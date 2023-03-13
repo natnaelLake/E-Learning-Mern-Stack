@@ -1,5 +1,5 @@
-import React from "react";
-import { Container, Card, Button, Row, Col, Image } from "react-bootstrap";
+import {React,useState} from "react";
+import { Container, Card, Button, Row, Col, Image,Offcanvas } from "react-bootstrap";
 // import * as Icon from 'react-bootstrap-icons'
 import imageOne from "../constimage.jpeg";
 import imageTwo from "../the big mountain.png";
@@ -10,6 +10,10 @@ import "./style.css";
 import * as Icon from "react-bootstrap-icons";
 
 function Home() {
+  const [show,setShow] = useState(false)
+  const handleClose = () =>{setShow(false)}
+  const handleShow = () =>{setShow(true)}
+
   return (
     <div className="">
       <Container>
@@ -171,6 +175,65 @@ function Home() {
                 </Button>
               </Card.Body>
             </Card>
+          </Col>
+        </Row>
+ 
+        <br />
+        <br />
+        <Row>
+        <Col>
+            <div className="">
+                <h1 className="text-primary">Course Lectures</h1>
+            </div>
+            <br />
+
+            </Col>
+        </Row>
+        <Row>
+          <Col>
+          <Card className="shadow-none border-0 mb-4" style = {{width:'15rem'}} onClick = {handleShow}>
+            <Image src = {imageTwo} roundedCircle width = '100' height = '100' className="border shadow align-items-center mx-auto"/>
+            <Card.Body className = ''>
+              <Card.Title>Ethiopia</Card.Title>
+              <Card.Text>the is the software engineer</Card.Text>
+            </Card.Body>
+          </Card>
+          <Offcanvas show={show} onHide={handleClose} placement = 'bottom' backdrop={false} scroll = {true} >
+        <Offcanvas.Header closeButton>
+          <Offcanvas.Title>Offcanvas</Offcanvas.Title>
+        </Offcanvas.Header>
+        <Offcanvas.Body>
+          Some text as placeholder. In real life you can have the elements you
+          have chosen. Like, text, images, lists, etc
+        </Offcanvas.Body>
+      </Offcanvas>
+          </Col>
+          <Col>
+          <Card className="shadow-none border-0 mb-4" style = {{width:'15rem'}}>
+            <Image src = {imageTwo} roundedCircle width = '100' height = '100' className="border  align-items-center mx-auto"/>
+            <Card.Body className = ''>
+              <Card.Title>Ethiopia</Card.Title>
+              <Card.Text>the is the software engineer</Card.Text>
+            </Card.Body>
+          </Card>
+          </Col>
+          <Col>
+          <Card className="shadow-none border-0 mb-4" style = {{width:'15rem'}}>
+            <Image src = {imageTwo} roundedCircle width = '100' height = '100' className="border  align-items-center mx-auto"/>
+            <Card.Body className = ''>
+              <Card.Title>Ethiopia</Card.Title>
+              <Card.Text>the is the software engineer</Card.Text>
+            </Card.Body>
+          </Card>
+          </Col>
+          <Col>
+          <Card className="shadow-none border-0 mb-4" style = {{width:'15rem'}}>
+            <Image src = {imageTwo} roundedCircle width = '100' height = '100' className="border  align-items-center mx-auto"/>
+            <Card.Body className = ''>
+              <Card.Title>Ethiopia</Card.Title>
+              <Card.Text>the is the software engineer</Card.Text>
+            </Card.Body>
+          </Card>
           </Col>
         </Row>
       </Container>
