@@ -24,8 +24,8 @@ function Login() {
   return (
     <div className="d-flex align-items-center justify-content-center firstDiv">
       <Card
-        bg="dark"
-        className="text-center  border-0 shadow-5 rounded-5 mx-auto pt-5"
+        bg="success"
+        className="text-center  border-0 shadow-5 rounded-5 mx-auto pt-5 mb-5"
         style={{ height: "500px", width: "400px" }}
       >
         <Icon.PersonFill
@@ -81,7 +81,7 @@ function Login() {
             </Card.Text>
             <br />
             <Button
-              variant="success"
+              variant="primary"
               type="submit"
               style={style1}
               className="text-uppercase"

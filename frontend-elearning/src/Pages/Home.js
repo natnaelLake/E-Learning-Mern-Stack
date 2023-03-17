@@ -1,10 +1,11 @@
 import {React,useState} from "react";
-import { Container, Card, Button, Row, Col, Image,Offcanvas } from "react-bootstrap";
+import { Container, Card, Button, Row, Col, Image,Offcanvas,Modal } from "react-bootstrap";
 // import * as Icon from 'react-bootstrap-icons'
 import imageOne from "../constimage.jpeg";
 import imageTwo from "../the big mountain.png";
 import imageThree from "../students.png";
 import imageFour from "../student.png";
+import {CDBBtn} from 'cdbreact'
 
 import "./style.css";
 import * as Icon from "react-bootstrap-icons";
@@ -13,6 +14,8 @@ function Home() {
   const [show,setShow] = useState(false)
   const handleClose = () =>{setShow(false)}
   const handleShow = () =>{setShow(true)}
+
+
 
   return (
     <div className="">
@@ -63,7 +66,7 @@ function Home() {
             </div>
             <br />
             <hr />
-            </Col>
+        </Col>
         </Row>
         <Row id = 'welcome'>
           <Col>
@@ -78,7 +81,7 @@ function Home() {
               <Card.Body>
                 <Card.Title>Welcome to React </Card.Title>
                 <Card.Text>Welcome to React</Card.Text>
-                <Button variant="outline-success" className="">
+                <Button href = '/courses' variant="outline-success" className="">
                   <Icon.Book /> Learn
                 </Button>
               </Card.Body>
@@ -96,7 +99,7 @@ function Home() {
               <Card.Body>
                 <Card.Title>Welcome to React</Card.Title>
                 <Card.Text>Welcome to React</Card.Text>
-                <Button variant="outline-success">
+                <Button href = '/courses' variant="outline-success">
                   <Icon.Book /> Learn
                 </Button>
               </Card.Body>
@@ -114,7 +117,7 @@ function Home() {
               <Card.Body>
                 <Card.Title>Welcome to React</Card.Title>
                 <Card.Text>Welcome to React</Card.Text>
-                <Button variant="outline-success">
+                <Button href = '/courses' variant="outline-success">
                   <Icon.Book /> Learn
                 </Button>
               </Card.Body>
@@ -134,7 +137,7 @@ function Home() {
               <Card.Body>
                 <Card.Title>Welcome to React</Card.Title>
                 <Card.Text>Welcome to React</Card.Text>
-                <Button variant="outline-success">
+                <Button href = '/courses' variant="outline-success">
                   <Icon.Book /> Learn
                 </Button>
               </Card.Body>
@@ -152,7 +155,7 @@ function Home() {
               <Card.Body>
                 <Card.Title>Welcome to React</Card.Title>
                 <Card.Text>Welcome to React</Card.Text>
-                <Button variant="outline-success">
+                <Button href = '/courses' variant="outline-success">
                   <Icon.Book /> Learn
                 </Button>
               </Card.Body>
@@ -170,7 +173,7 @@ function Home() {
               <Card.Body>
                 <Card.Title>Welcome to React</Card.Title>
                 <Card.Text>Welcome to React</Card.Text>
-                <Button variant="outline-success">
+                <Button href = '/courses' variant="outline-success">
                   <Icon.Book /> Learn
                 </Button>
               </Card.Body>
@@ -198,42 +201,189 @@ function Home() {
               <Card.Text>the is the software engineer</Card.Text>
             </Card.Body>
           </Card>
-          <Offcanvas show={show} onHide={handleClose} placement = 'bottom' backdrop={false} scroll = {true} >
-        <Offcanvas.Header closeButton>
-          <Offcanvas.Title>Offcanvas</Offcanvas.Title>
-        </Offcanvas.Header>
-        <Offcanvas.Body>
-          Some text as placeholder. In real life you can have the elements you
-          have chosen. Like, text, images, lists, etc
-        </Offcanvas.Body>
-      </Offcanvas>
+          <Modal show = {show} onHide = {handleClose} backdrop = 'true' scroll = 'true' position='top-right' side >
+            <Modal.Header closeButton> 
+              
+            </Modal.Header>
+            <Modal.Title className = 'text-align: center'>
+          
+                    <img
+                      alt="cardImg"
+                      className="mx-auto border rounded-circle bg-dark"
+                      width="130px"
+                      src={imageTwo}
+                    />
+              </Modal.Title>
+              <br />
+            <Modal.Body className = 'text-align:center'>
+            <div>
+                  <div className="border-0">
+                    
+                    <div className="p-3 d-flex flex-column align-items-center mb-4 text-center">
+                      <h4 style={{ fontWeight: "600" }}>Sammy Russo</h4>
+                      <p>Senior Software Developer</p>
+                      <p className="text-muted">Detroit, USA</p>
+                      <div className="d-flex justify-content-center flex-wrap">
+                        <CDBBtn className="mr-2" size="small" color="dark">
+                          <i className="fas fa-user-plus"></i> Connect
+                        </CDBBtn>
+                        <CDBBtn size="small" color="warning">
+                          {" "}
+                          Send Message{" "}
+                        </CDBBtn>
+                      </div>
+                    </div>
+                    </div>
+                    </div>
+            </Modal.Body>
+            <Modal.Footer>
+              <Button variant = 'danger' onClick = {handleClose} >Close</Button>
+            </Modal.Footer>
+          </Modal>
           </Col>
           <Col>
-          <Card className="shadow-none border-0 mb-4" style = {{width:'15rem'}}>
-            <Image src = {imageTwo} roundedCircle width = '100' height = '100' className="border  align-items-center mx-auto"/>
+          <Card className="shadow-none border-0 mb-4" style = {{width:'15rem'}} onClick = {handleShow}>
+            <Image src = {imageTwo} roundedCircle width = '100' height = '100' className="border shadow align-items-center mx-auto"/>
             <Card.Body className = ''>
               <Card.Title>Ethiopia</Card.Title>
               <Card.Text>the is the software engineer</Card.Text>
             </Card.Body>
           </Card>
+          <Modal show = {show} onHide = {handleClose} backdrop = 'true' scroll = 'true' position='top-right' side >
+            <Modal.Header closeButton> 
+              
+            </Modal.Header>
+            <Modal.Title className = 'text-align: center'>
+          
+                    <img
+                      alt="cardImg"
+                      className="mx-auto border rounded-circle bg-dark"
+                      width="130px"
+                      src={imageTwo}
+                    />
+              </Modal.Title>
+              <br />
+            <Modal.Body className = 'text-align:center'>
+            <div>
+                  <div className="border-0">
+                    
+                    <div className="p-3 d-flex flex-column align-items-center mb-4 text-center">
+                      <h4 style={{ fontWeight: "600" }}>Sammy Russo</h4>
+                      <p>Senior Software Developer</p>
+                      <p className="text-muted">Detroit, USA</p>
+                      <div className="d-flex justify-content-center flex-wrap">
+                        <CDBBtn className="mr-2" size="small" color="dark">
+                          <i className="fas fa-user-plus"></i> Connect
+                        </CDBBtn>
+                        <CDBBtn size="small" color="warning">
+                          {" "}
+                          Send Message{" "}
+                        </CDBBtn>
+                      </div>
+                    </div>
+                    </div>
+                    </div>
+            </Modal.Body>
+            <Modal.Footer>
+              <Button variant = 'danger' onClick = {handleClose} >Close</Button>
+            </Modal.Footer>
+          </Modal>
           </Col>
           <Col>
-          <Card className="shadow-none border-0 mb-4" style = {{width:'15rem'}}>
-            <Image src = {imageTwo} roundedCircle width = '100' height = '100' className="border  align-items-center mx-auto"/>
+          <Card className="shadow-none border-0 mb-4" style = {{width:'15rem'}} onClick = {handleShow}>
+            <Image src = {imageTwo} roundedCircle width = '100' height = '100' className="border shadow align-items-center mx-auto"/>
             <Card.Body className = ''>
               <Card.Title>Ethiopia</Card.Title>
               <Card.Text>the is the software engineer</Card.Text>
             </Card.Body>
           </Card>
+          <Modal show = {show} onHide = {handleClose} backdrop = 'true' scroll = 'true' position='top-right' side >
+            <Modal.Header closeButton> 
+              
+            </Modal.Header>
+            <Modal.Title className = 'text-align: center'>
+          
+                    <img
+                      alt="cardImg"
+                      className="mx-auto border rounded-circle bg-dark"
+                      width="130px"
+                      src={imageTwo}
+                    />
+              </Modal.Title>
+              <br />
+            <Modal.Body className = 'text-align:center'>
+            <div>
+                  <div className="border-0">
+                    
+                    <div className="p-3 d-flex flex-column align-items-center mb-4 text-center">
+                      <h4 style={{ fontWeight: "600" }}>Sammy Russo</h4>
+                      <p>Senior Software Developer</p>
+                      <p className="text-muted">Detroit, USA</p>
+                      <div className="d-flex justify-content-center flex-wrap">
+                        <CDBBtn className="mr-2" size="small" color="dark">
+                          <i className="fas fa-user-plus"></i> Connect
+                        </CDBBtn>
+                        <CDBBtn size="small" color="warning">
+                          {" "}
+                          Send Message{" "}
+                        </CDBBtn>
+                      </div>
+                    </div>
+                    </div>
+                    </div>
+            </Modal.Body>
+            <Modal.Footer>
+              <Button variant = 'danger' onClick = {handleClose} >Close</Button>
+            </Modal.Footer>
+          </Modal>
           </Col>
           <Col>
-          <Card className="shadow-none border-0 mb-4" style = {{width:'15rem'}}>
-            <Image src = {imageTwo} roundedCircle width = '100' height = '100' className="border  align-items-center mx-auto"/>
+          <Card className="shadow-none border-0 mb-4" style = {{width:'15rem'}} onClick = {handleShow}>
+            <Image src = {imageTwo} roundedCircle width = '100' height = '100' className="border shadow align-items-center mx-auto"/>
             <Card.Body className = ''>
               <Card.Title>Ethiopia</Card.Title>
               <Card.Text>the is the software engineer</Card.Text>
             </Card.Body>
           </Card>
+          <Modal show = {show} onHide = {handleClose} backdrop = 'true' scroll = 'true' position='top-right' side >
+            <Modal.Header closeButton> 
+              
+            </Modal.Header>
+            <Modal.Title className = 'text-align: center'>
+          
+                    <img
+                      alt="cardImg"
+                      className="mx-auto border rounded-circle bg-dark"
+                      width="130px"
+                      src={imageTwo}
+                    />
+              </Modal.Title>
+              <br />
+            <Modal.Body className = 'text-align:center'>
+            <div>
+                  <div className="border-0">
+                    
+                    <div className="p-3 d-flex flex-column align-items-center mb-4 text-center">
+                      <h4 style={{ fontWeight: "600" }}>Sammy Russo</h4>
+                      <p>Senior Software Developer</p>
+                      <p className="text-muted">Detroit, USA</p>
+                      <div className="d-flex justify-content-center flex-wrap">
+                        <CDBBtn className="mr-2" size="small" color="dark">
+                          <i className="fas fa-user-plus"></i> Connect
+                        </CDBBtn>
+                        <CDBBtn size="small" color="warning">
+                          {" "}
+                          Send Message{" "}
+                        </CDBBtn>
+                      </div>
+                    </div>
+                    </div>
+                    </div>
+            </Modal.Body>
+            <Modal.Footer>
+              <Button variant = 'danger' onClick = {handleClose} >Close</Button>
+            </Modal.Footer>
+          </Modal>
           </Col>
         </Row>
       </Container>
