@@ -5,13 +5,13 @@ import App from './App';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import reportWebVitals from './reportWebVitals';
 import {BrowserRouter as Router} from 'react-router-dom'
-
+import { ProSidebarProvider } from 'react-pro-sidebar';
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
-  <Router>
+  <ProSidebarProvider>
     <App />
-  </Router>
+  </ProSidebarProvider>
 );
 
 // If you want to start measuring performance in your app, pass a function

@@ -1,4 +1,4 @@
-import React from "react";
+import { React, useState } from "react";
 import {
   CDBSidebar,
   CDBSidebarContent,
@@ -6,89 +6,52 @@ import {
   CDBSidebarMenu,
   CDBSidebarMenuItem,
   CDBSidebarFooter,
-} from 'cdbreact';
+  CDBStepper,
+  CDBStep,
+  CDBInput,
+  CDBBtn,
+  CDBContainer,
+} from "cdbreact";
+
+import { Sidebar, Menu, MenuItem, SubMenu } from "react-pro-sidebar";
+
 import { NavLink } from "react-router-dom";
 
 const SidebarEl = () => {
+  const [active, setActive] = useState(1);
+
+  const handleNextPrevClick = a => {
+    setActive(a);
+  };
+
+  const handleSubmission = () => {
+    alert('Form submitted!');
+  };
   return (
-    <div className=""
-      style={{display:'flex',height:'100%',overflow:'scroll intial'}}
+    <div
+      className=""
+      style={{ display: "flex", height: "100%", overflow: "scroll intial",backgroundColor :'green' ,color:'green' }}
     >
-      <CDBSidebar 
-        textColor="#fff"
-        backgroundColor="#333"
-      >
-        <CDBSidebarHeader 
-          prefix = {
-            <i className="fa fa-bars fa-large"></i>
-          }
-        >
-          <a href="/" className="text-decoration-none" style={{color:'inherit'}}>Chapter One</a>
-
-        </CDBSidebarHeader>
-        <CDBSidebarContent className="sidebar-content">
-          <CDBSidebarMenu>
-            <NavLink
-              exact
-              to="/"
-              activeClassName="activeClicked"
-            >
-              <CDBSidebarMenuItem
-                icon="columns"
-              >
-                dashboard
-              </CDBSidebarMenuItem>
-            </NavLink>
-            <NavLink
-              exact
-              to="/tables"
-              activeClassName="activeClicked"
-            >
-              <CDBSidebarMenuItem
-                icon="table"
-              >
-                tables
-              </CDBSidebarMenuItem>
-            </NavLink>
-            <NavLink
-              exact
-              to="/profile"
-              activeClassName="activeClicked"
-            >
-              <CDBSidebarMenuItem
-                icon="user"
-              >
-                profile
-              </CDBSidebarMenuItem>
-            </NavLink>
-            <NavLink
-              exact
-              to="/hero404"
-              target="_blank"
-              activeClassName="activeClicked"
-            >
-              <CDBSidebarMenuItem
-                icon="exclamation-circle"
-              >
-                404 page
-              </CDBSidebarMenuItem>
-            </NavLink>
-          </CDBSidebarMenu>
-          <CDBSidebarMenu>
-          </CDBSidebarMenu>
-        </CDBSidebarContent>
-        <CDBSidebarFooter style={{ textAlign: "center" }}>
-          <div
-            className="sidebar-btn-wrapper"
-            style={{
-              padding: "20px 5px"
-            }}
-          >
-            Sidebar Footer
-          </div>
-        </CDBSidebarFooter>
-      </CDBSidebar>
-
+      <Sidebar backgroundColor="white">
+  <Menu>
+    <SubMenu label="React And NodeJs" backgroundColor="white">
+      <NavLink  to = '/courses'>
+        <MenuItem backgroundColor="black" color="green" variant = 'green'>Introduction of the course </MenuItem>
+      </NavLink>
+      <NavLink  to = '/courses'>
+        <MenuItem backgroundColor="black" color="green" variant = 'green'> Course Files</MenuItem>
+      </NavLink>
+      <NavLink  to = '/courses'>
+        <MenuItem backgroundColor="black" color="green" variant = 'green'> Course Videos </MenuItem>
+      </NavLink>
+      <NavLink  to = '/courses'>
+        <MenuItem backgroundColor="black" color="green" variant = 'green'> Quzzes  </MenuItem>
+      </NavLink>
+    </SubMenu>
+    <MenuItem> Session Two </MenuItem>
+    <MenuItem> Session Three </MenuItem>
+  </Menu>
+</Sidebar>
     </div>
   );
 };
