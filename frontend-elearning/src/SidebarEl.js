@@ -1,4 +1,5 @@
 import { React, useState } from "react";
+import imageOne from './student.png'
 import {
   CDBSidebar,
   CDBSidebarContent,
@@ -11,47 +12,75 @@ import {
   CDBInput,
   CDBBtn,
   CDBContainer,
+  CDBIcon
 } from "cdbreact";
 
 import { Sidebar, Menu, MenuItem, SubMenu } from "react-pro-sidebar";
-
-import { NavLink } from "react-router-dom";
+import * as Icon from 'react-bootstrap-icons'
+import { NavLink, Link } from "react-router-dom";
 
 const SidebarEl = () => {
-  const [active, setActive] = useState(1);
-
-  const handleNextPrevClick = a => {
-    setActive(a);
-  };
-
-  const handleSubmission = () => {
-    alert('Form submitted!');
-  };
   return (
     <div
       className=""
-      style={{ display: "flex", height: "100%", overflow: "scroll intial",backgroundColor :'green' ,color:'green' }}
+      style={{
+        display: "flex",
+        height: "100%",
+        overflow: "scroll intial",
+      }}
     >
-      <Sidebar backgroundColor="white">
-  <Menu>
-    <SubMenu label="React And NodeJs" backgroundColor="white">
-      <NavLink  to = '/courses'>
-        <MenuItem backgroundColor="black" color="green" variant = 'green'>Introduction of the course </MenuItem>
-      </NavLink>
-      <NavLink  to = '/courses'>
-        <MenuItem backgroundColor="black" color="green" variant = 'green'> Course Files</MenuItem>
-      </NavLink>
-      <NavLink  to = '/courses'>
-        <MenuItem backgroundColor="black" color="green" variant = 'green'> Course Videos </MenuItem>
-      </NavLink>
-      <NavLink  to = '/courses'>
-        <MenuItem backgroundColor="black" color="green" variant = 'green'> Quzzes  </MenuItem>
-      </NavLink>
-    </SubMenu>
-    <MenuItem> Session Two </MenuItem>
-    <MenuItem> Session Three </MenuItem>
-  </Menu>
-</Sidebar>
+      <CDBSidebar textColor="#333" backgroundColor="#f0f0f0">
+        <CDBSidebarHeader prefix={<i className="fa fa-bars" />}>
+          <div
+            // className="container"
+            // style={{ display: "flex", alignItems: "left" }}
+          >
+            
+            <h6>React And NodeJs</h6>
+          </div>
+        </CDBSidebarHeader>
+        <CDBSidebarContent>
+          <CDBSidebarMenu>
+            <Menu>
+              <SubMenu
+                label="Season One"
+                prefix={<i className="fa fa-address-book" />}
+              >
+                <MenuItem
+                  component={<Link to="/intro" />}
+                  prefix={<i className="fa fa-file "/>}
+                >
+                  Introduction of the course{" "}
+                </MenuItem>
+                <MenuItem
+                  component={<Link to="/files" />}
+                  prefix={<i className="fa fa-upload"  />}
+                >
+                  {" "}
+                  Course Files
+                </MenuItem>
+                <MenuItem
+                  component={<Link to="/videos" />}
+                  prefix={<i className="fa fa-thumbs-up" />}
+                >
+                  {" "}
+                  Course Videos{" "}
+                </MenuItem>
+                <MenuItem
+                  component={<Link to="/quizes" />}
+                  prefix={<i className="fa fa-code" />}
+                > 
+                  {" "}
+                  Quzzes{" "}
+                </MenuItem>
+              </SubMenu>
+              <MenuItem prefix={<i className="fa fa-code" />}> Session Two </MenuItem>
+              <MenuItem prefix={<i className="fa fa-code" />}> Session Three </MenuItem>
+            </Menu>
+          </CDBSidebarMenu>
+        </CDBSidebarContent>
+      </CDBSidebar>
+      {/*    */}
     </div>
   );
 };

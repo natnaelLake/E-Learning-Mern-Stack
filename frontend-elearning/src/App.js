@@ -12,6 +12,12 @@ import Header from './Pages/Header';
 import {BrowserRouter as Router} from 'react-router-dom'
 
 import 'bootstrap/dist/css/bootstrap.min.css';  
+import Introduction from './Courses/Introduction';
+import Files from './Courses/Files';
+import Videos from './Courses/Videos';
+import Quizes from './Courses/Quizes';
+
+
 
 function App() {
   return (
@@ -20,8 +26,12 @@ function App() {
       <Router>
       <Routes>
           <Route path='/login' Component={Login}/>
-          <Route path='/signup' Component={SignUp}/>
+          <Route path=                                                                                                                                                                                                                                                                                                                      '/signup' Component={SignUp}/>
           <Route path='/courses' Component={Courses}/>
+          <Route path='/videos' Component={Videos}/>
+          <Route path='/files' Component={Files}/>
+          <Route path='/intro' Component={Introduction}/>
+          <Route path='/quizes' Component={Quizes}/>
           <Route path = '/' Component = {Home} />
       </Routes>
       </Router>
