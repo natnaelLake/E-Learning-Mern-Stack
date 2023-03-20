@@ -30,7 +30,50 @@ function Introduction() {
               overflowY: "scroll",
             }}
           >
-            Introduction
+            <div className='container '>
+              <p className='text-center'>
+              Lorem ipsum dolor sit amet consectetur, adipisicing elit. Aperiam, 
+              ducimus! Aspernatur fugit architecto fugiat labore corporis reprehenderit aliquid 
+              veniam dolores, delectus eum praesentium? Quia vero quo, saepe animi voluptatibus ab.
+
+              Lorem ipsum dolor sit amet consectetur, adipisicing elit. Aperiam, 
+              ducimus! Aspernatur fugit architecto fugiat labore corporis reprehenderit aliquid 
+              veniam dolores, delectus eum praesentium? Quia vero quo, saepe animi voluptatibus ab.
+              </p>
+
+              <p>
+              Lorem ipsum dolor sit amet consectetur, adipisicing elit. Aperiam, 
+              ducimus! Aspernatur fugit architecto fugiat labore corporis reprehenderit aliquid 
+              veniam dolores, delectus eum praesentium? Quia vero quo, saepe animi voluptatibus ab.
+
+              Lorem ipsum dolor sit amet consectetur, adipisicing elit. Aperiam, 
+              ducimus! Aspernatur fugit architecto fugiat labore corporis reprehenderit aliquid 
+              veniam dolores, delectus eum praesentium? Quia vero quo, saepe animi voluptatibus ab.
+              </p>
+
+              <p>
+              Lorem ipsum dolor sit amet consectetur, adipisicing elit. Aperiam, 
+              ducimus! Aspernatur fugit architecto fugiat labore corporis reprehenderit aliquid 
+              veniam dolores, delectus eum praesentium? Quia vero quo, saepe animi voluptatibus ab.
+
+              Lorem ipsum dolor sit amet consectetur, adipisicing elit. Aperiam, 
+              ducimus! Aspernatur fugit architecto fugiat labore corporis reprehenderit aliquid 
+              veniam dolores, delectus eum praesentium? Quia vero quo, saepe animi voluptatibus ab.
+              </p>
+
+              <p>
+              Lorem ipsum dolor sit amet consectetur, adipisicing elit. Aperiam, 
+              ducimus! Aspernatur fugit architecto fugiat labore corporis reprehenderit aliquid 
+              veniam dolores, delectus eum praesentium? Quia vero quo, saepe animi voluptatibus ab.
+
+              Lorem ipsum dolor sit amet consectetur, adipisicing elit. Aperiam, 
+              ducimus! Aspernatur fugit architecto fugiat labore corporis reprehenderit aliquid 
+              veniam dolores, delectus eum praesentium? Quia vero quo, saepe animi voluptatibus ab.
+              </p>
+
+
+              
+            </div>
           </div>
         </div>
         </div>

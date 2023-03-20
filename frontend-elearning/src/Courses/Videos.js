@@ -1,14 +1,9 @@
 import React from "react";
 import SidebarEl from "../SidebarEl";
 import Header from "../Pages/Header";
-// import video_one from "./The Missing Account Book.mp4";
 import video_Two from "./video.mp4";
-// import ReactPlayer from "react-player";
-import ReactPlayer from "react-player";
 import imageOne from "../student.png";
 import "../../node_modules/video-react/dist/video-react.css";
-import video_four  from './Rising Shaolin The Protector 2023.avi'
-
 import { Player } from 'video-react';
 
 

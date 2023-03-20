@@ -4,6 +4,18 @@ import SidebarEl from '../SidebarEl'
 
 
 function Files() {
+  const onButtonClick = () => {
+        fetch('SamplePDF.pdf').then(response => {
+            response.blob().then(blob => {
+                const fileURL = window.URL.createObjectURL(blob);
+
+                let alink = document.createElement('a');
+                alink.href = fileURL;
+                alink.download = 'SamplePDF.pdf';
+                alink.click();
+            })
+        })
+    }
   return (
     <div>
         <div>
@@ -29,7 +41,13 @@ function Files() {
               overflowY: "scroll",
             }}
           >
-            Files
+             <div className='align-items-center container'>
+                <h3>Click on below button to download PDF file</h3>
+                <button onClick={onButtonClick}>
+                <i className="fas fa-download"/>
+                    Download
+                </button>
+            </div>
           </div>
         </div>
         </div>

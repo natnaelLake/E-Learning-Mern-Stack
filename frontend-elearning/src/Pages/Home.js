@@ -198,7 +198,7 @@ function Home() {
             <Image src = {imageTwo} roundedCircle width = '100' height = '100' className="border shadow align-items-center mx-auto"/>
             <Card.Body className = ''>
               <Card.Title>Ethiopia</Card.Title>
-              <Card.Text>the is the software engineer</Card.Text>
+              <Card.Text>This is the software engineer</Card.Text>
             </Card.Body>
           </Card>
           <Modal show = {show} onHide = {handleClose} backdrop = 'true' scroll = 'true' position='top-right' side >
@@ -220,9 +220,9 @@ function Home() {
                   <div className="border-0">
                     
                     <div className="p-3 d-flex flex-column align-items-center mb-4 text-center">
-                      <h4 style={{ fontWeight: "600" }}>Sammy Russo</h4>
-                      <p>Senior Software Developer</p>
-                      <p className="text-muted">Detroit, USA</p>
+                      <h4 style={{ fontWeight: "600" }}>Bewuketu Lake</h4>
+                      <p>Software Developer</p>
+                      <p className="text-muted">Addis Ababa, Ethiopia</p>
                       <div className="d-flex justify-content-center flex-wrap">
                         <CDBBtn className="mr-2" size="small" color="dark">
                           <i className="fas fa-user-plus"></i> Connect
@@ -246,7 +246,7 @@ function Home() {
             <Image src = {imageTwo} roundedCircle width = '100' height = '100' className="border shadow align-items-center mx-auto"/>
             <Card.Body className = ''>
               <Card.Title>Ethiopia</Card.Title>
-              <Card.Text>the is the software engineer</Card.Text>
+              <Card.Text>This is the software engineer</Card.Text>
             </Card.Body>
           </Card>
           <Modal show = {show} onHide = {handleClose} backdrop = 'true' scroll = 'true' position='top-right' side >
@@ -268,9 +268,9 @@ function Home() {
                   <div className="border-0">
                     
                     <div className="p-3 d-flex flex-column align-items-center mb-4 text-center">
-                      <h4 style={{ fontWeight: "600" }}>Sammy Russo</h4>
-                      <p>Senior Software Developer</p>
-                      <p className="text-muted">Detroit, USA</p>
+                      <h4 style={{ fontWeight: "600" }}>Bewuketu Lake</h4>
+                      <p>Software Developer</p>
+                      <p className="text-muted">Addis Ababa, Ethiopia</p>
                       <div className="d-flex justify-content-center flex-wrap">
                         <CDBBtn className="mr-2" size="small" color="dark">
                           <i className="fas fa-user-plus"></i> Connect
@@ -294,7 +294,7 @@ function Home() {
             <Image src = {imageTwo} roundedCircle width = '100' height = '100' className="border shadow align-items-center mx-auto"/>
             <Card.Body className = ''>
               <Card.Title>Ethiopia</Card.Title>
-              <Card.Text>the is the software engineer</Card.Text>
+              <Card.Text>This is the software engineer</Card.Text>
             </Card.Body>
           </Card>
           <Modal show = {show} onHide = {handleClose} backdrop = 'true' scroll = 'true' position='top-right' side >
@@ -316,9 +316,9 @@ function Home() {
                   <div className="border-0">
                     
                     <div className="p-3 d-flex flex-column align-items-center mb-4 text-center">
-                      <h4 style={{ fontWeight: "600" }}>Sammy Russo</h4>
-                      <p>Senior Software Developer</p>
-                      <p className="text-muted">Detroit, USA</p>
+                      <h4 style={{ fontWeight: "600" }}>Bewuketu Lake</h4>
+                      <p>Software Developer</p>
+                      <p className="text-muted">Addis Ababa, Ethiopia</p>
                       <div className="d-flex justify-content-center flex-wrap">
                         <CDBBtn className="mr-2" size="small" color="dark">
                           <i className="fas fa-user-plus"></i> Connect
@@ -342,7 +342,7 @@ function Home() {
             <Image src = {imageTwo} roundedCircle width = '100' height = '100' className="border shadow align-items-center mx-auto"/>
             <Card.Body className = ''>
               <Card.Title>Ethiopia</Card.Title>
-              <Card.Text>the is the software engineer</Card.Text>
+              <Card.Text>This is the software engineer</Card.Text>
             </Card.Body>
           </Card>
           <Modal show = {show} onHide = {handleClose} backdrop = 'true' scroll = 'true' position='top-right' side >
@@ -364,9 +364,9 @@ function Home() {
                   <div className="border-0">
                     
                     <div className="p-3 d-flex flex-column align-items-center mb-4 text-center">
-                      <h4 style={{ fontWeight: "600" }}>Sammy Russo</h4>
-                      <p>Senior Software Developer</p>
-                      <p className="text-muted">Detroit, USA</p>
+                      <h4 style={{ fontWeight: "600" }}>Bewuketu Lake</h4>
+                      <p>Software Developer</p>
+                      <p className="text-muted">Addis Ababa, Ethiopia</p>
                       <div className="d-flex justify-content-center flex-wrap">
                         <CDBBtn className="mr-2" size="small" color="dark">
                           <i className="fas fa-user-plus"></i> Connect
