@@ -3,8 +3,14 @@ import SidebarEl from "../SidebarEl";
 import Header from "../Pages/Header";
 // import video_one from "./The Missing Account Book.mp4";
 import video_Two from "./video.mp4";
+// import ReactPlayer from "react-player";
 import ReactPlayer from "react-player";
-import video_Three from 'https://player.vimeo.com/video/137857207'
+import imageOne from "../student.png";
+import "../../node_modules/video-react/dist/video-react.css";
+import video_four  from './Rising Shaolin The Protector 2023.avi'
+
+import { Player } from 'video-react';
+
 
 
 function Videos() {
@@ -33,12 +39,22 @@ function Videos() {
                   overflowY: "scroll",
                 }}
               >
-                <div className="embed-responsive embed-responsive-16by9">
+                <div className="player-wrapper">
+                <Player
+      playsInline
+      poster={imageOne}
+      src="https://media.w3.org/2010/05/sintel/trailer_hd.mp4"
+    />
+                </div>
+                <br />
+                <br />
+                <div className="ratio ratio-16x9">
                   <iframe
-                    title="embedsPage"
-                    className="embed-responsive-item"
                     src={video_Two}
+                    title="YouTube video"
                     allowfullscreen
+                    loop
+                    autoPlay
                   ></iframe>
                 </div>
               </div>
