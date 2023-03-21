@@ -1,0 +1,38 @@
+
+.my-navbars:hover{
+    background-color: rgb(228, 16, 16);
+    color: rgb(245, 240, 240);
+}
+body{
+    /* background-color: aqua; */
+    padding-top: 100px;
+}
+.my-drops:hover{
+    background-color: rgb(238, 27, 37);
+    color: rgb(245, 239, 239);
+}
+.main-nav{
+    position:fixed;
+}
+.card {
+    box-shadow: 0 3px 10px rgb(0 0 0 / 0.2);
+  }
+
+
+.mainCard{
+    transform: scale(1);
+    transition: all 1.5s ease;
+}
+.imageCard{
+    overflow: hidden;
+}
+.mainCard:hover{
+    transform: scale(1.5);
+}
+
+.center {
+    display: inline;
+    margin-left: auto;
+    margin-right: auto;
+    padding-left: auto;
+  }

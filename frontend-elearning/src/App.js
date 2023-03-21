@@ -30,7 +30,8 @@ function App() {
       <Header />
       <Router>
       <Routes>
-          <Route path='/login' Component={Login}/>                                                                                                                                                                                                                                                                                                                   '/signup' Component={SignUp}/>
+          <Route path='/login' Component={Login}/> 
+          <Route path='/signup' Component={SignUp}/>                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                     
           <Route path='/courses' Component={Courses}/>
           <Route path='/videos' Component={Videos}/>
           <Route path='/files' Component={Files}/>
