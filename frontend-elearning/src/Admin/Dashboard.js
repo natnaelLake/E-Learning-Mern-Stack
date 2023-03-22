@@ -11,7 +11,7 @@ import { CDBBtn, CDBView, CDBIframe } from "cdbreact";
 
 import "./style.css";
 import * as Icon from "react-bootstrap-icons";
-import { Row, Col, Card, Badge, Container } from "react-bootstrap";
+import { Row, Col, Card, Badge, Container,Button } from "react-bootstrap";
 function Dashboard() {
   return (
     <div className="d-flex profile">
@@ -28,6 +28,7 @@ function Dashboard() {
         }}
       >
         <Header className="p-5"></Header>
+        <Button className ='align-items-left ml-5' href = '/'style = {{float:'left',width:'7rem',marginLeft:'5px'}}> <Icon.ArrowLeftCircle /> Back</Button>
         <div style={{ height: "100%" }}>
           <div
             style={{
@@ -37,11 +38,11 @@ function Dashboard() {
             }}
           >
             <div style={{ margin: "0 auto", maxWidth: "1320px" }}>
-              <Container style={{marginTop:'80px'}}>
+              <Container style={{ marginTop: "80px" }}>
                 <Container>
                   <Row>
                     <Col>
-                      <Card style={{height:'7rem'}}>
+                      <Card style={{ height: "7rem" }}>
                         <Card.Body>
                           <Card.Title>Enrolled Students</Card.Title>
                           <Badge bg="danger">20</Badge>
@@ -49,7 +50,7 @@ function Dashboard() {
                       </Card>
                     </Col>
                     <Col>
-                      <Card style={{height:'7rem'}}>
+                      <Card style={{ height: "7rem" }}>
                         <Card.Body>
                           <Card.Title>Enrolled Students</Card.Title>
                           <Badge bg="danger">20</Badge>
@@ -57,7 +58,7 @@ function Dashboard() {
                       </Card>
                     </Col>
                     <Col>
-                      <Card style={{height:'7rem'}}>
+                      <Card style={{ height: "7rem" }}>
                         <Card.Body>
                           <Card.Title>Enrolled Students</Card.Title>
                           <Badge bg="danger">20</Badge>
@@ -71,7 +72,7 @@ function Dashboard() {
                 <Container>
                   <Row>
                     <Col>
-                      <Card style={{height:'7rem'}}>
+                      <Card style={{ height: "7rem" }}>
                         <Card.Body>
                           <Card.Title>Enrolled Students</Card.Title>
                           <Badge bg="danger">20</Badge>
@@ -79,7 +80,7 @@ function Dashboard() {
                       </Card>
                     </Col>
                     <Col>
-                      <Card style={{height:'7rem'}}>
+                      <Card style={{ height: "7rem" }}>
                         <Card.Body>
                           <Card.Title>Enrolled Students</Card.Title>
                           <Badge bg="danger">20</Badge>
@@ -87,7 +88,7 @@ function Dashboard() {
                       </Card>
                     </Col>
                     <Col>
-                      <Card style={{height:'7rem'}}>
+                      <Card style={{ height: "7rem" }} c>
                         <Card.Body>
                           <Card.Title>Enrolled Students</Card.Title>
                           <Badge bg="danger">20</Badge>

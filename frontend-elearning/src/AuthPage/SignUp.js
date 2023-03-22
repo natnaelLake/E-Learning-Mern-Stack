@@ -98,7 +98,7 @@ function SignUp() {
               </Form.Floating>{" "}
             </Form.Group>
             <br />
-            <Form></Form>
+            
             <hr className="text-white" />
             <Card.Text className="text-center text-white">
               Have Account ?<Link to="/login">Login </Link>
