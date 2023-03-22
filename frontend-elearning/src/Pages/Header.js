@@ -2,7 +2,7 @@ import React from 'react'
 import Nav from 'react-bootstrap/Nav';
 import Navbar from 'react-bootstrap/Navbar';
 import {Container,NavDropdown,Form,Button,Image} from 'react-bootstrap'
-import imageOne  from '../constimage.jpeg'
+import imageOne  from '../Assets/constimage.jpeg'
 import  './style.css'
 
 

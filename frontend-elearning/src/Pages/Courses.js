@@ -2,8 +2,8 @@ import React from "react";
 import * as Icon from "react-bootstrap-icons";
 
 import { NavLink } from "react-router-dom";
-import imageOne from "../constimage.jpeg";
-import imageTwo from "../student.png";
+import imageOne from "../Assets/constimage.jpeg";
+import imageTwo from "../Assets/student.png";
 
 import { CDBTable, CDBTableHeader, CDBTableBody } from "cdbreact";
 // import { Profile } from "../pages/Profile";

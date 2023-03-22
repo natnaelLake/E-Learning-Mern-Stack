@@ -3,10 +3,10 @@ import Header from "../Pages/Header";
 import Sidebar from "./Sidebar";
 // import { Container, Card, Button, Row, Col, Image,Offcanvas,Modal } from "react-bootstrap";
 // import * as Icon from 'react-bootstrap-icons'
-import imageOne from "../constimage.jpeg";
-import imageTwo from "../the big mountain.png";
-import imageThree from "../students.png";
-import imageFour from "../student.png";
+import imageOne from "../Assets/constimage.jpeg";
+import imageTwo from "../Assets/the big mountain.png";
+import imageThree from "../Assets/students.png";
+import imageFour from "../Assets/student.png";
 import { CDBBtn, CDBView, CDBIframe } from "cdbreact";
 
 import "./style.css";

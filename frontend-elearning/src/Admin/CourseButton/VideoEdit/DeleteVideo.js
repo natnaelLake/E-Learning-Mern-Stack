@@ -1,6 +1,6 @@
 import {React,useState} from 'react'
 import {Button,Form,Card,Modal} from 'react-bootstrap'
-import imageOne from '../../../student.png'
+import imageOne from '../../../Assets/student.png'
 
 
 function DeleteVideo() {

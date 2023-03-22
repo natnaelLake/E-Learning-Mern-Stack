@@ -1,15 +1,13 @@
 import React from 'react'
-import Sidebar from './Sidebar'
-import Header from '../Pages/Header'
-import {Button,Table,Tab,Tabs} from 'react-bootstrap'
+import { Tabs,Tab,Button } from 'react-bootstrap'
 import * as Icon from 'react-bootstrap-icons'
-import Quiz from './ExamControl/Quiz'
-import Mid from './ExamControl/Mid'
-import Final from './ExamControl/Final'
+import AddQuiz from './AddQuiz'
+import DeleteQuiz from './DeleteQuiz'
+import UpdateQuiz from './UpdateQuiz'
+import Header from '../../../Pages/Header'
+import Sidebar from '../../Sidebar'
 
-
-
-function ManageExams() {
+function EditQuiz() {
   return (
     <div className="d-flex profile">
       <div>
@@ -25,7 +23,7 @@ function ManageExams() {
         }}
       >
           <Header className="p-5"></Header>
-        <Button className ='align-items-left ml-5' href = '/'style = {{float:'left',width:'7rem',marginLeft:'5px'}}> <Icon.ArrowLeftCircle /> Back</Button>
+        <Button className ='align-items-left ml-5' href = '/exams'style = {{float:'left',width:'7rem',marginLeft:'5px'}}> <Icon.ArrowLeftCircle /> Back</Button>
           <div style={{ height: "100%" }}>
             <div
               style={{
@@ -35,10 +33,10 @@ function ManageExams() {
               }}
             >
               <div style={{ margin: "0 auto", maxWidth: "1320px" }}>
-                <Tabs defaultActiveKey="Quiz Exam" className="mb-3" fill >
-                  <Tab eventKey="Quiz Exam" title='Quiz Exam' bg = 'dark'><Quiz /></Tab>
-                  <Tab eventKey="Mid Exam" title = 'Mid Exam'><Mid /></Tab>
-                  <Tab eventKey="Final Exam" title = 'Final Exam'><Final /></Tab>
+                <Tabs defaultActiveKey="Add" className="mb-3" fill >
+                  <Tab eventKey="Add" title='Add' bg = 'dark'><AddQuiz /></Tab>
+                  <Tab eventKey="Update" title = 'Update'><UpdateQuiz /></Tab>
+                  <Tab eventKey="Delete" title = 'Delete'><DeleteQuiz /></Tab>
                 </Tabs>
                 <br /><br />
                 <footer className="d-flex mx-auto py-4">
@@ -54,4 +52,4 @@ function ManageExams() {
   )
 }
 
-export default ManageExams
+export default EditQuiz

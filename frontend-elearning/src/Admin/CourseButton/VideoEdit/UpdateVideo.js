@@ -1,6 +1,6 @@
 import React from 'react'
 import {Card,Form,Button} from 'react-bootstrap'
-import imageOne from '../../../student.png'
+import imageOne from '../../../Assets/student.png'
 function UpdateVideo() {
   return (
     <div className="d-flex align-items-cUpdate justify-content-cUpdate firstDiv">

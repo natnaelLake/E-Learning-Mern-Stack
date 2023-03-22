@@ -21,6 +21,12 @@ import UpdateIntro from './Admin/CourseButton/UpdateIntro'
 import UpdateVideo from './Admin/CourseButton/VideoEdit/UpdateVideo'
 import VidEditPage from './Admin/CourseButton/VideoEdit/VidEditPage'
 import DocMainEdit from './Admin/CourseButton/DocEdit/DocMainEdit'
+import EditQuiz from './Admin/ExamControl/EditQuiz/EditQuiz'
+import Final from './Admin/ExamControl/Final'
+import Quiz from './Admin/ExamControl/Quiz'
+import Mid from './Admin/ExamControl/Mid'
+import EditMid from './Admin/ExamControl/EditMId/EditMid'
+import EditFinal from './Admin/ExamControl/EditFinal/EditFinal'
 
 function RoutesPage() {
   return (
@@ -46,6 +52,12 @@ function RoutesPage() {
           <Route path='/indVidUpdate' Component={UpdateVideo}/>
           <Route path='/editDoc' Component={DocMainEdit}/>
           <Route path='/updateDoc' Component={UpdateDoc}/>
+          <Route path='/editQuiz' Component={EditQuiz}/>
+          <Route path='/editMid' Component={EditMid}/>
+          <Route path='/editFinal' Component={EditFinal}/>
+
+
+
 
 
           <Route path='/editCourse' Component={EditCourse}/>

@@ -1,8 +1,8 @@
 import React from "react";
 import SidebarEl from "../SidebarEl";
 import Header from "../Pages/Header";
-import video_Two from "./video.mp4";
-import imageOne from "../student.png";
+import video_Two from "../Assets/video.mp4";
+import imageOne from "../Assets/student.png";
 import "../../node_modules/video-react/dist/video-react.css";
 import { Player } from 'video-react';
 

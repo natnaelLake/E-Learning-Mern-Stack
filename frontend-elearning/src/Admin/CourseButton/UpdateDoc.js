@@ -3,7 +3,7 @@ import Sidebar from '../Sidebar'
 import Header from '../../Pages/Header'
 import { Button,Row,Col,Card } from 'react-bootstrap'
 import * as Icon from 'react-bootstrap-icons'
-import imageOne from '../../student.png'
+import imageOne from '../../Assets/student.png'
 function UpdateDoc() {
   return (
     <div className="d-flex profile">

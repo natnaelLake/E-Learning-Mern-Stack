@@ -1,5 +1,5 @@
 import { React, useState } from "react";
-import imageOne from './student.png'
+import imageOne from './Assets/student.png'
 import {
   CDBSidebar,
   CDBSidebarContent,

@@ -1,11 +1,11 @@
 import React from 'react'
 import {Button,Form,Card} from 'react-bootstrap'
-import imageOne from '../../../student.png'
+import imageOne from '../../../Assets/student.png'
 
 
 function UpdateDocInd() {
   return (
-    <div className="d-flex align-items-cUpdate justify-content-cUpdate firstDiv">
+    <div className="d-flex align-items-cUpdate justify-content-center Update firstDiv">
     <Card
       bg="white"
       className="text-cUpdate  border-0 shadow-5 rounded-5 mx-auto pt-5 mb-5"

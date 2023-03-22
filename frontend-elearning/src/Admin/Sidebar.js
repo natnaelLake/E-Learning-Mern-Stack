@@ -39,10 +39,6 @@ function Sidebar() {
             <NavLink exact to="/exams" activeClassName="activeClicked">
               <CDBSidebarMenuItem icon="columns">Manage Exams</CDBSidebarMenuItem>
             </NavLink>
-            <NavLink exact to="/students" activeClassName="activeClicked">
-              <CDBSidebarMenuItem icon="columns">Manage Students</CDBSidebarMenuItem>
-            </NavLink>
-
           </CDBSidebarMenu>
         </CDBSidebarContent>
         <CDBSidebarFooter style={{ textAlign: 'center' }}>
