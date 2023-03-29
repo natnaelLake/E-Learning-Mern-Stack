@@ -1,7 +1,6 @@
-import {React,useEffect,useState} from "react";
+import {useState} from "react";
 import { Form, Card, Button } from "react-bootstrap";
 import * as Icon from "react-bootstrap-icons";
-import axios from 'axios'
 import { Link } from "react-router-dom";
 import "./style.css";
 
@@ -10,7 +9,9 @@ function Login() {
   const [validated, setValidated] = useState(false);
   const [email,setEmail] = useState('');
   const [password,setPassword] = useState('');
-  const [message,setMessage] = useState('')
+  const [emailError,setEmailError] = useState('')
+  const [passError,setPassError] = useState('')
+
   // const [email,setEmail] = useState();
 
 
@@ -30,9 +31,12 @@ function Login() {
     })
     // console.log(response)
     let jsonRes = await response.json();
-    setMessage(jsonRes.message)
+    if(!response.ok){
+      setEmailError(jsonRes.email)
+      setPassError(jsonRes.password)
+    }
+    console.log(jsonRes)
   };
-  console.log(message)
   const style = { color: "white", width: "200px", height: "50px" };
   const style1 = { width: "200px", height: "50px" };
 
@@ -63,7 +67,7 @@ function Login() {
                 />
                 <label htmlFor="email">User Name</label>
                 <Form.Control.Feedback type="invalid">
-                  Please provide a valid Email
+                  {emailError}
                 </Form.Control.Feedback>
               </Form.Floating>
             </Form.Group>
@@ -81,7 +85,7 @@ function Login() {
                 />
                 <label htmlFor="email">Password</label>
                 <Form.Control.Feedback type="invalid" className="text-danger">
-                  Please provide a valid Password.
+                  {passError}
                 </Form.Control.Feedback>
               </Form.Floating>{" "}
             </Form.Group>

@@ -14,7 +14,13 @@ function SignUp() {
   const [age,setAge] = useState('')
   const [department,setDepartment] = useState('')
   const [phone,setPhone] = useState('')
-  const [message,setMessage] = useState('')
+  const [phoneError,setPhoneError] = useState('')
+  const [fnameError,setFnameError]  = useState('')
+  const [lnameError,setLnameError]  = useState('')
+  const [emailError,setEmailError]  = useState('')
+  const [passError,setPassError]  = useState('')
+  const [depError,setDepError]  = useState('')
+
 
 
   const handleSubmit = async (event) => {
@@ -35,11 +41,28 @@ function SignUp() {
     })
     // console.log(response)
     let jsonRes = await response.json();
-    setMessage(jsonRes.message)
+    if(response.ok){
+        console.log(jsonRes)
+        setLnameError('')
+        setFnameError('')
+        setEmailError('')
+        setPassError('')
+        setPhoneError('')
+        setDepError('')
+    }else{
+      console.log(jsonRes)
+      setFnameError(jsonRes.firstname)
+      setLnameError(jsonRes.lastname)
+      setEmailError(jsonRes.email)
+      setPassError(jsonRes.password)
+      setPhoneError(jsonRes.phone)
+      setDepError(jsonRes.department)
+    }
+    
+
   };
   const style = { color: "white", width: "200px", height: "50px" };
   const style1 = { width: "200px", height: "50px" };
-  console.log(message);
 
 
   return (
@@ -69,7 +92,7 @@ function SignUp() {
                 />
                 <label htmlFor="firtName">First Name</label>
                 <Form.Control.Feedback type="invalid">
-                  Enter First Name
+                  {fnameError}
                 </Form.Control.Feedback>
               </Form.Floating>
             </Form.Group>
@@ -87,7 +110,7 @@ function SignUp() {
                 />
                 <label htmlFor="lastName">Last Name</label>
                 <Form.Control.Feedback type="invalid">
-                  Enter Last Name
+                  {lnameError}
                 </Form.Control.Feedback>
               </Form.Floating>
             </Form.Group>
@@ -104,8 +127,9 @@ function SignUp() {
                   controlid="validationCustom03"
                 />
                 <label htmlFor="email">Enter Email</label>
+                <p className="text-danger">{emailError  == 'Email is in use' && emailError}</p>
                 <Form.Control.Feedback type="invalid">
-                  Please provide a valid Email
+                  {emailError}
                 </Form.Control.Feedback>
               </Form.Floating>
             </Form.Group>
@@ -122,8 +146,9 @@ function SignUp() {
                   required
                 />
                 <label htmlFor="email">Password</label>
+                <p className="text-danger">{passError == 'Minimum Length is 8 Characters' && passError}</p>
                 <Form.Control.Feedback type="invalid" className="text-danger">
-                  Please provide a valid Password.
+                 {passError}
                 </Form.Control.Feedback>
               </Form.Floating>{" "}
             </Form.Group>
@@ -131,7 +156,6 @@ function SignUp() {
             <Form.Group>
               <Form.Floating>
                 <Form.Control
-                  required
                   type="number"
                   id="age"
                   placeholder="Age"
@@ -141,7 +165,7 @@ function SignUp() {
                 />
                 <label htmlFor="age">Age</label>
                 <Form.Control.Feedback type="invalid" className="text-danger">
-                  Please provide a valid Age.
+                  
                 </Form.Control.Feedback>
               </Form.Floating>{" "}
             </Form.Group>
@@ -159,7 +183,7 @@ function SignUp() {
                 />
                 <label htmlFor="department">Department</label>
                 <Form.Control.Feedback type="invalid" className="text-danger">
-                  Please provide a valid zip.
+                  {depError}
                 </Form.Control.Feedback>
               </Form.Floating>{" "}
             </Form.Group>
@@ -178,7 +202,7 @@ function SignUp() {
                 />
                 <label htmlFor="phone">Phone Number</label>
                 <Form.Control.Feedback type="invalid" className="text-danger">
-                  Please provide a valid Phone.
+                  {phoneError}
                 </Form.Control.Feedback>
               </Form.Floating>{" "}
             </Form.Group>
