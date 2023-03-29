@@ -1,9 +1,9 @@
 const mongoose = require('mongoose');
-const isEmail = require('validator')
+const {isEmail} = require('validator')
 const bcrypt = require('bcrypt')
+const Schema = mongoose.Schema;
 
-
-const User = mongoose.Schema({
+const userSchema = new Schema({
     firstname:{
         type:String,
         required:[true,'Enter First Name']
@@ -14,26 +14,26 @@ const User = mongoose.Schema({
     },
     email:{
         type:String,
-        required:[true,'Enter First Name'],
-        unique:true,
+        required:[true,'Enter Valid Email'],
         lowercase:true,
-        validate:[isEmail,'Provide Valid Email']
+        unique:true,
+        validate:[isEmail,'Enter Valid Email']
     },
     password:{
         type:String,
-        required:[true,'Enter First Name']
-    },
-    age:{
-        type:String,
-        required:[true,'Enter Your Age']
+        required:[true,'Enter Password'],
+        minlength:[8,'Minimum Length is 8 Characters']
     },
     department:{
         type:String,
-        required:[true,'Enter Your Department']
+        required:[true,'Enter  Department']
     },
     age:{
+        type:String
+    },
+    phone:{
         type:String,
-        required:[true,'Enter a Valid Phone']
+        required:[true,'Enter Valid Phone Number']
     }
 })
-module.exports = mongoose.model('User',User)
+module.exports = mongoose.model('User',userSchema)

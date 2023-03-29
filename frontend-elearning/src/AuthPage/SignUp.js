@@ -7,8 +7,17 @@ import { useState } from "react";
 
 function SignUp() {
   const [validated, setValidated] = useState(false);
+  const [firstname,setFirstname] = useState('')
+  const [lastname,setLastname] = useState('')
+  const [email,setEmail] = useState('')
+  const [password,setPassword] = useState('')
+  const [age,setAge] = useState('')
+  const [department,setDepartment] = useState('')
+  const [phone,setPhone] = useState('')
+  const [message,setMessage] = useState('')
 
-  const handleSubmit = (event) => {
+
+  const handleSubmit = async (event) => {
     const form = event.currentTarget;
     if (form.checkValidity() === false) {
       event.preventDefault();
@@ -16,10 +25,21 @@ function SignUp() {
     }
 
     setValidated(true);
+    event.preventDefault();
+    setValidated(true);
+    let data = {firstname, lastname, email, password, age, phone, department} 
+    const response = await fetch('http://localhost:8000/signup',{
+      method:'POST',
+      body:JSON.stringify(data),
+      headers:{'Content-Type':'application/json'}
+    })
+    // console.log(response)
+    let jsonRes = await response.json();
+    setMessage(jsonRes.message)
   };
   const style = { color: "white", width: "200px", height: "50px" };
   const style1 = { width: "200px", height: "50px" };
-
+  console.log(message);
 
 
   return (
@@ -39,13 +59,15 @@ function SignUp() {
           <Form.Group>
               <Form.Floating>
                 <Form.Control
-                  type="email"
-                  id="email"
+                  type="text"
+                  id="firtName"
                   placeholder="User Name"
+                  value={firstname}
+                  onChange = {e=>{setFirstname(e.target.value)}}
                   required
-                  controlId="validationCustom03"
+                  controlid="validationCustom03"
                 />
-                <label htmlFor="email">First Name</label>
+                <label htmlFor="firtName">First Name</label>
                 <Form.Control.Feedback type="invalid">
                   Enter First Name
                 </Form.Control.Feedback>
@@ -55,13 +77,15 @@ function SignUp() {
             <Form.Group>
               <Form.Floating>
                 <Form.Control
-                  type="email"
-                  id="email"
+                  type="text"
+                  id="lastName"
                   placeholder="Last Name"
+                  value={lastname}
+                  onChange = {e=>{setLastname(e.target.value)}}
                   required
-                  controlId="validationCustom03"
+                  controlid="validationCustom03"
                 />
-                <label htmlFor="email">Last Name</label>
+                <label htmlFor="lastName">Last Name</label>
                 <Form.Control.Feedback type="invalid">
                   Enter Last Name
                 </Form.Control.Feedback>
@@ -74,10 +98,12 @@ function SignUp() {
                   type="email"
                   id="email"
                   placeholder="User Name"
+                  value={email}
+                  onChange = {e=>{setEmail(e.target.value)}}
                   required
-                  controlId="validationCustom03"
+                  controlid="validationCustom03"
                 />
-                <label htmlFor="email">User Name</label>
+                <label htmlFor="email">Enter Email</label>
                 <Form.Control.Feedback type="invalid">
                   Please provide a valid Email
                 </Form.Control.Feedback>
@@ -87,11 +113,13 @@ function SignUp() {
             <Form.Group>
               <Form.Floating>
                 <Form.Control
-                  required
                   type="password"
                   id="email"
                   placeholder="Password"
-                  controlId="validationCustom03"
+                  value={password}
+                  onChange = {e=>{setPassword(e.target.value)}}
+                  controlid="validationCustom03"
+                  required
                 />
                 <label htmlFor="email">Password</label>
                 <Form.Control.Feedback type="invalid" className="text-danger">
@@ -105,11 +133,13 @@ function SignUp() {
                 <Form.Control
                   required
                   type="number"
-                  id="email"
+                  id="age"
                   placeholder="Age"
-                  controlId="validationCustom03"
+                  value={age}
+                  onChange = {e=>{setAge(e.target.value)}}
+                  controlid="validationCustom03"
                 />
-                <label htmlFor="email">Age</label>
+                <label htmlFor="age">Age</label>
                 <Form.Control.Feedback type="invalid" className="text-danger">
                   Please provide a valid Age.
                 </Form.Control.Feedback>
@@ -121,11 +151,13 @@ function SignUp() {
                 <Form.Control
                   required
                   type="text"
-                  id="email"
+                  id="department"
                   placeholder="Text"
-                  controlId="validationCustom03"
+                  value = {department}
+                  onChange = {e=>{setDepartment(e.target.value)}}
+                  controlid="validationCustom03"
                 />
-                <label htmlFor="email">Department</label>
+                <label htmlFor="department">Department</label>
                 <Form.Control.Feedback type="invalid" className="text-danger">
                   Please provide a valid zip.
                 </Form.Control.Feedback>
@@ -137,12 +169,14 @@ function SignUp() {
                 <Form.Control
                   required
                   type="tel"
-                  id="email"
+                  id="phone"
                   placeholder="Phone Number"
                   pattern="[0-9]{10}"
-                  controlId="validationCuston03"
+                  value={phone}
+                  onChange = {e=>{setPhone(e.target.value)}}
+                  controlid="validationCuston03"
                 />
-                <label htmlFor="email">Phone Number</label>
+                <label htmlFor="phone">Phone Number</label>
                 <Form.Control.Feedback type="invalid" className="text-danger">
                   Please provide a valid Phone.
                 </Form.Control.Feedback>

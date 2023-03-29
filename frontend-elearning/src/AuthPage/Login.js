@@ -1,23 +1,38 @@
-import {React,useState} from "react";
+import {React,useEffect,useState} from "react";
 import { Form, Card, Button } from "react-bootstrap";
 import * as Icon from "react-bootstrap-icons";
-
+import axios from 'axios'
 import { Link } from "react-router-dom";
 import "./style.css";
 
 
 function Login() {
   const [validated, setValidated] = useState(false);
+  const [email,setEmail] = useState('');
+  const [password,setPassword] = useState('');
+  const [message,setMessage] = useState('')
+  // const [email,setEmail] = useState();
 
-  const handleSubmit = (event) => {
+
+  const handleSubmit = async (event) => {
     const form = event.currentTarget;
     if (form.checkValidity() === false) {
       event.preventDefault();
       event.stopPropagation();
     }
-
+    event.preventDefault();
     setValidated(true);
+    let data = {email,password} 
+    const response = await fetch('http://localhost:8000/login',{
+      method:'POST',
+      body:JSON.stringify(data),
+      headers:{'Content-Type':'application/json'}
+    })
+    // console.log(response)
+    let jsonRes = await response.json();
+    setMessage(jsonRes.message)
   };
+  console.log(message)
   const style = { color: "white", width: "200px", height: "50px" };
   const style1 = { width: "200px", height: "50px" };
 
@@ -41,8 +56,10 @@ function Login() {
                   type="email"
                   id="email"
                   placeholder="User Name"
+                  value={email}
+                  onChange = {(e)=>{setEmail(e.target.value)}}
                   required
-                  controlId="validationCustom03"
+                  controlid="validationCustom03"
                 />
                 <label htmlFor="email">User Name</label>
                 <Form.Control.Feedback type="invalid">
@@ -58,7 +75,9 @@ function Login() {
                   type="password"
                   id="email"
                   placeholder="Password"
-                  controlId="validationCustom03"
+                  value={password}
+                  controlid="validationCustom03"
+                  onChange = {(e)=>{setPassword(e.target.value)}}
                 />
                 <label htmlFor="email">Password</label>
                 <Form.Control.Feedback type="invalid" className="text-danger">

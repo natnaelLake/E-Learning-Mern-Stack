@@ -14,7 +14,7 @@ var indexRouter = require('./routes/index');
 var usersRouter = require('./routes/users');
 
 var app = express();
-mongoose.connect(process.env.URL).then(()=>{
+mongoose.connect(process.env.URL,{}).then(()=>{
   console.log('mongodb is connected')
 });
 
@@ -28,8 +28,7 @@ app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 app.use(cors({
-  origin:'*',
-  credentials:true
+  origin:'*'
 }))
 
 app.get('/',(req,res)=>{
