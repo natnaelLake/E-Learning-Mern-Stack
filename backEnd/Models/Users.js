@@ -1,5 +1,5 @@
 const mongoose = require('mongoose');
-const {isEmail} = require('validator')
+const {isEmail,isStrongPassword} = require('validator')
 const bcrypt = require('bcrypt')
 const Schema = mongoose.Schema;
 
@@ -22,7 +22,7 @@ const userSchema = new Schema({
     password:{
         type:String,
         required:[true,'Enter Password'],
-        minlength:[8,'Minimum Length is 8 Characters']
+        minlength:[8,'Minimum Length is 8 Characters'],
     },
     department:{
         type:String,
@@ -35,5 +35,28 @@ const userSchema = new Schema({
         type:String,
         required:[true,'Enter Valid Phone Number']
     }
+},{timestamps:true});
+userSchema.pre('save',async function(next){
+    // if(!isStrongPassword(this.password)){
+    //     throw Error('Use Storng Password')
+    // }
+    const salt =await bcrypt.genSalt();
+    this.password = await bcrypt.hash(this.password,salt)
+    
+    next();
 })
+
+
+userSchema.statics.login = async function(email,password){
+    const user = await this.findOne({email});
+    if(user){
+        const retData= bcrypt.compare(password,user.password)
+        if(retData){
+            return user
+        }
+        throw Error('Incorrect Password');
+    }
+    throw Error('Email is not registered')
+}
+
 module.exports = mongoose.model('User',userSchema)

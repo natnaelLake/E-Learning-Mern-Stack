@@ -9,10 +9,6 @@ const pageRoutes = require('./MainRoutesControl/Routes')
 const mongoose = require('mongoose')
 // const url = 'mongodb+srv://bewuketu:nati1212@elearningcloud.q9sopgm.mongodb.net/?retryWrites=true&w=majority'
 
-
-var indexRouter = require('./routes/index');
-var usersRouter = require('./routes/users');
-
 var app = express();
 mongoose.connect(process.env.URL,{}).then(()=>{
   console.log('mongodb is connected')
