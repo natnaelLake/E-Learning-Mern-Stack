@@ -28,42 +28,42 @@ import Mid from "./Admin/ExamControl/Mid";
 import EditMid from "./Admin/ExamControl/EditMId/EditMid";
 import EditFinal from "./Admin/ExamControl/EditFinal/EditFinal";
 import { useAuthContext } from "./hooks/useAuthContext";
+import ProtectedRoutes from "./ProtectedRoutes";
 
 function RoutesPage() {
   const { user } = useAuthContext();
   return (
     <div>
       <Routes>
-        <Route
-          path="/login"
-          element={!user ? <Login /> : <Navigate to="/" />}
-        />
-        <Route
-          path="/signup"
-          element={!user ? <SignUp /> : <Navigate to="/" />}
-        />
-        <Route path="/courses" element={<Courses />} />
-        <Route path="/videos" element={<Videos />} />
-        <Route path="/files" element={<Files />} />
-        <Route path="/intro" element={<Introduction />} />
-        <Route path="/quizes" element={<Quizes />} />
-        <Route path="/dashboard" element={<Dashboard />} />
-        <Route path="/assessment" element={<ManageAssesment />} />
-        <Route path="/mntcourse" element={<ManageCourse />} />
-        <Route path="/exams" element={<ManageExams />} />
-        <Route path="/students" element={<ManageStudents />} />
-        <Route path="/edit" element={<EditAss />} />
-        <Route path="/vidEdit" element={<VidoeEdit />} />
-        <Route path="/docEdit" element={<UpdateDoc />} />
-        <Route path="/introEdit" element={<UpdateIntro />} />
-        <Route path="/indVideo" element={<VidEditPage />} />
-        <Route path="/indVidUpdate" element={<UpdateVideo />} />
-        <Route path="/editDoc" element={<DocMainEdit />} />
-        <Route path="/updateDoc" element={<UpdateDoc />} />
-        <Route path="/editQuiz" element={<EditQuiz />} />
-        <Route path="/editMid" element={<EditMid />} />
-        <Route path="/editFinal" element={<EditFinal />} />
-        <Route path="/editCourse" element={<EditCourse />} />
+        <Route path="/login" element={<Login />} />
+        <Route path="/signup" element={<SignUp />} />
+        <Route element={<ProtectedRoutes />}>
+          <Route
+            path="/courses"
+            element={<Courses />}
+          />
+          <Route path="/videos" element={<Videos />} />
+          <Route path="/files" element={<Files />} />
+          <Route path="/intro" element={<Introduction />} />
+          <Route path="/quizes" element={<Quizes />} />
+          <Route path="/dashboard" element={<Dashboard />} />
+          <Route path="/assessment" element={<ManageAssesment />} />
+          <Route path="/mntcourse" element={<ManageCourse />} />
+          <Route path="/exams" element={<ManageExams />} />
+          <Route path="/students" element={<ManageStudents />} />
+          <Route path="/edit" element={<EditAss />} />
+          <Route path="/vidEdit" element={<VidoeEdit />} />
+          <Route path="/docEdit" element={<UpdateDoc />} />
+          <Route path="/introEdit" element={<UpdateIntro />} />
+          <Route path="/indVideo" element={<VidEditPage />} />
+          <Route path="/indVidUpdate" element={<UpdateVideo />} />
+          <Route path="/editDoc" element={<DocMainEdit />} />
+          <Route path="/updateDoc" element={<UpdateDoc />} />
+          <Route path="/editQuiz" element={<EditQuiz />} />
+          <Route path="/editMid" element={<EditMid />} />
+          <Route path="/editFinal" element={<EditFinal />} />
+          <Route path="/editCourse" element={<EditCourse />} />
+        </Route>
         <Route path="/" element={<Home />} />
       </Routes>
     </div>
