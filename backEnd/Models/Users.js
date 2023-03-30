@@ -48,13 +48,20 @@ userSchema.pre('save',async function(next){
 
 
 userSchema.statics.login = async function(email,password){
+    if(!email || !isEmail(email)){
+        throw Error('Enter Valid Email')
+    }
+    if(!password){
+        throw Error('Enter Password')
+    }
     const user = await this.findOne({email});
     if(user){
-        const retData= bcrypt.compare(password,user.password)
+        const retData= await bcrypt.compare(password,user.password)
+        console.log(retData)
         if(retData){
             return user
         }
-        throw Error('Incorrect Password');
+        throw Error('Incorrect Password')
     }
     throw Error('Email is not registered')
 }

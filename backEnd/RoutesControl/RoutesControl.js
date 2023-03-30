@@ -14,6 +14,20 @@ const handleErrors = (err) => {
     phone: "",
     department: "",
   };
+
+
+  if(err.message === 'Email is not registered'){
+      errors.email = 'Email is not registered'
+  }
+  if(err.message === 'Incorrect Password'){
+     errors.password = 'Incorrect Password'
+  }
+  if(err.message === 'Enter Valid Email'){
+    errors.email = 'Enter Valid Email'
+}
+if(err.message === 'Enter Password'){
+   errors.password = 'Enter Password'
+}
   if (err.code === 11000) {
     console.log(err);
     errors.email = "Email is in use";
@@ -28,24 +42,24 @@ const handleErrors = (err) => {
       errors[properties.path] = properties.message;
     });
   }
-
+  console.log(errors)
   return errors;
 };
 const maxAge = 3*24*60*60;
 const createToken = (_id)=>{
-  return jwt.sing({_id},process.env.SECRET,{expiresIn:maxAge})
+  return jwt.sign({_id},process.env.SECRET,{expiresIn:maxAge})
 }
 const login_Post = async (req, res) => {
   const {email,password} = req.body;
   try{
     const user = await User.login(email,password)
     const token = createToken(user._id)
-    res.status(200).json({message:'successfully login'})
+    res.status(200).json(user._id)
   }catch(err){
-
-    res.status(404).json({message:err})
+    const errors = handleErrors(err)
+    console.log(err)
+    res.status(404).json({errors})
   }
-  res.status(200).json({ message: "welcome to post login page." });
 };
 const signup_Post = async (req, res) => {
   const { firstname, lastname, email, password, age, phone, department } =
@@ -67,7 +81,7 @@ const signup_Post = async (req, res) => {
   } catch (err) {
     let errors = handleErrors(err);
     // console.log(err)
-    res.status(404).json(errors);
+    res.status(404).json({errors});
   }
 };
 const videos_Post = async (req, res) => {

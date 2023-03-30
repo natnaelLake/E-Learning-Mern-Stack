@@ -22,20 +22,27 @@ function Login() {
       event.stopPropagation();
     }
     event.preventDefault();
-    setValidated(true);
     let data = {email,password} 
     const response = await fetch('http://localhost:8000/login',{
       method:'POST',
       body:JSON.stringify(data),
       headers:{'Content-Type':'application/json'}
     })
+    setValidated(true);
     // console.log(response)
     let jsonRes = await response.json();
-    if(!response.ok){
-      setEmailError(jsonRes.email)
-      setPassError(jsonRes.password)
-    }
     console.log(jsonRes)
+    if(response.ok){
+      setEmailError('')
+      setPassError('')
+    }else{
+      
+      setEmailError(jsonRes.errors.email)
+      setPassError(jsonRes.errors.password)
+      // event.preventDefault();
+      // event.stopPropagation();
+    }
+    // console.log(jsonRes)
   };
   const style = { color: "white", width: "200px", height: "50px" };
   const style1 = { width: "200px", height: "50px" };
@@ -43,7 +50,7 @@ function Login() {
   return (
     <div className="d-flex align-items-center justify-content-center firstDiv">
       <Card
-        bg="success"
+        bg="dark"
         className="text-center  border-0 shadow-5 rounded-5 mx-auto pt-5 mb-5"
         style={{ height: "500px", width: "400px" }}
       >
@@ -66,8 +73,9 @@ function Login() {
                   controlid="validationCustom03"
                 />
                 <label htmlFor="email">User Name</label>
+                <p className="text-danger">{emailError != 'Enter Valid Email' && emailError}</p>
                 <Form.Control.Feedback type="invalid">
-                  {emailError}
+                 {emailError}
                 </Form.Control.Feedback>
               </Form.Floating>
             </Form.Group>
@@ -84,6 +92,7 @@ function Login() {
                   onChange = {(e)=>{setPassword(e.target.value)}}
                 />
                 <label htmlFor="email">Password</label>
+                <p className="text-danger">{passError != 'Enter Password' && passError}</p>
                 <Form.Control.Feedback type="invalid" className="text-danger">
                   {passError}
                 </Form.Control.Feedback>
