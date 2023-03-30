@@ -29,11 +29,11 @@ if(err.message === 'Enter Password'){
    errors.password = 'Enter Password'
 }
   if (err.code === 11000) {
-    console.log(err);
+    // console.log(err);
     errors.email = "Email is in use";
     return errors;
   }
-  console.log(err);
+  // console.log(err);
   // if(err ==='Use Storng Password'){
   //   console.log(err)
   // }
@@ -42,7 +42,7 @@ if(err.message === 'Enter Password'){
       errors[properties.path] = properties.message;
     });
   }
-  console.log(errors)
+  // console.log(errors)
   return errors;
 };
 const maxAge = 3*24*60*60;
@@ -54,10 +54,10 @@ const login_Post = async (req, res) => {
   try{
     const user = await User.login(email,password)
     const token = createToken(user._id)
-    res.status(200).json(user._id)
+    res.status(200).json({email,token})
   }catch(err){
     const errors = handleErrors(err)
-    console.log(err)
+    // console.log(err)
     res.status(404).json({errors})
   }
 };

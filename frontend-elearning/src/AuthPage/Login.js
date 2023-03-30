@@ -3,46 +3,40 @@ import { Form, Card, Button } from "react-bootstrap";
 import * as Icon from "react-bootstrap-icons";
 import { Link } from "react-router-dom";
 import "./style.css";
+import { useLogin } from "../hooks/useLogin";
+import { useAuthContext } from "../hooks/useAuthContext";
 
 
 function Login() {
   const [validated, setValidated] = useState(false);
   const [email,setEmail] = useState('');
   const [password,setPassword] = useState('');
-  const [emailError,setEmailError] = useState('')
-  const [passError,setPassError] = useState('')
-
-  // const [email,setEmail] = useState();
+  const {login,emailError,passError} = useLogin()
+  const {user} = useAuthContext();
+  const [authError,setAuthError] = useState();
 
 
   const handleSubmit = async (event) => {
+    // if(user){
+    //   if(user.email !== email){
+    //     setAuthError('you must be register')
+    //     return
+    //   }
+    // }else{
+    //   setAuthError('you must be register')
+    //   event.preventDefault();
+    //   event.stopPropagation();
+    // }
     const form = event.currentTarget;
     if (form.checkValidity() === false) {
       event.preventDefault();
       event.stopPropagation();
     }
     event.preventDefault();
-    let data = {email,password} 
-    const response = await fetch('http://localhost:8000/login',{
-      method:'POST',
-      body:JSON.stringify(data),
-      headers:{'Content-Type':'application/json'}
-    })
     setValidated(true);
-    // console.log(response)
-    let jsonRes = await response.json();
-    console.log(jsonRes)
-    if(response.ok){
-      setEmailError('')
-      setPassError('')
-    }else{
-      
-      setEmailError(jsonRes.errors.email)
-      setPassError(jsonRes.errors.password)
-      // event.preventDefault();
-      // event.stopPropagation();
-    }
-    // console.log(jsonRes)
+
+      await login(email,password)
+
   };
   const style = { color: "white", width: "200px", height: "50px" };
   const style1 = { width: "200px", height: "50px" };
@@ -54,6 +48,7 @@ function Login() {
         className="text-center  border-0 shadow-5 rounded-5 mx-auto pt-5 mb-5"
         style={{ height: "500px", width: "400px" }}
       >
+        <p className="text-danger">{authError}</p>
         <Icon.PersonFill
           style={style}
           className="align-items-center mx-auto "

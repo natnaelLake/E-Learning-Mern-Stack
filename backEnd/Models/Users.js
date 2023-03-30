@@ -57,7 +57,7 @@ userSchema.statics.login = async function(email,password){
     const user = await this.findOne({email});
     if(user){
         const retData= await bcrypt.compare(password,user.password)
-        console.log(retData)
+        // console.log(retData)
         if(retData){
             return user
         }

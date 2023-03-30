@@ -4,6 +4,11 @@ import * as Icon from "react-bootstrap-icons";
 import { Link } from "react-router-dom";
 import "./style.css";
 import { useState } from "react";
+import {useSignUp} from '../hooks/useSignUp'
+
+
+
+
 
 function SignUp() {
   const [validated, setValidated] = useState(false);
@@ -14,13 +19,8 @@ function SignUp() {
   const [age,setAge] = useState('')
   const [department,setDepartment] = useState('')
   const [phone,setPhone] = useState('')
-  const [phoneError,setPhoneError] = useState('')
-  const [fnameError,setFnameError]  = useState('')
-  const [lnameError,setLnameError]  = useState('')
-  const [emailError,setEmailError]  = useState('')
-  const [passError,setPassError]  = useState('')
-  const [depError,setDepError]  = useState('')
-
+  const {fnameError,lnameError,emailError,passError,depError,phoneError,signUp} = useSignUp()
+  
 
 
   const handleSubmit = async (event) => {
@@ -32,34 +32,7 @@ function SignUp() {
 
     setValidated(true);
     event.preventDefault();
-    setValidated(true);
-    let data = {firstname, lastname, email, password, age, phone, department} 
-    const response = await fetch('http://localhost:8000/signup',{
-      method:'POST',
-      body:JSON.stringify(data),
-      headers:{'Content-Type':'application/json'}
-    })
-    // console.log(response)
-    let jsonRes = await response.json();
-    if(response.ok){
-        console.log(jsonRes)
-        setLnameError('')
-        setFnameError('')
-        setEmailError('')
-        setPassError('')
-        setPhoneError('')
-        setDepError('')
-    }else{
-      console.log(jsonRes)
-      setFnameError(jsonRes.firstname)
-      setLnameError(jsonRes.lastname)
-      setEmailError(jsonRes.email)
-      setPassError(jsonRes.password)
-      setPhoneError(jsonRes.phone)
-      setDepError(jsonRes.department)
-    }
-    
-
+    await signUp(email,password,firstname,lastname,age,department,phone)
   };
   const style = { color: "white", width: "200px", height: "50px" };
   const style1 = { width: "200px", height: "50px" };

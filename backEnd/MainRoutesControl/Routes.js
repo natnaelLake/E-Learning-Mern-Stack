@@ -8,9 +8,11 @@ const {
   files_Post,
   files_get,
 } = require("../RoutesControl/RoutesControl");
+const AuthControl = require('../middleware/AuthControl')
 
-router.post("/login",login_Post);
 router.post('/signup',signup_Post)
+// router.use(AuthControl)
+router.post("/login",login_Post);
 router.post('/addVideos',videos_Post)
 router.get('/getVideos',videos_get)
 router.post('/addFiles',files_Post)
