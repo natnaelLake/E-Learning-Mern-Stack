@@ -1,3 +1,5 @@
+
+// import { upload } from "../RoutesControl/RoutesControl";
 const express = require("express");
 const router = express.Router();
 const {
@@ -7,9 +9,10 @@ const {
   videos_get,
   files_Post,
   files_get,
+  upload
 } = require("../RoutesControl/RoutesControl");
 const AuthControl = require('../middleware/AuthControl')
-
+// const {upload} = 
 router.post('/signup',signup_Post)
 // router.use(AuthControl)
 router.post("/login",login_Post);
