@@ -29,41 +29,43 @@ import EditMid from "./Admin/ExamControl/EditMId/EditMid";
 import EditFinal from "./Admin/ExamControl/EditFinal/EditFinal";
 import { useAuthContext } from "./hooks/useAuthContext";
 import ProtectedRoutes from "./ProtectedRoutes";
+import AddCourse from "./Admin/CourseButton/AddCourse";
 
 function RoutesPage() {
   const { user } = useAuthContext();
   return (
     <div>
       <Routes>
-        <Route path="/login" element={<Login />} />
-        <Route path="/signup" element={<SignUp />} />
-        <Route element={<ProtectedRoutes />}>
+        <Route path="/login" element={!user ? <Login /> : <Navigate to = '/'/>} />
+        <Route path="/signup" element={!user ? <SignUp /> : <Navigate to ='/'/>} />
+        {/* <Route element={<ProtectedRoutes />}> */}
           <Route
             path="/courses"
-            element={<Courses />}
+            element={user ? < Courses />: <Login />}
           />
-          <Route path="/videos" element={<Videos />} />
-          <Route path="/files" element={<Files />} />
-          <Route path="/intro" element={<Introduction />} />
-          <Route path="/quizes" element={<Quizes />} />
-          <Route path="/dashboard" element={<Dashboard />} />
-          <Route path="/assessment" element={<ManageAssesment />} />
-          <Route path="/mntcourse" element={<ManageCourse />} />
-          <Route path="/exams" element={<ManageExams />} />
-          <Route path="/students" element={<ManageStudents />} />
-          <Route path="/edit" element={<EditAss />} />
-          <Route path="/vidEdit" element={<VidoeEdit />} />
-          <Route path="/docEdit" element={<UpdateDoc />} />
-          <Route path="/introEdit" element={<UpdateIntro />} />
-          <Route path="/indVideo" element={<VidEditPage />} />
-          <Route path="/indVidUpdate" element={<UpdateVideo />} />
-          <Route path="/editDoc" element={<DocMainEdit />} />
-          <Route path="/updateDoc" element={<UpdateDoc />} />
-          <Route path="/editQuiz" element={<EditQuiz />} />
-          <Route path="/editMid" element={<EditMid />} />
-          <Route path="/editFinal" element={<EditFinal />} />
-          <Route path="/editCourse" element={<EditCourse />} />
-        </Route>
+          <Route path="/videos" element={user ? <Videos />:<Login />} />
+          <Route path="/files" element={user ? <Files />: <Login />}/>
+          <Route path="/intro" element={user ? <Introduction /> : <Login />} />
+          <Route path="/quizes" element={user ? <Quizes /> : <Login />} />
+          <Route path="/dashboard" element={user ? <Dashboard />: <Login />} />
+          <Route path="/assessment" element={user ? <ManageAssesment />: <Login />} />
+          <Route path="/mntcourse" element={user ? <ManageCourse />: <Login />} />
+          <Route path="/exams" element={user ? <ManageExams />: <Login />} />
+          <Route path="/students" element={user ? <ManageStudents />: <Login />} />
+          <Route path="/edit" element={user ? <EditAss />: <Login />} />
+          <Route path="/vidEdit" element={user ? <VidoeEdit />: <Login />} />
+          <Route path="/docEdit" element={user ? <UpdateDoc />: <Login />} />
+          <Route path="/introEdit" element={user ? <UpdateIntro />: <Login />} />
+          <Route path="/indVideo" element={user ? <VidEditPage />: <Login />} />
+          <Route path="/indVidUpdate" element={user ? <UpdateVideo />: <Login />} />
+          <Route path="/editDoc" element={user ? <DocMainEdit />: <Login />} />
+          <Route path="/updateDoc" element={user ? <UpdateDoc />: <Login />} />
+          <Route path="/editQuiz" element={user ? <EditQuiz />: <Login />} />
+          <Route path="/editMid" element={user ? <EditMid />: <Login />} />
+          <Route path="/editFinal" element={user ? <EditFinal />: <Login />} />
+          <Route path="/editCourse" element={user ? <EditCourse />: <Login />} />
+          <Route path="/addCourse" element={user ? <AddCourse />: <Login />} />
+        {/* </Route> */}
         <Route path="/" element={<Home />} />
       </Routes>
     </div>

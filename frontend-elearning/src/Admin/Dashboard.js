@@ -52,7 +52,7 @@ function Dashboard() {
                     <Col>
                       <Card style={{ height: "7rem" }}>
                         <Card.Body>
-                          <Card.Title>Enrolled Students</Card.Title>
+                          <Card.Title>Course Numbers </Card.Title>
                           <Badge bg="danger">20</Badge>
                         </Card.Body>
                       </Card>
@@ -60,7 +60,7 @@ function Dashboard() {
                     <Col>
                       <Card style={{ height: "7rem" }}>
                         <Card.Body>
-                          <Card.Title>Enrolled Students</Card.Title>
+                          <Card.Title>Total Teachers</Card.Title>
                           <Badge bg="danger">20</Badge>
                         </Card.Body>
                       </Card>
@@ -74,7 +74,7 @@ function Dashboard() {
                     <Col>
                       <Card style={{ height: "7rem" }}>
                         <Card.Body>
-                          <Card.Title>Enrolled Students</Card.Title>
+                          <Card.Title>Active Activities</Card.Title>
                           <Badge bg="danger">20</Badge>
                         </Card.Body>
                       </Card>

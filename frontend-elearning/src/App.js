@@ -8,7 +8,7 @@ import Courses from "./Pages/Courses";
 // import Login from './Pages/Login'
 
 import Header from "./Pages/Header";
-import { BrowserRouter as Router } from "react-router-dom";
+import { BrowserRouter } from "react-router-dom";
 
 import "bootstrap/dist/css/bootstrap.min.css";
 import { Routes, Route,Navigate } from "react-router-dom";
@@ -31,9 +31,9 @@ function App() {
   return (
     <div className="App">
       <Header />
-      <Router>
+      <BrowserRouter>
         <Routers />
-      </Router>
+      </BrowserRouter>
     </div>
   );
 }

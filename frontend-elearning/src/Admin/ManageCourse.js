@@ -22,7 +22,11 @@ function ManageCourse() {
           }}
         >
           <Header className="p-5"></Header>
+        <div>
         <Button className ='align-items-left ml-5' href = '/'style = {{float:'left',width:'7rem',marginLeft:'5px'}}> <Icon.ArrowLeftCircle /> Back</Button>
+        <Button className ='align-items-left ml-5' href = '/addCourse'style = {{float:'left',width:'10rem',marginLeft:'5px'}} variant = 'success'> <Icon.PlusCircleFill /> Add Course</Button>
+        </div>
+          
           <div style={{ height: "100%" }}>
             <div
               style={{
