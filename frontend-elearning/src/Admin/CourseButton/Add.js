@@ -1,54 +1,54 @@
 import { React, useState } from "react";
-import { Form, Card,Button } from "react-bootstrap";
-
-
+import { Form, Card, Button } from "react-bootstrap";
+import axios from "axios";
 
 function Add() {
   const [validated, setValidated] = useState(false);
-  const [courseTitle,setCourseTitle] = useState('')
-  const [moduleTitle,setModuleTitle] = useState('')
-  const [modules,setModules] = useState({})
-  const [videoTitle,setVideoTitle] = useState('')
-  const [fileTitle,setFileTitle] = useState('')
-  const [coverImage,setCoverImage] = useState('')
-  const [courseFiles,setCourseFiles] = useState([{}])
-  const [courseVideos,setCourseVideos] = useState([{}])
-  const [descTitle,setDescTitle] = useState('')
-  const [videos,setVideos] = useState([])
-  const [file,setFiles] = useState([])
-  const [description,setDescription] = useState({})
-  const [desc,setDesc] = useState({})
-  const [allFiles,setAllFiles] = useState({})
+  const [courseTitle, setCourseTitle] = useState("");
+  const [coverImage, setCoverImage] = useState();
+  const [moduleTitle, setModuleTitle] = useState("");
+  const [videoTitle, setVideoTitle] = useState("");
+  const [videoArray, setVideoArray] = useState([]);
+  const [fileTitle, setFileTitle] = useState("");
+  const [fileArray, setFileArray] = useState([]);
+  const [descTitle, setDescTitle] = useState("");
+  const [desc, setDesc] = useState("");
 
   const handleSubmit = async (event) => {
-
-    setCourseFiles([{file,fileTitle}])
-    setCourseVideos([{videoTitle,videos}])
-    setDescription({desc,descTitle})
-    setAllFiles({courseFiles,courseVideos})
-    
     event.preventDefault();
     const formData = new FormData();
-    formData.append('file',allFiles)
-    // formData.append('video',courseVideos)
-    setModules({moduleTitle,formData})
-    console.log(modules)
+    formData.append("courseTitle", courseTitle);
+    formData.append("coverImage", coverImage);
+
+    for (let i = 0; i < videoArray.length; i++) {
+      formData.append("videoArray", videoArray[i]);
+    }
+    for (let i = 0; i < fileArray.length; i++) {
+      formData.append("fileArray", fileArray[i]);
+    }
+    formData.append("descTitle", descTitle);
+    formData.append("desc", desc);
+    formData.append("moduleTitle", moduleTitle);
+    formData.append("videoTitle", videoTitle);
+    formData.append("fileTitle", fileTitle);
+
     const form = event.currentTarget;
     if (form.checkValidity() === false) {
       event.preventDefault();
       event.stopPropagation();
     }
     setValidated(true);
-    // setModule({description,formData})
-    console.log(formData)
-    const response = await fetch('http://localhost:8000/addVideos',{
-      method:'POST',
-      body:JSON.stringify({courseTitle,moduleTitle,coverImage,description,modules}),
-      headers:{'Contentt-Type':'multipart/form-data'}
-    })
-    const jsonRes = await response.json()
-    console.log(jsonRes)
+    const response = await axios.post(
+      "http://localhost:8000/addVideos",
+      formData,
+      {
+        headers: { "Content-Type": "multipart/form-data" },
+      }
+    );
+    // const jsonRes = await response.json()
+    console.log(response);
   };
+
   return (
     <div className="d-flex align-items-center justify-content-center firstDiv">
       <Card
@@ -66,7 +66,9 @@ function Add() {
                   id="course"
                   placeholder="Course Name"
                   required
-                  onChange = {(e)=>{setCourseTitle(e.target.value)}}
+                  onChange={(e) => {
+                    setCourseTitle(e.target.value);
+                  }}
                   controlid="validationCustom03"
                 />
                 <label htmlFor="student">Enter Course Title</label>
@@ -77,14 +79,15 @@ function Add() {
             </Form.Group>
             <br />
             <Form.Group>
-                <Form.Label>Select Cover Image</Form.Label>
-                <Form.Control
-                  type="file"
-                  id="quiz"
-                  placeholder="Enter Quiz Result"
-                  onChange = {e => {setCoverImage(e.target.files)} }
-                  controlid="validationCustom03"
-                />
+              <Form.Label>Select Cover Image</Form.Label>
+              <Form.Control
+                type="file"
+                id="quiz"
+                placeholder="Enter Quiz Result"
+                accept = 'image/*'
+                onChange={(e) => setCoverImage(e.target.files[0])}
+                controlid="validationCustom03"
+              />
             </Form.Group>
             <br />
             <Form.Group>
@@ -93,11 +96,13 @@ function Add() {
                   type="text"
                   id="session"
                   placeholder="Session Name"
-                  onChange = {e =>{setModuleTitle(e.target.value)}}
+                  onChange={(e) => {
+                    setModuleTitle(e.target.value);
+                  }}
                   required
                   controlid="validationCustom03"
                 />
-                <label htmlFor="student">Enter Session Title</label>
+                <label htmlFor="student">Enter Module Title</label>
                 <Form.Control.Feedback type="invalid">
                   Please provide Session Title
                 </Form.Control.Feedback>
@@ -105,61 +110,33 @@ function Add() {
             </Form.Group>
             <br />
             <Form.Group>
-              <Form.Floating>
-                <Form.Control
-                  type="text"
-                  id="course"
-                  placeholder="Course Name"
-                  required
-                  onChange = {e=>{setVideoTitle(e.target.value)}}
-                  controlid="validationCustom03"
-                />
-                <label htmlFor="student">Enter Video Title</label>
-                <Form.Control.Feedback type="invalid">
-                  Please provide Course Video Title
-                </Form.Control.Feedback>
-              </Form.Floating>
+              <Form.Label>Select Multiple Course Videos</Form.Label>
+              <Form.Control
+                type="file"
+                id="quiz"
+                placeholder="Enter Quiz Result"
+                accept = 'video/*'
+                controlid="validationCustom03"
+                onChange={(e) => {
+                  setVideoArray(e.target.files);
+                }}
+                multiple
+              />
             </Form.Group>
             <br />
             <Form.Group>
-                <Form.Label>Select Multiple Course Videos</Form.Label>
-                <Form.Control
-                  type="file"
-                  id="quiz"
-                  placeholder="Enter Quiz Result"
-                  controlid="validationCustom03"
-                  onChange = {e =>{setVideos(e.target.files)}}
-                  multiple
-                />
-            </Form.Group>
-            <br />
-            <Form.Group>
-              <Form.Floating>
-                <Form.Control
-                  type="text"
-                  id="course"
-                  placeholder="Course Name"
-                  required
-                  onChange = {e=>{setFileTitle(e.target.value)}}
-                  controlid="validationCustom03"
-                />
-                <label htmlFor="student">Enter Course File Title</label>
-                <Form.Control.Feedback type="invalid">
-                  Please provide Course File Title
-                </Form.Control.Feedback>
-              </Form.Floating>
-            </Form.Group>
-            <br />
-            <Form.Group>
-                <Form.Label>Select Multiple Course Documents</Form.Label>
-                <Form.Control
-                  type="file"
-                  id="quiz"
-                  placeholder="Enter Quiz Result"
-                  onChange = {e => {setFiles(e.target.files)} }
-                  controlid="validationCustom03"
-                  multiple
-                />
+              <Form.Label>Select Multiple Course Documents</Form.Label>
+              <Form.Control
+                type="file"
+                id="quiz"
+                placeholder="Enter Quiz Result"
+                accept = '.pdf, .txt ,.doc ,.docx'
+                onChange={(e) => {
+                  setFileArray(e.target.files);
+                }}
+                controlid="validationCustom03"
+                multiple
+              />
             </Form.Group>
             <br />
             <Form.Group>
@@ -168,8 +145,10 @@ function Add() {
                   type="text"
                   id="course"
                   placeholder="Course Name"
-                  required
-                  onChange = {e=>{setDescTitle(e.target.value)}}
+                  // required
+                  onChange={(e) => {
+                    setDescTitle(e.target.value);
+                  }}
                   controlid="validationCustom03"
                 />
                 <label htmlFor="student">Enter Description Title</label>
@@ -182,22 +161,20 @@ function Add() {
             <Form.Group>
               <Form.Floating>
                 <Form.Control
-                  as = "textarea"
-                  rows = {4}
+                  as="textarea"
+                  rows={4}
                   id="session"
                   placeholder="Session Name"
-                  onChange = {e =>{setDesc(e.target.value)}}
+                  onChange={(e) => {
+                    setDesc(e.target.value);
+                  }}
                   controlid="validationCustom03"
                 />
                 <label htmlFor="student">Enter Introduction</label>
               </Form.Floating>
             </Form.Group>
             <br />
-            <Button
-              variant="danger"
-              type="submit"
-              className="text-uppercase "
-            >
+            <Button variant="danger" type="submit" className="text-uppercase ">
               Add
             </Button>
           </Form>

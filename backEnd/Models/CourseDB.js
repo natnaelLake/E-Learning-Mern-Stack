@@ -7,33 +7,19 @@ const Schema = mongoose.Schema;
 const Course = new Schema({
     courseTitle: {
         type: String,
-        // required: [true, 'Enter Course Title']
+        required: [true, 'Enter Course Title']
     },
     coverImage: {
         type: String,
-        // required: [true, 'Select Cover Image']
+        required: [true, 'Select Cover Image']
     },
-    module: {
+    session: {
         moduleTitle: {
             type:String,
             default:'welcome to react'
         } ,
-        videos: [
-            {
-                videoTitle: {
-                    type:String
-                },
-                vidArray: [{
-                    type:String
-                }]
-            }
-        ],
-        files: [
-            {
-                fileTitle: String,
-                fileArray: [String]
-            }
-        ]
+        videos: [Object],
+        docs: [Object]
     },
     description: {
         descTitle: String,

@@ -7,19 +7,17 @@ const multer = require('multer')
 const app = express();
 const fileupload = require('express-fileupload')
 
-
-const path = require('path')
 app.use(fileupload)
-
+const path = require('path')
 const storage = multer.diskStorage({
-  destination : './public/uploads',
-  filename:function(req,file,cb){
-    cb(null,file.fieldname + '-' + Date.now() + path.extname(file.originalname))
-  }
+   destination:"./public/uploads/",
+   filename:(req,file,cb)=>{
+    cb(null,file.fieldname + '-' + Date.now() + file.originalname)
+   }
 })
 const upload = multer({
   storage:storage
-}).single('image');
+})
 
 const handleErrors = (err) => {
   let errors = {
@@ -93,44 +91,59 @@ const signup_Post = async (req, res) => {
   }
 }
 const videos_Post = async (req, res) => {
-  if(req.files){
+  if(req.files === null){
+    console.log('there is no file')
     return res.status(400).json({message:'File is not found'})
   }
-  
-  let file  =  req.files.file;
-  console.log(file)
-  file.mv(`${__dirname}/frontend-elearning/src/Assets/${file.name}`,err=>{
-    if(err){
-      console.log(err)
-      return res.status(500).send(err)
+  const {courseTitle,moduleTitle,descTitle,desc,fileTitle,videoTitle} = req.body
+  const files = req.files
+  let session = {
+    videos:[],
+    docs:[]
+  }
+  let coverImage;
+  // console.log(req.files)
+  // console.log(req.files.length)
+  // console.log(files)
+  let ind1 = 0; 
+  let ind2 = 0; 
+
+  await files.forEach((images,index)=>{
+    if(images.fieldname === 'videoArray'){
+      
+      session['videos'][ind1] = images.filename
+      ind1 = ind1+1;
     }
-    res.json({fileName:file.name,filaPath:`/src/Assets/${file.name}`})
+    if(images.fieldname === 'fileArray'){
+      session['docs'][ind2++] = images.filename
+      
+    }
+    if(images.fieldname === 'coverImage'){
+      coverImage = images.filename;
+    }
   })
-  // const {module: {
-  //   videos: [{ vidArray }],
-  //   files: [{fileArray }],
-  // }} = req.file
+  const { } = req.files
+  // session = JSON.stringify(session)
+const {videos,docs} = session;
+  // console.log(session,typeof(videos))
   
-    const courseTitle = req.file
-    console.log(courseTitle)
-  // const {
-  //   coverImage,
-  //   moduleTitle,
-  //   module: {videos: [{ videoTitle,vidArray}],files: [{ fileTitle,fileArray}]},
-  //   description,
-  // } = req.body;
+  //   res.json({fileName:file.name,filaPath:`/src/Assets/${file.name}`})
 
   try {
-    // const courses = await Courses.create({
-    //   // courseTitle,
-    //   coverImage,
-    //   module: {
-    //     moduleTitle,
-    //     videos: [{ videoTitle, vidArray }],
-    //     files: [{ fileTitle, fileArray }],
-    //   },
-    //   description,
-    // });
+    const courses = await Courses.create({
+      courseTitle,
+      coverImage,
+      session:{
+        moduleTitle,
+        videos,
+        docs
+      },
+      description:{
+        descTitle,
+        desc
+      }
+    });
+    console.log(courses)
     res.status(200).json({ message:'success' });
   } catch (err) {
     console.log(err);

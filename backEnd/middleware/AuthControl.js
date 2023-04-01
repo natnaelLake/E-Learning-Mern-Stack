@@ -5,7 +5,7 @@ const AuthControl = async (req,res,next) => {
     const {authorization} = req.headers;    
     if(!authorization){
         // console.log('authentication is :',authorization)
-        return res.status(404).json({message:'Ther is no Authorization token'})
+        return res.status(404).json({message:'There is no Authorization token'})
     }
     const token = authorization.split(' ')[1]
         try{

@@ -16,7 +16,7 @@ const AuthControl = require('../middleware/AuthControl')
 router.post('/signup',signup_Post)
 // router.use(AuthControl)
 router.post("/login",login_Post);
-router.post('/addVideos',videos_Post)
+router.post('/addVideos',upload.any("coverImage"),videos_Post)
 router.get('/getVideos',videos_get)
 router.post('/addFiles',files_Post)
 router.get('/getFiles',files_get)
