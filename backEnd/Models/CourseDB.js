@@ -16,7 +16,7 @@ const Course = new Schema({
     session: {
         moduleTitle: {
             type:String,
-            default:'welcome to react'
+            required:[true,'Enter Module Title']
         } ,
         videos: [Object],
         docs: [Object]

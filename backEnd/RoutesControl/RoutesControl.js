@@ -90,45 +90,64 @@ const signup_Post = async (req, res) => {
     res.status(404).json({ errors });
   }
 }
-const videos_Post = async (req, res) => {
-  if(req.files === null){
-    console.log('there is no file')
-    return res.status(400).json({message:'File is not found'})
+const errors = {courseTitle:'',moduleTitle:'',coverImage:''}
+const handlerFileErrors = (err)=>{
+  if(err.message.includes('Course validation failed')){
+    // console.log(err) 
+
+    Object.values(err.errors).forEach(({properties})=>{
+      console.log(properties)
+      let val;
+      let lastInd;
+
+      if(properties.path.includes('.')){
+        val = properties.path.lastIndexOf('.')+1
+        console.log(val)
+        lastInd = properties.path.slice(-1*(properties.path.length - val))
+        errors[lastInd] = properties.message
+      }else{
+
+        errors[properties.path] = properties.message
+      }
+    })
   }
-  const {courseTitle,moduleTitle,descTitle,desc,fileTitle,videoTitle} = req.body
+  console.log(errors)
+  return errors
+
+}
+const videos_Post = async (req, res) => {
+  const {courseTitle,moduleTitle,descTitle,desc} = req.body
   const files = req.files
   let session = {
     videos:[],
     docs:[]
   }
-  let coverImage;
-  // console.log(req.files)
-  // console.log(req.files.length)
-  // console.log(files)
+  let coverImage ;
+ 
   let ind1 = 0; 
-  let ind2 = 0; 
+  let ind2 = 0;
 
-  await files.forEach((images,index)=>{
-    if(images.fieldname === 'videoArray'){
-      
-      session['videos'][ind1] = images.filename
-      ind1 = ind1+1;
-    }
-    if(images.fieldname === 'fileArray'){
-      session['docs'][ind2++] = images.filename
-      
-    }
-    if(images.fieldname === 'coverImage'){
-      coverImage = images.filename;
-    }
-  })
-  const { } = req.files
-  // session = JSON.stringify(session)
-const {videos,docs} = session;
-  // console.log(session,typeof(videos))
-  
-  //   res.json({fileName:file.name,filaPath:`/src/Assets/${file.name}`})
-
+  if(files !== undefined){
+    if(files.length > 1){
+    await files.forEach((images,index)=>{
+          if(images.fieldname === 'videoArray'){
+            
+            session['videos'][ind1] = images.filename
+            ind1 = ind1+1;
+          }
+          if(images.fieldname === 'fileArray'){
+            session['docs'][ind2++] = images.filename
+            
+          }
+          if(images.fieldname === 'coverImage'){
+            coverImage = images.filename;
+          }
+        })
+  }else{
+    coverImage =images.filename
+  }
+  }
+  const {videos,docs} = session;
   try {
     const courses = await Courses.create({
       courseTitle,
@@ -144,14 +163,16 @@ const {videos,docs} = session;
       }
     });
     console.log(courses)
-    res.status(200).json({ message:'success' });
+    res.status(200).json({ message:'Successfully Added'});
   } catch (err) {
-    console.log(err);
-    res.status(401).json({ message: "There is request error" });
+    const errors = handlerFileErrors(err)
+    res.status(401).json(errors);
   }
 };
 const videos_get = async (req, res) => {
-  res.send("welcome get videos page");
+  const result = await Courses.find({}).sort({createdAt:-1})
+  console.log(result)
+  res.json(result)
 };
 const files_Post = async (req, res) => {
   res.send("welcome");
