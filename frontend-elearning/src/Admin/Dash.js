@@ -18,7 +18,7 @@ import { useStudentContext } from "../hooks/useStudentContext";
 import {useFileContext} from "../hooks/useFileContext";
 
 
-async function Dashboard() {
+async function Dash() {
   const {getStudents} = useStudents();
   const {getCourse} = useFiles();
   const {studentList} = useStudentContext();
@@ -97,4 +97,4 @@ await getStudents()
   );
 }
 
-export default Dashboard;
+export default Dash;

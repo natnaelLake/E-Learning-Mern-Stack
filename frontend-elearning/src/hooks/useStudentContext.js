@@ -1,13 +1,11 @@
 import { useContext } from "react";
-import { studentContext } from "../Context/StudentsContext";
+import { StudentContext } from "../Context/StudentsContext";
 
-const useStudentContext = () => {
-    const context = useContext(studentContext) 
+export const useStudentContext = () => {
+    const context = useContext(StudentContext) 
 
     if(!context){
         throw Error('student context is out of bound.')
     }
     return context;
 }
-
-export default useStudentContext;

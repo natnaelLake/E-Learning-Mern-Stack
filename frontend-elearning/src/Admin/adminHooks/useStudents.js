@@ -1,4 +1,4 @@
-import {useStudentContext} from '../../Context/StudentsContext'
+import {useStudentContext} from '../../hooks/useStudentContext'
 import axios from 'axios'
 import {useState} from 'react'
 
@@ -10,18 +10,18 @@ export const useStudents = () => {
 
 
     const {dispatch} = useStudentContext();
-    console.log(studentList)
+    // console.log(studentList)
     const getStudents = async ()=>{
-        const allStudents = await axios.get('http://localhost:8000/getVideos')
+        const allStudents = await axios.get('http://localhost:8000/getStudents')
         console.log(allStudents)
         if(allStudents.ok){
             // setGetData(allStudents)
-            dispatch({action:'GET_STUDENTS',payload:allStudents})
+            dispatch({action:'GET_STUDENT',payload:allStudents})
         }
     }
     const updateStudent = async ()=>{
         const updatedStudent = await axios.post('http://localhost:8000/updateStudents/:id')
-        colsole.log(updatedStudent)
+        console.log(updatedStudent)
         if(updatedStudent.ok){
             dispatch({action:'UPDATE_STUDENT',payload:updatedStudent})
         }

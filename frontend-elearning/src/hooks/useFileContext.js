@@ -1,9 +1,9 @@
 import { useContext } from "react";
-import { fileContext } from "../Context/fileContext";
+import { FileContext } from "../Context/fileContext";
 
-const useFileContext = () => {
+export const useFileContext = () => {
 
-    const context = useContext(fileContext)
+    const context = useContext(FileContext)
     if(!context){
         throw Error('file context is out of bound.')
     }

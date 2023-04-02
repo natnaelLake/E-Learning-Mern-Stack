@@ -3,7 +3,7 @@ import Sidebar from "./Sidebar";
 import Header from "../Pages/Header";
 import { Table, Button } from "react-bootstrap";
 import * as Icon from "react-bootstrap-icons";
-import { useStudentContext } from "../Context/StudentsContext";
+import { useStudentContext } from "../hooks/useStudentContext";
 // import './style.css'
 
 function ManageAssesment() {

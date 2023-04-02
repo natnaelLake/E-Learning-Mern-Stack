@@ -12,6 +12,8 @@ import { useStudents } from "../adminHooks/useStudents";
   const [total,setTotal] = useState(0)
   const {addStudents} = useStudents();
 
+  
+
   const handleSubmit = async (event) => {
     const form = event.currentTarget;
     if (form.checkValidity() === false) {

@@ -1,21 +1,25 @@
-import { createContext } from "react";
+import { createContext, useReducer } from "react";
 
-export const studentContext = createContext();
+export const StudentContext = createContext();
 const studentReducer = (state, action) => {
   switch (action.type) {
-    case "GET_STUDENTS":
+    case "GET_STUDENT":
       return {
         studentList: action.payload,
       };
-    case "DELETE_STUDENTS":
+    case "DELETE_STUDENT":
       return {
         studentList: [...state.studentList],
       };
-    case "UPDATE_STUDENTS":
+    case "COUNT_STUDENT":
+      return {
+        studentList: [...state.studentList],
+      };
+    case "UPDATE_STUDENT":
       return {
         studentList: action.payload,
       };
-    case "ADD_STUDENTS":
+    case "ADD_STUDENT":
       return {
         studentList: [action.payload, ...state.studentList],
       };
@@ -23,15 +27,13 @@ const studentReducer = (state, action) => {
       return state;
   }
 };
-const StudentsContextProvider = ({ children }) => {
+export const StudentContextProvider = ({ children }) => {
   const { state, dispatch } = useReducer(studentReducer, {
     studentList: null,
   });
   return (
-    <StudentsContextProvider.Provider value={{ ...state, dispatch }}>
+    <StudentContext.Provider value={{ ...state, dispatch }}>
       {children}
-    </StudentsContextProvider.Provider>
+    </StudentContext.Provider>
   );
 };
-
-export default StudentsContextProvider;

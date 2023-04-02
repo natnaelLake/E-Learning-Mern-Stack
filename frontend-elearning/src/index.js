@@ -8,16 +8,16 @@ import {BrowserRouter as Router} from 'react-router-dom'
 import { ProSidebarProvider } from 'react-pro-sidebar';
 import {AuthContextProvider} from  './Context/AuthContext'
 import {StudentContextProvider} from './Context/StudentsContext'
-import {filesContextProvider} from './Context/fileContext'
+import {FilesContextProvider} from './Context/fileContext'
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
   <ProSidebarProvider>
     <AuthContextProvider>
       <StudentContextProvider>
-        <filesContexProvider>
+        <FilesContextProvider>
           <App />
-        </filesContexProvider>
+        </FilesContextProvider>
       </StudentContextProvider>
     </AuthContextProvider>
   </ProSidebarProvider>

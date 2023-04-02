@@ -1,12 +1,39 @@
-import { createContext } from "react";
+import { createContext, useReducer } from "react";
 
-export const fileContext = createContext();
-const filesContexProvider = ({ children }) => {
+
+
+export const FileContext = createContext();
+
+export const fileReducer = (state,action)=>{
+  switch (action.type) {
+    case "GET_COURSE":
+      return {
+        fileList: action.payload,
+      };
+    case "DELETE_COURSE":
+      return {
+        fileList: [...state.fileList],
+      };
+    case "UPDATE_COURSE":
+      return {
+        fileList: action.payload,
+      };
+      
+    case "ADD_COURSE":
+      return {
+        fileList: [action.payload, ...state.fileList],
+      };
+    default:
+      return state;
+  }
+}
+export const FilesContextProvider = ({ children }) => {
+  const [state,dispatch] = useReducer(fileReducer,{
+    fileList:null
+  })
   return (
-    <filesContexProvider.Provider value={{ ...state, dispatch }}>
+    <FileContext.Provider value={{ ...state, dispatch }}>
       {children}
-    </filesContexProvider.Provider>
+    </FileContext.Provider>
   );
 };
-
-export default filesContexProvider;
