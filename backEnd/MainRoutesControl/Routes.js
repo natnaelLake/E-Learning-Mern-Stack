@@ -8,10 +8,11 @@ const {
   videos_Post,
   videos_get,
   upload,
-  deleteFiles,
+  fileUpdate,
+  getStudents,
   deleteStudents,
   updateStudents,
-  fileUpdate,
+  deleteFiles,
 
 } = require("../RoutesControl/RoutesControl");
 const AuthControl = require('../middleware/AuthControl')
@@ -21,6 +22,7 @@ router.post('/signup',signup_Post)
 router.post("/login",login_Post);
 router.post('/addVideos',upload.any(),videos_Post)
 router.get('/getVideos',videos_get)
+router.get('/getStudents',getStudents)
 router.delete('/deleteFiles:id',deleteFiles)
 router.delete('/deleteStudents:id',deleteStudents)
 router.patch('/updateStudents:id',updateStudents)

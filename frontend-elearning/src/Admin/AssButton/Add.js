@@ -1,9 +1,18 @@
 import { React, useState } from "react";
 import { Form, Card,Button } from "react-bootstrap";
+import { useStudents } from "../adminHooks/useStudents";
 
-function Add() {
+
+ function Add() {
   const [validated, setValidated] = useState(false);
-  const handleSubmit = (event) => {
+  const [studentname,setStudentname]  = useState('');
+  const [quiz,setQuiz] = useState(0)
+  const [mid,setMid] = useState(0)
+  const [final,setFinal] = useState(0)
+  const [total,setTotal] = useState(0)
+  const {addStudents} = useStudents();
+
+  const handleSubmit = async (event) => {
     const form = event.currentTarget;
     if (form.checkValidity() === false) {
       event.preventDefault();
@@ -11,7 +20,7 @@ function Add() {
     }
 
     setValidated(true);
-    
+    await addStudents(studentname,quiz,mid,final,total)
   };
   return (
     <div className="d-flex align-items-center justify-content-center firstDiv">
@@ -29,6 +38,8 @@ function Add() {
                   type="text"
                   id="student"
                   placeholder="Student Name"
+                  value = {studentname}
+                  onChange={(e)=>{setStudentname(e.target.value)}}
                   required
                   controlId="validationCustom03"
                 />
@@ -46,6 +57,8 @@ function Add() {
                   type="number"
                   id="quiz"
                   placeholder="Enter Quiz Result"
+                  value = {quiz}
+                  onChange={(e)=>{seQuiz(e.target.value)}}
                   controlId="validationCustom03"
                 />
                 <label htmlFor="quiz">Enter Quiz Result</label>
@@ -62,6 +75,8 @@ function Add() {
                   type="number"
                   id="mid"
                   placeholder="Enter Mid Result"
+                  value = {mid}
+                  onChange={(e)=>{setMid(e.target.value)}}
                   controlId="validationCustom03"
                 />
                 <label htmlFor="mid">Enter Mid Result</label>
@@ -78,6 +93,8 @@ function Add() {
                   type="number"
                   id="final"
                   placeholder="Enter Final Result"
+                  value = {final}
+                  onChange={(e)=>{setFinal(e.target.value)}}
                   controlId="validationCustom03"
                 />
                 <label htmlFor="final">Enter Final Result</label>
@@ -94,6 +111,8 @@ function Add() {
                   type="number"
                   id="total"
                   placeholder="Enter Total Result"
+                  value = {total}
+                  onChange={(e)=>{setTotal(e.target.value)}}
                   controlId="validationCustom03"
                 />
                 <label htmlFor="total">Enter Total Result</label>
