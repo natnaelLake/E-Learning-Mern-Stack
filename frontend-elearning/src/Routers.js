@@ -7,7 +7,7 @@ import Login from "./AuthPage/Login";
 import SignUp from "./AuthPage/SignUp";
 import Introduction from "./Courses/Introduction";
 import Quizes from "./Courses/Quizes";
-import Dashboard from "./Admin/Dashboard";
+import Dashboard from "./Admin/Dash";
 import ManageAssesment from "./Admin/ManageAssesment";
 import ManageCourse from "./Admin/ManageCourse";
 import ManageExams from "./Admin/ManageExams";

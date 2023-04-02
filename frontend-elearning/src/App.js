@@ -20,7 +20,7 @@ import Quizes from "./Courses/Quizes";
 import ManageExams from "./Admin/ManageExams";
 import ManageCourse from "./Admin/ManageCourse";
 import ManageAssesment from "./Admin/ManageAssesment";
-import Dashboard from "./Admin/Dashboard";
+import Dashboard from "./Admin/Dash";
 import ManageStudents from "./Admin/ManageStudents";
 import Routers from "./Routers";
 

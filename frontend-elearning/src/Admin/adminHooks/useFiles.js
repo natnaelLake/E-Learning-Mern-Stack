@@ -19,7 +19,6 @@ export const useFiles = () => {
             dispatch({action:'GET_COURSE',payload:allCourses})
         }
     }
-    const 
     const updateCourse = async ()=>{
         const updatedCourse = await axios.post('http://localhost:8000/fileUpdate/:id')
         console.log(updatedCourse)

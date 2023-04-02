@@ -29,7 +29,7 @@ const studentReducer = (state, action) => {
 };
 export const StudentContextProvider = ({ children }) => {
   const { state, dispatch } = useReducer(studentReducer, {
-    studentList: null,
+    studentList: [],
   });
   return (
     <StudentContext.Provider value={{ ...state, dispatch }}>

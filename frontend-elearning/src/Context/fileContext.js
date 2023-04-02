@@ -18,7 +18,6 @@ export const fileReducer = (state,action)=>{
       return {
         fileList: action.payload,
       };
-      
     case "ADD_COURSE":
       return {
         fileList: [action.payload, ...state.fileList],
@@ -29,7 +28,7 @@ export const fileReducer = (state,action)=>{
 }
 export const FilesContextProvider = ({ children }) => {
   const [state,dispatch] = useReducer(fileReducer,{
-    fileList:null
+    fileList:[]
   })
   return (
     <FileContext.Provider value={{ ...state, dispatch }}>
