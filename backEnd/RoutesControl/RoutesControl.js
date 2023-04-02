@@ -3,21 +3,21 @@ const express = require("express");
 const User = require("../Models/Users");
 const jwt = require("jsonwebtoken");
 const Courses = require("../Models/CourseDB");
-const multer = require('multer')
+const multer = require("multer");
 const app = express();
-const fileupload = require('express-fileupload')
+const fileupload = require("express-fileupload");
 
-app.use(fileupload)
-const path = require('path')
+app.use(fileupload);
+const path = require("path");
 const storage = multer.diskStorage({
-   destination:"./public/uploads/",
-   filename:(req,file,cb)=>{
-    cb(null,file.fieldname + '-' + Date.now() + file.originalname)
-   }
-})
+  destination: "./public/uploads/",
+  filename: (req, file, cb) => {
+    cb(null, file.fieldname + "-" + Date.now() + file.originalname);
+  },
+});
 const upload = multer({
-  storage:storage
-})
+  storage: storage,
+});
 
 const handleErrors = (err) => {
   let errors = {
@@ -89,103 +89,158 @@ const signup_Post = async (req, res) => {
     let errors = handleErrors(err);
     res.status(404).json({ errors });
   }
-}
-const errors = {courseTitle:'',moduleTitle:'',coverImage:''}
-const handlerFileErrors = (err)=>{
-  if(err.message.includes('Course validation failed')){
-    // console.log(err) 
+};
+const errors = { courseTitle: "", moduleTitle: "", coverImage: "" };
+const handlerFileErrors = (err) => {
+  if (err.message.includes("Course validation failed")) {
+    // console.log(err)
 
-    Object.values(err.errors).forEach(({properties})=>{
-      console.log(properties)
+    Object.values(err.errors).forEach(({ properties }) => {
+      console.log(properties);
       let val;
       let lastInd;
 
-      if(properties.path.includes('.')){
-        val = properties.path.lastIndexOf('.')+1
-        console.log(val)
-        lastInd = properties.path.slice(-1*(properties.path.length - val))
-        errors[lastInd] = properties.message
-      }else{
-
-        errors[properties.path] = properties.message
+      if (properties.path.includes(".")) {
+        val = properties.path.lastIndexOf(".") + 1;
+        console.log(val);
+        lastInd = properties.path.slice(-1 * (properties.path.length - val));
+        errors[lastInd] = properties.message;
+      } else {
+        errors[properties.path] = properties.message;
       }
-    })
+    });
   }
-  console.log(errors)
-  return errors
-
-}
+  console.log(errors);
+  return errors;
+};
 const videos_Post = async (req, res) => {
-  const {courseTitle,moduleTitle,descTitle,desc} = req.body
-  const files = req.files
+  const { courseTitle, moduleTitle, descTitle, desc } = req.body;
+  const files = req.files;
   let session = {
-    videos:[],
-    docs:[]
-  }
-  let coverImage ;
- 
-  let ind1 = 0; 
+    videos: [],
+    docs: [],
+  };
+  let coverImage;
+
+  let ind1 = 0;
   let ind2 = 0;
 
-  if(files !== undefined){
-    if(files.length > 1){
-    await files.forEach((images,index)=>{
-          if(images.fieldname === 'videoArray'){
-            
-            session['videos'][ind1] = images.filename
-            ind1 = ind1+1;
-          }
-          if(images.fieldname === 'fileArray'){
-            session['docs'][ind2++] = images.filename
-            
-          }
-          if(images.fieldname === 'coverImage'){
-            coverImage = images.filename;
-          }
-        })
-  }else{
-    coverImage =images.filename
+  if (files !== undefined) {
+    if (files.length > 1) {
+      await files.forEach((images, index) => {
+        if (images.fieldname === "videoArray") {
+          session["videos"][ind1] = images.filename;
+          ind1 = ind1 + 1;
+        }
+        if (images.fieldname === "fileArray") {
+          session["docs"][ind2++] = images.filename;
+        }
+        if (images.fieldname === "coverImage") {
+          coverImage = images.filename;
+        }
+      });
+    } else {
+      coverImage = images.filename;
+    }
   }
-  }
-  const {videos,docs} = session;
+  const { videos, docs } = session;
   try {
     const courses = await Courses.create({
       courseTitle,
       coverImage,
-      session:{
+      session: {
         moduleTitle,
         videos,
-        docs
+        docs,
       },
-      description:{
+      description: {
         descTitle,
-        desc
-      }
+        desc,
+      },
     });
-    console.log(courses)
-    res.status(200).json({ message:'Successfully Added'});
+    console.log(courses);
+    res.status(200).json({ message: "Successfully Added" });
   } catch (err) {
-    const errors = handlerFileErrors(err)
+    const errors = handlerFileErrors(err);
     res.status(401).json(errors);
   }
 };
 const videos_get = async (req, res) => {
-  const result = await Courses.find({}).sort({createdAt:-1})
-  console.log(result)
-  res.json(result)
+  const result = await Courses.find({}).sort({ createdAt: -1 });
+  console.log(result);
+  res.status(200).json(result);
 };
-const files_Post = async (req, res) => {
-  res.send("welcome");
+const getStudents = async (req, res) => {
+  const getStudents = await User.find({});
+  console.log(getStudents);
+  res.status(200).json(getStudents);
 };
-const files_get = async (req, res) => {
-  res.send("welcome to get files page");
+const deleteStudents = async (req, res) => {
+  const { id } = req.params;
+  if (!mongoose.Types.ObjectId.isValid(id)) {
+    return res.status(400).json({ error: "there is no such student." });
+  }
+  const deletedStudents = await User.findByIdAndDelete({ _id: id });
+  if (!deletedStudents) {
+    return res.status(404).json({ error: "no such student" });
+  }
+
+  console.log("deleted successfully!");
+  res.status(200).json(deleteStudents);
 };
+const updateStudents = async (req, res) => {
+  const id = req.params;
+  if (!mongoose.Types.ObjectId.isValid(id)) {
+    return res.status(400).json({ error: "there is no such student." });
+  }
+  const updatedStudents = await User.findByIdAndUpdate(
+    { _id: id },
+    {
+      ...req.body,
+    }
+  );
+  if (!updatedStudents) {
+    return res.status(404).json({ error: "No Such Student" });
+  }
+  res.status(200).json(updatedStudents);
+};
+const fileUpdate = async (req, res) => {
+  const { id } = req.params;
+  if (!mongoose.Types.ObjectId.isValid(id)) {
+    return res.status(404).json({ error: "There is no such File" });
+  }
+  const updatedFile = await Courses.findByIdAndUpdate(
+    { _id: id },
+    {
+      ...req.body,
+    }
+  );
+  if (!updatedFile) {
+    return res.status(404).json({ error: "There is no Such File" });
+  }
+  res.status(200).json(updatedFile);
+};
+const deleteFiles = async (req, res) => {
+  const { id } = req.params;
+  if (!mongoose.Types.ObjectId.isValid(id)) {
+    return res.status(400).json({ error: "there is no such File." });
+  }
+  const deletedFile = await Courses.findByIdAndDelete({ _id: id });
+  if (!deletedFile) {
+    return res.status(404).json({ error: "There is No such File" });
+  }
+  res.status(200).json(deletedFile);
+};
+
 module.exports = {
   login_Post,
   signup_Post,
   videos_Post,
   videos_get,
-  files_Post,
-  files_get,
-  upload
+  fileUpdate,
+  getStudents,
+  deleteStudents,
+  updateStudents,
+  deleteFiles,
+  upload,
 };
