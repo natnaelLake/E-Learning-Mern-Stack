@@ -9,14 +9,21 @@ export const useFiles = () => {
     // const {addData,setAddData} = useState()
 
 
-    const {dispatch} = useFileContext();
+    const {dispatch,fileList} = useFileContext();
     // console.log(studentList)
     const getCourse = async ()=>{
         const allCourses = await axios.get('http://localhost:8000/getVideos')
         console.log(allCourses)
-        if(allCourses.ok){
+        // console.log(allCourses.data.fileList)
+
+        if(allCourses.status === 200){
             // setGetData(allStudents)
-            dispatch({action:'GET_COURSE',payload:allCourses})
+            // console.log('json file is ',JSON.stringify(allCourses.data.fileList))
+            localStorage.setItem("allCourse", JSON.stringify(allCourses.data.fileList));
+            // localStorage.setItem("countCourse", JSON.stringify(allCourses.data.countListFile));
+            dispatch({type:'GET_COURSE',payload:allCourses.data.fileList})
+            // dispatch({type:'COUNT_COURSE',payload:allCourses.data.countListFile})
+            console.log('file list is ',fileList)
         }
     }
     const updateCourse = async ()=>{

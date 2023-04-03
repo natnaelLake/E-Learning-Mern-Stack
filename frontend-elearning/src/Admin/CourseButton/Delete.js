@@ -1,13 +1,20 @@
 import {React,useState} from 'react'
 import {Form,Card,Button,Modal} from 'react-bootstrap'
+import { useStudents } from '../adminHooks/useStudents'
+
 
 
 function Delete() {
-    const [show ,setShow] = useState(false)
-    const handleModal = ()=>{
-        setShow(true)
-    }
-    const handleClose = ()=> setShow(false)
+  const [show ,setShow] = useState(false)
+  const {deleteStudent} = useStudents();
+  const handleModal = ()=>{
+      setShow(true)
+  }
+  const handleClose = ()=> setShow(false)
+  const handleSubmit = async (e)=>{
+    e.preventDefault();
+    await deleteStudent();
+  }
 
   return (
     <div className="d-flex align-items-cUpdate justify-content-cUpdate firstDiv">
@@ -18,7 +25,7 @@ function Delete() {
       >
         {/* <hr /> */}
         <Card.Body>
-          <Form  >
+          <Form  onSubmit={handleSubmit}>
             <Form.Group>
               <Form.Floating>
                 <Form.Control
@@ -49,7 +56,7 @@ function Delete() {
                 Do you want to delete this Course?
             </Modal.Body>
             <Modal.Footer>
-                <Button variant = 'danger' onClick={handleClose}>Yes</Button>
+                <Button variant = 'danger' onClick={handleSubmit}>Yes</Button>
                 <Button variant = 'primary' onClick={handleClose }>No</Button>
             </Modal.Footer>
           </Modal>

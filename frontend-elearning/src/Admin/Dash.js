@@ -6,11 +6,24 @@ import * as Icon from "react-bootstrap-icons";
 import imageOne from "../Assets/student.png";
 import { useFiles } from "./adminHooks/useFiles";
 import {useFileContext} from '../hooks/useFileContext'
-
+import { useEffect } from "react";
+import { useStudents } from "./adminHooks/useStudents";
+import { useStudentContext } from "../hooks/useStudentContext";
 
 function Dashboard() {
   const { getCourse } = useFiles();
-  const {fileList} = useFileContext()
+  const { getStudents } = useStudents();
+  const {fileList} = useFileContext();
+  const {studentList} = useStudentContext()
+
+
+  useEffect(()=>{
+    const manageDash = async ()=>{
+      await getCourse();
+      await getStudents()
+    }
+    manageDash();
+  },[])
   return (
     <div>
       <div className="d-flex profile">
@@ -57,24 +70,35 @@ function Dashboard() {
             >
               <div style={{ margin: "0 auto", maxWidth: "1320px" }}>
                 {
-                  fileList && <div class="row row-cols-1 row-cols-md-3 g-4">
-                 { fileList.map((files)=>{
+                  studentList && <div class="row row-cols-1 row-cols-md-3 g-4">
+                 { 
                   <div class="col">
-                     <Card style={{ height: "7rem" }}>
+                     <Card style={{ height: "9rem" }}>
                    <Card.Body>
                     <Card.Title>Enrolled Students</Card.Title>
-                    <Badge bg="danger">20</Badge>
+                    <Badge bg="danger">{studentList.length}</Badge>
                  </Card.Body>
                     <Card.Footer>
                       <small className="text-muted">updated 3min ago</small>
                     </Card.Footer>
                   </Card>
                   </div>
-                 })
+                    }
+                    {
+                  fileList &&  <div class="col">
+                     <Card style={{ height: "9rem" }}>
+                   <Card.Body>
+                    <Card.Title>Enrolled Courses</Card.Title>
+                    <Badge bg="danger">{fileList.length}</Badge>
+                 </Card.Body>
+                    <Card.Footer>
+                      <small className="text-muted">updated 3min ago</small>
+                    </Card.Footer>
+                  </Card>
+                  </div>
                     }
                 </div>
-                }
-
+                }              
                 <br />
                 <br />
                 <footer className="d-flex mx-auto py-4">

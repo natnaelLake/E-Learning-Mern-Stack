@@ -1,11 +1,21 @@
 import {React,useState} from 'react'
 import {Button,Form,Card} from 'react-bootstrap'
+import { useStudents } from '../adminHooks/useStudents';
+
 
 
 
 function Update() {
     const [validated, setValidated] = useState(false);
-  const handleSubmit = (event) => {
+    const [upstudentname,setUpstudentname] = useState()
+    const [updateQuiz,setUpdateQuiz] = useState()
+    const [upMid,setUpMid] = useState()
+    const [upFinal,setUpFinal] = useState()
+    const [upTotal,setUpTotal] = useState()
+    const {updateStudent} = useStudents()
+
+
+  const handleSubmit = async (event) => {
     const form = event.currentTarget;
     if (form.checkValidity() === false) {
       event.preventDefault();
@@ -13,6 +23,8 @@ function Update() {
     }
 
     setValidated(true);
+      event.preventDefault();
+      await updateStudent(upstudentname,updateQuiz,upMid,upFinal,upTotal);
   };
   return (
     <div>
@@ -31,8 +43,10 @@ function Update() {
                   type="text"
                   id="student"
                   placeholder="Student Name"
+                  value = {upstudentname}
+                  onChange = {(e)=>{setUpstudentname(e.target.value)}}
                   required
-                  controlId="validationCustom03"
+                  controlid="validationCustom03"
                 />
                 <label htmlFor="student">Student Name</label>
                 <Form.Control.Feedback type="invalid">
@@ -48,7 +62,9 @@ function Update() {
                   type="number"
                   id="quiz"
                   placeholder="Update Quiz Result"
-                  controlId="validationCustom03"
+                  value = {updateQuiz}
+                  onChange = {(e)=>{setUpdateQuiz(e.target.value)}}
+                  controlid="validationCustom03"
                 />
                 <label htmlFor="quiz">Update Quiz Result</label>
                 <Form.Control.Feedback type="invalid" className="text-danger">
@@ -64,7 +80,9 @@ function Update() {
                   type="number"
                   id="mid"
                   placeholder="Update Mid Result"
-                  controlId="validationCustom03"
+                  value = {upMid}
+                  onChange = {(e)=>{setUpMid(e.target.value)}}
+                  controlid="validationCustom03"
                 />
                 <label htmlFor="mid">Update Mid Result</label>
                 <Form.Control.Feedback type="invalid" className="text-danger">
@@ -80,7 +98,9 @@ function Update() {
                   type="number"
                   id="final"
                   placeholder="Update Final Result"
-                  controlId="validationCustom03"
+                  value = {upFinal}
+                  onChange = {(e)=>{setUpFinal(e.target.value)}}
+                  controlid="validationCustom03"
                 />
                 <label htmlFor="final">Update Final Result</label>
                 <Form.Control.Feedback type="invalid" className="text-danger">
@@ -96,7 +116,9 @@ function Update() {
                   type="number"
                   id="total"
                   placeholder="Update Total Result"
-                  controlId="validationCustom03"
+                  value = {upTotal}
+                  onChange = {(e)=>{setUpTotal(e.target.value)}}
+                  controlid="validationCustom03"
                 />
                 <label htmlFor="total">Update Total Result</label>
                 <Form.Control.Feedback type="invalid" className="text-danger">

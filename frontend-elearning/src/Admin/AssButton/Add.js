@@ -43,7 +43,7 @@ import { useStudents } from "../adminHooks/useStudents";
                   value = {studentname}
                   onChange={(e)=>{setStudentname(e.target.value)}}
                   required
-                  controlId="validationCustom03"
+                  controlid="validationCustom03"
                 />
                 <label htmlFor="student">Student Name</label>
                 <Form.Control.Feedback type="invalid">
@@ -60,8 +60,8 @@ import { useStudents } from "../adminHooks/useStudents";
                   id="quiz"
                   placeholder="Enter Quiz Result"
                   value = {quiz}
-                  onChange={(e)=>{seQuiz(e.target.value)}}
-                  controlId="validationCustom03"
+                  onChange={(e)=>{setQuiz(e.target.value)}}
+                  controlid="validationCustom03"
                 />
                 <label htmlFor="quiz">Enter Quiz Result</label>
                 <Form.Control.Feedback type="invalid" className="text-danger">
@@ -79,7 +79,7 @@ import { useStudents } from "../adminHooks/useStudents";
                   placeholder="Enter Mid Result"
                   value = {mid}
                   onChange={(e)=>{setMid(e.target.value)}}
-                  controlId="validationCustom03"
+                  controlid="validationCustom03"
                 />
                 <label htmlFor="mid">Enter Mid Result</label>
                 <Form.Control.Feedback type="invalid" className="text-danger">
@@ -97,7 +97,7 @@ import { useStudents } from "../adminHooks/useStudents";
                   placeholder="Enter Final Result"
                   value = {final}
                   onChange={(e)=>{setFinal(e.target.value)}}
-                  controlId="validationCustom03"
+                  controlid="validationCustom03"
                 />
                 <label htmlFor="final">Enter Final Result</label>
                 <Form.Control.Feedback type="invalid" className="text-danger">
@@ -115,7 +115,7 @@ import { useStudents } from "../adminHooks/useStudents";
                   placeholder="Enter Total Result"
                   value = {total}
                   onChange={(e)=>{setTotal(e.target.value)}}
-                  controlId="validationCustom03"
+                  controlid="validationCustom03"
                 />
                 <label htmlFor="total">Enter Total Result</label>
                 <Form.Control.Feedback type="invalid" className="text-danger">

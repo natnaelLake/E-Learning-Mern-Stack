@@ -6,11 +6,18 @@ import * as Icon from "react-bootstrap-icons";
 import imageOne from "../Assets/student.png";
 import { useFiles } from "./adminHooks/useFiles";
 import {useFileContext} from '../hooks/useFileContext'
-
+import { useEffect } from "react";
 
 function ManageCourse() {
   const { getCourse } = useFiles();
   const {fileList} = useFileContext()
+  useEffect(()=>{
+    const manageCrs = async ()=>{
+      
+      await getCourse();
+    }
+    manageCrs();
+  },[])
   return (
     <div>
       <div className="d-flex profile">
@@ -58,8 +65,8 @@ function ManageCourse() {
               <div style={{ margin: "0 auto", maxWidth: "1320px" }}>
                 {
                   fileList && <div class="row row-cols-1 row-cols-md-3 g-4">
-                 { fileList.map((files)=>{
-                  <div class="col">
+                 { fileList.map((files)=>(
+                  <div className="col">
                   <Card className="shadow mb-3 rounded-5 border-5 mt-3 card">
                     <div className="imageCard">
                       <Card.Img
@@ -69,7 +76,7 @@ function ManageCourse() {
                       />
                     </div>
                     <Card.Body>
-                      <Card.Title>{files.title}</Card.Title>
+                      <Card.Title>{files.courseTitle}</Card.Title>
                       <Card.Text>{files.desc}</Card.Text>
                       <Button
                         href="/editCourse"
@@ -84,7 +91,7 @@ function ManageCourse() {
                     </Card.Footer>
                   </Card>
                   </div>
-                 })
+                 ))
                     }
                 </div>
                 }
