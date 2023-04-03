@@ -23,8 +23,8 @@ router.post("/login",login_Post);
 router.post('/addVideos',upload.any(),videos_Post)
 router.get('/getVideos',videos_get)
 router.get('/getStudents',getStudents)
-router.delete('/deleteFiles:id',deleteFiles)
-router.delete('/deleteStudents:id',deleteStudents)
-router.patch('/updateStudents:id',updateStudents)
+router.delete('/deleteFiles/:id',deleteFiles)
+router.delete('/deleteStudents/:id',deleteStudents)
+router.patch('/updateStudents/:id',updateStudents)
 router.patch('/fileUpdate:id',fileUpdate)
 module.exports = router

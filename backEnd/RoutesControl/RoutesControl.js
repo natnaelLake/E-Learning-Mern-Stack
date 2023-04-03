@@ -6,7 +6,7 @@ const Courses = require("../Models/CourseDB");
 const multer = require("multer");
 const app = express();
 const fileupload = require("express-fileupload");
-
+const mongoose = require('mongoose')
 app.use(fileupload);
 const path = require("path");
 const storage = multer.diskStorage({
@@ -167,26 +167,33 @@ const videos_Post = async (req, res) => {
 };
 const videos_get = async (req, res) => {
   const result = await Courses.find({}).sort({ createdAt: -1 });
+  const countList = await Courses.find({}).count();
+
   console.log(result);
-  res.status(200).json(result);
+  res.status(200).json({fileList:result,countListFile:countList});
 };
 const getStudents = async (req, res) => {
   const getStudents = await User.find({});
-  console.log(getStudents);
-  res.status(200).json(getStudents);
+  const countList = await User.find({}).count();
+
+  console.log(getStudents,countList);
+  res.status(200).json({students:getStudents,countListStud:countList});
 };
 const deleteStudents = async (req, res) => {
   const { id } = req.params;
+  console.log(id)
   if (!mongoose.Types.ObjectId.isValid(id)) {
+    console.log('id error')
     return res.status(400).json({ error: "there is no such student." });
   }
   const deletedStudents = await User.findByIdAndDelete({ _id: id });
   if (!deletedStudents) {
+    console.log('no stud')
     return res.status(404).json({ error: "no such student" });
   }
 
   console.log("deleted successfully!");
-  res.status(200).json(deleteStudents);
+  res.status(200).json(deletedStudents);
 };
 const updateStudents = async (req, res) => {
   const id = req.params;
