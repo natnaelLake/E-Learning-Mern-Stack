@@ -16,7 +16,9 @@ function EditAss() {
   const {getStudents} = useStudents()
   console.log('.........   ',studentList)
   // console.log(id)
-  const indStud = location.state.stud
+  const indStud = location.state.student
+  // const changeData = location.state
+  // console.log(' ...... change',changeData)
   // console.log('indvidula id :',indId)
   return (
     <div>
@@ -44,9 +46,9 @@ function EditAss() {
               }}
             >
               <div style={{ margin: "0 auto", maxWidth: "1320px" }}>
-                <Tabs defaultActiveKey="Update" className="mb-3" fill >
+                <Tabs defaultActiveKey="Delete" className="mb-3" fill >
                   {/* <Tab eventKey="Add" title='Add' bg = 'dark'><Add /></Tab> */}
-                  <Tab eventKey="Update" title = 'Update'><Update student = {indStud}/></Tab>
+                  {/* <Tab eventKey="Update" title = 'Update'><Update student = {indStud}/></Tab> */}
                   <Tab eventKey="Delete" title = 'Delete'><Delete student = {indStud}/></Tab>
                 </Tabs>
               </div>

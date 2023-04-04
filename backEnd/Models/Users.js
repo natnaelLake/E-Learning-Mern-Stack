@@ -6,7 +6,9 @@ const Schema = mongoose.Schema;
 const userSchema = new Schema({
     firstname:{
         type:String,
-        required:[true,'Enter First Name']
+        required:[true,'Enter First Name'],
+        unique:true,
+
     },
     lastname:{
         type:String,
@@ -14,25 +16,36 @@ const userSchema = new Schema({
     },
     email:{
         type:String,
-        required:[true,'Enter Valid Email'],
+        // required:[true,'Enter Valid Email'],
         lowercase:true,
-        unique:true,
-        validate:[isEmail,'Enter Valid Email']
+        // validate:[isEmail,'Enter Valid Email']
     },
     password:{
         type:String,
+        default:'nati@1212',
         required:[true,'Enter Password'],
         minlength:[8,'Minimum Length is 8 Characters'],
     },
     department:{
         type:String,
+        default:'Software Engineering',
         required:[true,'Enter  Department']
     },
-    age:{
-        type:String
+    quiz:{
+        type:Number
+    },
+    mid:{
+        type:Number
+    },
+    final:{
+        type:Number
+    },
+    total:{
+        type:Number
     },
     phone:{
-        type:String,
+        type:Number,
+        default:0934627708,
         required:[true,'Enter Valid Phone Number']
     }
 },{timestamps:true});

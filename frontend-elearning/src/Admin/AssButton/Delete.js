@@ -60,14 +60,18 @@ function Delete({student}) {
             >
               Delete
             </Button>
-          <Modal show = {show} onHide = {handleClose}>
+            <Modal show={show} onHide={handleClose}>
             <Modal.Header closeButton></Modal.Header>
-            <Modal.Body>
-                Do you want to delete this Student?
+            <Modal.Body className="text-capitalize">
+              {`Do you want to delete ${student.firstname} ${student.lastname}?`}
             </Modal.Body>
             <Modal.Footer>
-                <Button type = 'submit' onClick={handleDelete} variant= 'danger'>Yes</Button>
-                <Button variant = 'primary' onClick={handleClose }>No</Button>
+              <Button type="submit" onClick={handleDelete} variant="danger">
+                Yes
+              </Button>
+              <Button variant="primary" onClick={handleClose}>
+                No
+              </Button>
             </Modal.Footer>
           </Modal>
         </Card.Body>

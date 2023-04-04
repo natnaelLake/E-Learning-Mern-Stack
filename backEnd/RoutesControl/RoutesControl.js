@@ -71,8 +71,12 @@ const login_Post = async (req, res) => {
   }
 };
 const signup_Post = async (req, res) => {
-  const { firstname, lastname, email, password, age, phone, department } =
+  const { firstname, lastname,  password, age, phone, department,quiz,mid,final } =
     req.body;
+    const total = Number(mid )+ Number(quiz) +Number(final)
+    console.log(typeof(total))
+    const email = firstname + lastname
+    console.log(req.body)
   try {
     const user = await User.create({
       firstname,
@@ -82,10 +86,16 @@ const signup_Post = async (req, res) => {
       age,
       phone,
       department,
+      quiz,
+      mid,
+      final,
+      total
     });
+    console.log(user)
     const token = createToken(user._id);
-    res.status(200).json({ email, token });
+    res.status(200).json({ email, token ,user});
   } catch (err) {
+    console.log(err)
     let errors = handleErrors(err);
     res.status(404).json({ errors });
   }
@@ -179,6 +189,13 @@ const getStudents = async (req, res) => {
   console.log(getStudents,countList);
   res.status(200).json({students:getStudents,countListStud:countList});
 };
+const getIndStud = async (req, res) => {
+  const getStudents = await User.find({});
+  // const countList = await User.find({}).count();
+  
+  console.log(getStudents,countList);
+  res.status(200).json({students:getStudents,countListStud:countList});
+};
 const deleteStudents = async (req, res) => {
   const { id } = req.params;
   console.log(id)
@@ -196,16 +213,23 @@ const deleteStudents = async (req, res) => {
   res.status(200).json(deletedStudents);
 };
 const updateStudents = async (req, res) => {
-  const id = req.params;
+  const {id} = req.params;
+  console.log({...req.body},id)
+  const {quiz,mid,final} = req.body
+
+ 
+  const total = Number(quiz) + Number(mid) + Number(final)
+  req.body.total = total
   if (!mongoose.Types.ObjectId.isValid(id)) {
     return res.status(400).json({ error: "there is no such student." });
   }
   const updatedStudents = await User.findByIdAndUpdate(
     { _id: id },
     {
-      ...req.body,
+      ...req.body
     }
   );
+  console.log(updatedStudents)
   if (!updatedStudents) {
     return res.status(404).json({ error: "No Such Student" });
   }
@@ -249,5 +273,6 @@ module.exports = {
   deleteStudents,
   updateStudents,
   deleteFiles,
+  getIndStud,
   upload,
 };

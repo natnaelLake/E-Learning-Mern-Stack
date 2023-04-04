@@ -25,28 +25,31 @@ export const useStudents = () => {
         }
         console.log('stud list is: ',studentList)
     }
-    const updateStudent = async (upstudentname,updateQuiz,upMid,upFinal,upTotal)=>{ 
-        const updateData = {upstudentname,updateQuiz,upMid,upFinal,upTotal}
-        const updatedStudent = await axios.post('http://localhost:8000/updateStudents/:id',updateData)
-        console.log(updatedStudent)
-        if(updatedStudent.ok){
-            dispatch({action:'UPDATE_STUDENT',payload:updatedStudent})
+    const updateStudent = async (student,studId)=>{ 
+        
+        const updatedStudent = await axios.patch('http://localhost:8000/updateStudents/'+studId,student)
+        // console.log(updatedStudent)
+        if(updatedStudent.status === 200){
+            console.log('.... updated one is :',updatedStudent.data)
+            localStorage.setItem("updated", JSON.stringify(updatedStudent.data));
+            // dispatch({type:'UPDATE_STUDENT',payload:updatedStudent})
         }
     }
     const deleteStudent = async (id)=>{
         const deletedStudent =  await axios.delete('http://localhost:8000/deleteStudents/'+id)
-        console.log('deletedStud is :',deletedStudent)
-        if(deletedStudent.statusText === 200){
-            dispatch({action:'DELETE_STUDENT',payload:deletedStudent})
+        console.log('deletedStud is :',id)
+        if(deletedStudent.status === 200){
+            dispatch({type:'DELETE_STUDENT',payload:deletedStudent})
         }
     }
-    const addStudents = async (studentname,quiz,mid,final,total)=>{
-        const studentData = {studentname,quiz,mid,final,total}
-        const addedStudent = await axios.post('http://localhost:8000/addStudents',studentData);
+    const addStudents = async (firstname,lastname,quiz,mid,final)=>{
+        const studentData = {firstname,lastname,quiz,mid,final}
+        console.log('before add :',studentData)
+        const addedStudent = await axios.post('http://localhost:8000/signup',studentData);
         console.log(addedStudent)
-        if(addedStudent.ok){
-            dispatch({action:'ADD_STUDENT',payload:addedStudent})
-        }
+        // if(addedStudent.statusText === 200){
+        //     dispatch({type:'ADD_STUDENT',payload:addedStudent})
+        // }
     }
     return {getStudents,updateStudent,deleteStudent,addStudents};
 }

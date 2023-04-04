@@ -30,6 +30,7 @@ import EditFinal from "./Admin/ExamControl/EditFinal/EditFinal";
 import { useAuthContext } from "./hooks/useAuthContext";
 import ProtectedRoutes from "./ProtectedRoutes";
 import AddCourse from "./Admin/CourseButton/AddCourse";
+import AddStudent from "./Admin/AssButton/AddStudent";
 
 function RoutesPage() {
   const { user } = useAuthContext();
@@ -65,6 +66,7 @@ function RoutesPage() {
           <Route path="/editFinal" element={user ? <EditFinal />: <Login />} />
           <Route path="/editCourse" element={user ? <EditCourse />: <Login />} />
           <Route path="/addCourse" element={user ? <AddCourse />: <Login />} />
+          <Route path="/addStudent" element={user ? <AddStudent />: <Login />} />
         {/* </Route> */}
         <Route path="/" element={<Home />} />
       </Routes>

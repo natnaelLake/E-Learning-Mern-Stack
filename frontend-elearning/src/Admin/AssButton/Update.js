@@ -5,7 +5,7 @@ import { useStudents } from '../adminHooks/useStudents';
 
 
 
-function Update() {
+function Update(student) {
     const [validated, setValidated] = useState(false);
     const [upstudentname,setUpstudentname] = useState()
     const [updateQuiz,setUpdateQuiz] = useState()
@@ -13,7 +13,15 @@ function Update() {
     const [upFinal,setUpFinal] = useState()
     const [upTotal,setUpTotal] = useState()
     const {updateStudent} = useStudents()
+    // const changeUpd = JSON.parse(localStorage.getItem('allStudent'))
+    // let studVal;
+    // changeUpd.map((stud)=>{
+    //   if(stud._id === student.student._id){
+    //     studVal = stud;
+    //   }
+    // })
 
+    const [studentData,setStudentData] = useState(student)
 
   const handleSubmit = async (event) => {
     const form = event.currentTarget;
@@ -24,8 +32,22 @@ function Update() {
 
     setValidated(true);
       event.preventDefault();
-      await updateStudent(upstudentname,updateQuiz,upMid,upFinal,upTotal);
+      await updateStudent(studentData);
   };
+  const handleChange = (e, studentId) => {
+    const { name, value } = e.target
+    // console.log(' fdjksadlfj fdsfjkdkl ',{...student})
+    // student.name = 
+    // const {firstname,quiz,mid,final} = student
+    const editData = student._id === studentId && name ? { ...student.student, [name]: value } : student.student
+    // console.log(editData)
+    localStorage.setItem("changeUser",JSON.stringify(editData))
+    const fetchedChange = JSON.parse(localStorage.getItem('changeUser'))
+    console.log('.../fetch',fetchedChange)
+    setStudentData(editData)
+
+  }
+  console.log(studentData)
   return (
     <div>
         <div className="d-flex align-items-cUpdate justify-content-cUpdate firstDiv">
@@ -43,8 +65,9 @@ function Update() {
                   type="text"
                   id="student"
                   placeholder="Student Name"
-                  value = {upstudentname}
-                  onChange = {(e)=>{setUpstudentname(e.target.value)}}
+                  value = {studentData.firstname}
+                  name = 'firstname'
+                  onChange = {(e)=>{handleChange(e, student._id)}}
                   required
                   controlid="validationCustom03"
                 />
@@ -62,8 +85,9 @@ function Update() {
                   type="number"
                   id="quiz"
                   placeholder="Update Quiz Result"
-                  value = {updateQuiz}
-                  onChange = {(e)=>{setUpdateQuiz(e.target.value)}}
+                  value = {studentData.quiz}
+                  name = 'quiz'
+                  onChange = {(e)=>{handleChange(e, student._id)}}
                   controlid="validationCustom03"
                 />
                 <label htmlFor="quiz">Update Quiz Result</label>
@@ -80,8 +104,9 @@ function Update() {
                   type="number"
                   id="mid"
                   placeholder="Update Mid Result"
-                  value = {upMid}
-                  onChange = {(e)=>{setUpMid(e.target.value)}}
+                  value = {studentData.mid}
+                  name = 'mid'
+                  onChange = {(e)=>{handleChange(e, student._id)}}
                   controlid="validationCustom03"
                 />
                 <label htmlFor="mid">Update Mid Result</label>
@@ -97,9 +122,10 @@ function Update() {
                   required
                   type="number"
                   id="final"
+                  name = 'final'
                   placeholder="Update Final Result"
-                  value = {upFinal}
-                  onChange = {(e)=>{setUpFinal(e.target.value)}}
+                  value = {studentData.final}
+                  onChange = {(e)=>{handleChange(e, student._id)}}
                   controlid="validationCustom03"
                 />
                 <label htmlFor="final">Update Final Result</label>
@@ -109,7 +135,7 @@ function Update() {
               </Form.Floating>{" "}
             </Form.Group>
             <br />
-            <Form.Group>
+            {/* <Form.Group>
               <Form.Floating>
                 <Form.Control
                   required
@@ -127,7 +153,7 @@ function Update() {
               </Form.Floating>{" "}
             </Form.Group>
             
-            <br />
+            <br /> */}
             <Button
               variant="danger"
               type="submit"

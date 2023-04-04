@@ -1,15 +1,18 @@
 import { React, useState } from "react";
 import { Form, Card,Button } from "react-bootstrap";
+import { useNavigate } from "react-router-dom";
 import { useStudents } from "../adminHooks/useStudents";
 
 
  function Add() {
   const [validated, setValidated] = useState(false);
-  const [studentname,setStudentname]  = useState('');
-  const [quiz,setQuiz] = useState(0)
-  const [mid,setMid] = useState(0)
-  const [final,setFinal] = useState(0)
-  const [total,setTotal] = useState(0)
+  const [firstname,setFirstname]  = useState('');
+  const [lastname,setLastname]  = useState('');
+  const [quiz,setQuiz] = useState('')
+  const [mid,setMid] = useState('')
+  const [final,setFinal] = useState('')
+  const navigate = useNavigate();
+  // const [total,setTotal] = useState(null)
   const {addStudents} = useStudents();
 
   
@@ -20,9 +23,10 @@ import { useStudents } from "../adminHooks/useStudents";
       event.preventDefault();
       event.stopPropagation();
     }
-
+    event.preventDefault();
     setValidated(true);
-    await addStudents(studentname,quiz,mid,final,total)
+    await addStudents(firstname,lastname,quiz,mid,final)
+    navigate(-1)
   };
   return (
     <div className="d-flex align-items-center justify-content-center firstDiv">
@@ -40,6 +44,42 @@ import { useStudents } from "../adminHooks/useStudents";
                   type="text"
                   id="student"
                   placeholder="Student Name"
+                  value = {firstname}
+                  onChange={(e)=>{setFirstname(e.target.value)}}
+                  required
+                  controlid="validationCustom03"
+                />
+                <label htmlFor="student">First Name</label>
+                <Form.Control.Feedback type="invalid">
+                  Please provide First Name
+                </Form.Control.Feedback>
+              </Form.Floating>
+            </Form.Group>
+            <br />
+            <Form.Group>
+              <Form.Floating>
+                <Form.Control
+                  type="text"
+                  id="student"
+                  placeholder="Student Name"
+                  value = {lastname}
+                  onChange={(e)=>{setLastname(e.target.value)}}
+                  required
+                  controlid="validationCustom03"
+                />
+                <label htmlFor="student">Lat Name</label>
+                <Form.Control.Feedback type="invalid">
+                  Please provide Last Name
+                </Form.Control.Feedback>
+              </Form.Floating>
+            </Form.Group>
+            <br />
+            {/* <Form.Group>
+              <Form.Floating>
+                <Form.Control
+                  type="text"
+                  id="student"
+                  placeholder="Student Name"
                   value = {studentname}
                   onChange={(e)=>{setStudentname(e.target.value)}}
                   required
@@ -51,7 +91,7 @@ import { useStudents } from "../adminHooks/useStudents";
                 </Form.Control.Feedback>
               </Form.Floating>
             </Form.Group>
-            <br />
+            <br /> */}
             <Form.Group>
               <Form.Floating>
                 <Form.Control
@@ -105,7 +145,7 @@ import { useStudents } from "../adminHooks/useStudents";
                 </Form.Control.Feedback>
               </Form.Floating>{" "}
             </Form.Group>
-            <br />
+            {/* <br />
             <Form.Group>
               <Form.Floating>
                 <Form.Control
@@ -122,7 +162,7 @@ import { useStudents } from "../adminHooks/useStudents";
                   Please provide a valid Total.
                 </Form.Control.Feedback>
               </Form.Floating>{" "}
-            </Form.Group>
+            </Form.Group> */}
             
             <br />
             <Button
