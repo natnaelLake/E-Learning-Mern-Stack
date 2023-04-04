@@ -4,17 +4,22 @@ import {useState} from 'react'
 import EditAss from '../AssButton/EditAss'
 
 export const useStudents = () => {
-    const {getData,setGetData} = useState()
-    const {updateData,setUpdateData} = useState()
-    const {deleteData,setDeleteData} = useState()
-    const {addData,setAddData} = useState()
+    const [nameError,setNameError] = useState()
+    const [emailError,setEmailError] = useState('')
+    const [passwordError,setPasswordError] = useState('')
+    const [phoneError,setPhoneError] = useState('')
+    const [deptError,setDeptError] = useState('')
+    const [quizError,setQuizError] = useState('')
+    const [midError,setMidError] = useState('')
+    const [finalError,setFinalError] = useState('')
+
 
 
     const {dispatch,studentList} = useStudentContext();
     // console.log(studentList)
     const getStudents = async ()=>{
         const allStudents = await axios.get('http://localhost:8000/getStudents')
-        console.log(allStudents)
+        // console.log(allStudents)
         if(allStudents.status === 200){
             // setGetData(allStudents)
             localStorage.setItem("allStudent", JSON.stringify(allStudents.data.students));
@@ -30,26 +35,47 @@ export const useStudents = () => {
         const updatedStudent = await axios.patch('http://localhost:8000/updateStudents/'+studId,student)
         // console.log(updatedStudent)
         if(updatedStudent.status === 200){
-            console.log('.... updated one is :',updatedStudent.data)
+            // console.log('.... updated one is :',updatedStudent.data)
             localStorage.setItem("updated", JSON.stringify(updatedStudent.data));
             // dispatch({type:'UPDATE_STUDENT',payload:updatedStudent})
         }
     }
     const deleteStudent = async (id)=>{
         const deletedStudent =  await axios.delete('http://localhost:8000/deleteStudents/'+id)
-        console.log('deletedStud is :',id)
+        // console.log('deletedStud is :',id)
         if(deletedStudent.status === 200){
             dispatch({type:'DELETE_STUDENT',payload:deletedStudent})
         }
     }
-    const addStudents = async (firstname,lastname,quiz,mid,final)=>{
-        const studentData = {firstname,lastname,quiz,mid,final}
-        console.log('before add :',studentData)
-        const addedStudent = await axios.post('http://localhost:8000/signup',studentData);
-        console.log(addedStudent)
-        // if(addedStudent.statusText === 200){
-        //     dispatch({type:'ADD_STUDENT',payload:addedStudent})
-        // }
+    const addStudents = async (studentname,email,password,age,department,phone,quiz,mid,final)=>{
+        const studentData = {studentname,email,password,age,department,phone,quiz,mid,final}
+        // console.log('before add :',studentData)
+            const addedStudent = await fetch('http://localhost:8000/signup',{
+            method:'POST',    
+            body:JSON.stringify({
+                    studentname,email,password,age,department,phone,quiz,mid,final
+                }),
+            headers:{'Content-Type':'application/json'}
+            });
+            let jsonRes = await addedStudent.json();
+            console.log(addedStudent.code)
+            if(addedStudent.ok){
+                dispatch({type:'ADD_STUDENT',payload:jsonRes})
+            }else{
+                console.log(jsonRes)
+                setNameError(jsonRes.errors.studentname)
+                setEmailError(jsonRes.errors.email)
+                setPasswordError(jsonRes.errors.password)
+                setPhoneError(jsonRes.errors.phone)
+                setQuizError(jsonRes.errors.quiz)
+                setMidError(jsonRes.errors.mid)
+                setDeptError(jsonRes.errors.department)
+                setFinalError(jsonRes.errors.final)
+            }
+            // console.log(jsonRes.errors.studentname)
+                
+        // console.log(nameError)
+
     }
-    return {getStudents,updateStudent,deleteStudent,addStudents};
+    return {getStudents,updateStudent,deleteStudent,addStudents,nameError,emailError,passwordError,phoneError,quizError,midError,finalError,deptError};
 }

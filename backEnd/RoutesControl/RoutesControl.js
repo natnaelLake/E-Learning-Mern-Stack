@@ -21,12 +21,14 @@ const upload = multer({
 
 const handleErrors = (err) => {
   let errors = {
-    firstname: "",
-    lastname: "",
+    username: "",
     email: "",
     password: "",
     phone: "",
     department: "",
+    quiz:'',
+    mid:'',
+    final:'',
   };
   if (err.message === "Email is not registered") {
     errors.email = "Email is not registered";
@@ -48,9 +50,13 @@ const handleErrors = (err) => {
   // if(err ==='Use Storng Password'){
   //   console.log(err)
   // }
+  // console.log(err.errors.code)
+  // console.log(err.errors.kind)
+console.log(err.errors)
   if (err.message.includes("User validation failed")) {
     Object.values(err.errors).forEach(({ properties }) => {
       errors[properties.path] = properties.message;
+      // console.log(properties)
     });
   }
   return errors;
@@ -71,16 +77,13 @@ const login_Post = async (req, res) => {
   }
 };
 const signup_Post = async (req, res) => {
-  const { firstname, lastname,  password, age, phone, department,quiz,mid,final } =
+  const { studentname,email, password, age, phone, department,quiz,mid,final } =
     req.body;
     const total = Number(mid )+ Number(quiz) +Number(final)
-    console.log(typeof(total))
-    const email = firstname + lastname
-    console.log(req.body)
+    console.log(req.body,mid,quiz,final)
   try {
     const user = await User.create({
-      firstname,
-      lastname,
+      studentname,
       email,
       password,
       age,
@@ -95,8 +98,9 @@ const signup_Post = async (req, res) => {
     const token = createToken(user._id);
     res.status(200).json({ email, token ,user});
   } catch (err) {
-    console.log(err)
+    // console.log(err)
     let errors = handleErrors(err);
+    console.log(errors)
     res.status(404).json({ errors });
   }
 };
@@ -184,18 +188,18 @@ const videos_get = async (req, res) => {
 };
 const getStudents = async (req, res) => {
   const getStudents = await User.find({});
-  const countList = await User.find({}).count();
-
-  console.log(getStudents,countList);
-  res.status(200).json({students:getStudents,countListStud:countList});
-};
-const getIndStud = async (req, res) => {
-  const getStudents = await User.find({});
   // const countList = await User.find({}).count();
-  
-  console.log(getStudents,countList);
-  res.status(200).json({students:getStudents,countListStud:countList});
+
+  console.log(getStudents);
+  res.status(200).json({students:getStudents});
 };
+// const getIndStud = async (req, res) => {
+//   const getStudents = await User.find({});
+//   // const countList = await User.find({}).count();
+
+//   console.log(getStudents,countList);
+//   res.status(200).json({students:getStudents,countListStud:countList});
+// };
 const deleteStudents = async (req, res) => {
   const { id } = req.params;
   console.log(id)
@@ -273,6 +277,5 @@ module.exports = {
   deleteStudents,
   updateStudents,
   deleteFiles,
-  getIndStud,
   upload,
 };

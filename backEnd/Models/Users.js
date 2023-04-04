@@ -4,50 +4,50 @@ const bcrypt = require('bcrypt')
 const Schema = mongoose.Schema;
 
 const userSchema = new Schema({
-    firstname:{
+    studentname:{
         type:String,
-        required:[true,'Enter First Name'],
-        unique:true,
-
-    },
-    lastname:{
-        type:String,
-        required:[true,'Enter Last Name']
-    },
+        required:[true,'Enter Student Name'],
+    }
+    // },
+    // lastname:{
+    //     type:String,
+    //     required:[true,'Enter Last Name']
+    // }
+    ,
     email:{
         type:String,
-        // required:[true,'Enter Valid Email'],
+        required:[true,'Enter Valid Email'],
         lowercase:true,
-        // validate:[isEmail,'Enter Valid Email']
+        unique:true,
+        validate:[isEmail,'Enter Valid Email']
     },
     password:{
         type:String,
-        default:'nati@1212',
         required:[true,'Enter Password'],
         minlength:[8,'Minimum Length is 8 Characters'],
     },
     department:{
         type:String,
-        default:'Software Engineering',
         required:[true,'Enter  Department']
     },
     quiz:{
-        type:Number
+        type:Number,
+        max:[5,'Maximum Limit is 5']
     },
     mid:{
-        type:Number
+        type:Number,
+        max:[25,'Maximum Limit is 25']
     },
     final:{
-        type:Number
+        type:Number,
+        max:[50,'Maximum Limit is 50']
     },
     total:{
         type:Number
     },
     phone:{
         type:Number,
-        default:0934627708,
-        required:[true,'Enter Valid Phone Number']
-    }
+        required:[true,'Enter Valid Phone Number'],}
 },{timestamps:true});
 userSchema.pre('save',async function(next){
     // if(!isStrongPassword(this.password)){
