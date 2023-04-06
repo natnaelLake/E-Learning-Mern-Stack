@@ -7,6 +7,9 @@ import imageOne from "../Assets/student.png";
 import { useFiles } from "./adminHooks/useFiles";
 import {useFileContext} from '../hooks/useFileContext'
 import { useEffect } from "react";
+import formatDistanceToNow from "date-fns/formatDistance";
+
+
 
 function ManageCourse() {
   const { getCourse } = useFiles();
@@ -87,7 +90,7 @@ function ManageCourse() {
                       </Button>
                     </Card.Body>
                     <Card.Footer>
-                      <small className="text-muted">updated 3min ago</small>
+                      <small className="text-muted">{formatDistanceToNow(new Date(files.createdAt), {addSuffix:true})}</small>
                     </Card.Footer>
                   </Card>
                   </div>

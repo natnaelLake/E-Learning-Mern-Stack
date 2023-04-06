@@ -12,14 +12,13 @@ import {useSignUp} from '../hooks/useSignUp'
 
 function SignUp() {
   const [validated, setValidated] = useState(false);
-  const [firstname,setFirstname] = useState('')
-  const [lastname,setLastname] = useState('')
+  const [studentname,setStudentname] = useState('')
   const [email,setEmail] = useState('')
   const [password,setPassword] = useState('')
   const [age,setAge] = useState('')
   const [department,setDepartment] = useState('')
   const [phone,setPhone] = useState('')
-  const {fnameError,lnameError,emailError,passError,depError,phoneError,signUp} = useSignUp()
+  const {nameError,emailError,passError,depError,phoneError,signUp} = useSignUp()
   
 
 
@@ -32,7 +31,7 @@ function SignUp() {
 
     setValidated(true);
     event.preventDefault();
-    await signUp(email,password,firstname,lastname,age,department,phone)
+    await signUp(email,password,studentname,age,department,phone)
   };
   const style = { color: "white", width: "200px", height: "50px" };
   const style1 = { width: "200px", height: "50px" };
@@ -58,18 +57,18 @@ function SignUp() {
                   type="text"
                   id="firtName"
                   placeholder="User Name"
-                  value={firstname}
-                  onChange = {e=>{setFirstname(e.target.value)}}
+                  value={studentname}
+                  onChange = {e=>{setStudentname(e.target.value)}}
                   required
                   controlid="validationCustom03"
                 />
-                <label htmlFor="firtName">First Name</label>
+                <label htmlFor="firtName">Student Name</label>
                 <Form.Control.Feedback type="invalid">
-                  {fnameError}
+                  {nameError}
                 </Form.Control.Feedback>
               </Form.Floating>
             </Form.Group>
-            <br />
+            {/* <br />
             <Form.Group>
               <Form.Floating>
                 <Form.Control
@@ -86,7 +85,7 @@ function SignUp() {
                   {lnameError}
                 </Form.Control.Feedback>
               </Form.Floating>
-            </Form.Group>
+            </Form.Group> */}
             <br />
             <Form.Group>
               <Form.Floating>

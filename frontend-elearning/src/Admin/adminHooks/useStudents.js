@@ -12,7 +12,7 @@ export const useStudents = () => {
     const [quizError,setQuizError] = useState('')
     const [midError,setMidError] = useState('')
     const [finalError,setFinalError] = useState('')
-
+    const [error,setError] = useState(false)
 
 
     const {dispatch,studentList} = useStudentContext();
@@ -32,14 +32,24 @@ export const useStudents = () => {
     }
     const updateStudent = async (student,studId)=>{ 
         
-        const updatedStudent = await axios.patch('http://localhost:8000/updateStudents/'+studId,student)
-        // console.log(updatedStudent)
-        if(updatedStudent.status === 200){
-            // console.log('.... updated one is :',updatedStudent.data)
-            localStorage.setItem("updated", JSON.stringify(updatedStudent.data));
-            // dispatch({type:'UPDATE_STUDENT',payload:updatedStudent})
-        }
+       try{
+            const updatedStudent = await axios.patch('http://localhost:8000/updateStudents/'+studId,student)
+            // console.log(updatedStudent)
+            if(updatedStudent.status === 200){
+                // console.log('.... updated one is :',updatedStudent.data)
+                localStorage.setItem("updated", JSON.stringify(updatedStudent.data));
+                // dispatch({type:'UPDATE_STUDENT',payload:updatedStudent})
+            }
+       }catch(error){
+                console.log(error.response.data)
+                setQuizError(error.response.data.quiz);
+                setMidError(error.response.data.mid);
+                setFinalError(error.response.data.final);
+                setError(true)
+       }
     }
+    console.log(' ..... ...  ..',error)
+
     const deleteStudent = async (id)=>{
         const deletedStudent =  await axios.delete('http://localhost:8000/deleteStudents/'+id)
         // console.log('deletedStud is :',id)
@@ -58,11 +68,12 @@ export const useStudents = () => {
             headers:{'Content-Type':'application/json'}
             });
             let jsonRes = await addedStudent.json();
-            console.log(addedStudent.code)
+            console.log(addedStudent)
             if(addedStudent.ok){
                 dispatch({type:'ADD_STUDENT',payload:jsonRes})
             }else{
-                console.log(jsonRes)
+                
+                console.log('dsfjkj dsfdfjkjf fddkj',jsonRes)
                 setNameError(jsonRes.errors.studentname)
                 setEmailError(jsonRes.errors.email)
                 setPasswordError(jsonRes.errors.password)
@@ -77,5 +88,5 @@ export const useStudents = () => {
         // console.log(nameError)
 
     }
-    return {getStudents,updateStudent,deleteStudent,addStudents,nameError,emailError,passwordError,phoneError,quizError,midError,finalError,deptError};
+    return {getStudents,updateStudent,deleteStudent,addStudents,nameError,emailError,passwordError,phoneError,quizError,midError,finalError,deptError,error};
 }

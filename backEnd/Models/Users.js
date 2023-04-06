@@ -3,32 +3,26 @@ const {isEmail,isStrongPassword} = require('validator')
 const bcrypt = require('bcrypt')
 const Schema = mongoose.Schema;
 
-const userSchema = new Schema({
+const studentDatabase = new Schema({
     studentname:{
         type:String,
-        required:[true,'Enter Student Name'],
-    }
-    // },
-    // lastname:{
-    //     type:String,
-    //     required:[true,'Enter Last Name']
-    // }
-    ,
+        required:[true,'Enter Student Name']
+    },
     email:{
         type:String,
-        required:[true,'Enter Valid Email'],
-        lowercase:true,
         unique:true,
-        validate:[isEmail,'Enter Valid Email']
+        lowercase:true,
+        validate:[isEmail,'Enter Valid Email'],
+        required:[true,'Enter Valid Email']
     },
     password:{
         type:String,
         required:[true,'Enter Password'],
-        minlength:[8,'Minimum Length is 8 Characters'],
+        minlength:[8,'Minimum Length is 8 Characters']
     },
     department:{
         type:String,
-        required:[true,'Enter  Department']
+        required:[true,'Enter Department']
     },
     quiz:{
         type:Number,
@@ -43,13 +37,14 @@ const userSchema = new Schema({
         max:[50,'Maximum Limit is 50']
     },
     total:{
-        type:Number
+        type:Number,
     },
     phone:{
         type:Number,
         required:[true,'Enter Valid Phone Number'],}
+   
 },{timestamps:true});
-userSchema.pre('save',async function(next){
+studentDatabase.pre('save',async function(next){
     // if(!isStrongPassword(this.password)){
     //     throw Error('Use Storng Password')
     // }
@@ -60,7 +55,7 @@ userSchema.pre('save',async function(next){
 })
 
 
-userSchema.statics.login = async function(email,password){
+studentDatabase.statics.login = async function(email,password){
     if(!email || !isEmail(email)){
         throw Error('Enter Valid Email')
     }
@@ -78,5 +73,4 @@ userSchema.statics.login = async function(email,password){
     }
     throw Error('Email is not registered')
 }
-
-module.exports = mongoose.model('User',userSchema)
+module.exports = mongoose.model('student',studentDatabase)

@@ -4,18 +4,16 @@ import { useAuthContext } from './useAuthContext';
 
 export const useSignUp = () => {
     const [emailError,setEmailError] = useState('');
-    const [fnameError,setFnameError] = useState('');
-    const [lnameError,setLnameError] = useState('');
+    const [nameError,setNameError] = useState('');
     const [passError,setPassError] = useState('');
     const [depError,setDepError] = useState('');
     const [phoneError,setPhoneError] = useState('');
     const {dispatch}  = useAuthContext()
-    const signUp = async (email,password,firstname,lastname,age,department,phone) =>{
+    const signUp = async (email,password,studentname,age,department,phone) =>{
         const response = await fetch('http://localhost:8000/signup',{
             method:'POST',
             body:JSON.stringify({
-                firstname,
-                lastname,
+                studentname,
                 email,
                 password,
                 age,
@@ -27,8 +25,7 @@ export const useSignUp = () => {
           let jsonRes = await response.json();
           if(response.ok){
               console.log(jsonRes)
-              setLnameError('')
-              setFnameError('')
+              setNameError('')
               setEmailError('')
               setPassError('')
               setPhoneError('')
@@ -36,13 +33,12 @@ export const useSignUp = () => {
               localStorage.setItem('user',JSON.stringify(jsonRes))
               dispatch({type:'LOGIN',payload:jsonRes})
           }else{
-            setFnameError(jsonRes.errors.firstname)
-            setLnameError(jsonRes.errors.lastname)
+            setNameError(jsonRes.errors.studentname)
             setEmailError(jsonRes.errors.email)
             setPassError(jsonRes.errors.password)
             setPhoneError(jsonRes.errors.phone)
             setDepError(jsonRes.errors.department)
           }
     }
-    return ({fnameError,lnameError,passError,emailError,phoneError,depError,signUp});
+    return ({nameError,passError,emailError,phoneError,depError,signUp});
 }

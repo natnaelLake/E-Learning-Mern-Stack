@@ -21,7 +21,7 @@ const upload = multer({
 
 const handleErrors = (err) => {
   let errors = {
-    username: "",
+    studentname: "",
     email: "",
     password: "",
     phone: "",
@@ -69,8 +69,10 @@ const login_Post = async (req, res) => {
   const { email, password } = req.body;
   try {
     const user = await User.login(email, password);
+    const name = user.studentname
+    console.log('....... user',user)
     const token = createToken(user._id);
-    res.status(200).json({ email, token });
+    res.status(200).json({ email, token, name});
   } catch (err) {
     const errors = handleErrors(err);
     res.status(404).json({ errors });
@@ -79,7 +81,15 @@ const login_Post = async (req, res) => {
 const signup_Post = async (req, res) => {
   const { studentname,email, password, age, phone, department,quiz,mid,final } =
     req.body;
-    const total = Number(mid )+ Number(quiz) +Number(final)
+  let quiz1;
+  let mid1;
+  let final1;
+  quiz === undefined ? quiz1 = 0 : quiz1 = quiz
+  mid === undefined ? mid1 = 0 : mid1 = mid
+  final === undefined ? final1 = 0 : final1 = final
+
+
+    const total = Number(mid1 )+ Number(quiz1) +Number(final1)
     console.log(req.body,mid,quiz,final)
   try {
     const user = await User.create({
@@ -89,16 +99,16 @@ const signup_Post = async (req, res) => {
       age,
       phone,
       department,
-      quiz,
-      mid,
-      final,
+      quiz:quiz1,
+      mid:mid1,
+      final:final1,
       total
     });
     console.log(user)
     const token = createToken(user._id);
     res.status(200).json({ email, token ,user});
   } catch (err) {
-    // console.log(err)
+    console.log(err)
     let errors = handleErrors(err);
     console.log(errors)
     res.status(404).json({ errors });
@@ -221,12 +231,28 @@ const updateStudents = async (req, res) => {
   console.log({...req.body},id)
   const {quiz,mid,final} = req.body
 
- 
+ let emptyField = {
+  quiz:'',
+  mid:'',
+  final:''
+ }
   const total = Number(quiz) + Number(mid) + Number(final)
   req.body.total = total
   if (!mongoose.Types.ObjectId.isValid(id)) {
     return res.status(400).json({ error: "there is no such student." });
   }
+  if(quiz >5){
+    emptyField['quiz'] = 'Maximum quiz limit is 5'
+  }
+  if(mid >25){
+    emptyField['mid'] = 'Maximum mid limit is 25'
+  }if(final >50){
+    emptyField['final'] = 'Maximum final limit is 50'
+  }
+  if(quiz>5 || mid>25 || final>50){
+    return res.status(404).json(emptyField)
+  }
+  console.log('empty field is : ',emptyField)
   const updatedStudents = await User.findByIdAndUpdate(
     { _id: id },
     {

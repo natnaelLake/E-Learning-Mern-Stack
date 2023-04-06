@@ -9,6 +9,9 @@ import {useFileContext} from '../hooks/useFileContext'
 import { useEffect } from "react";
 import { useStudents } from "./adminHooks/useStudents";
 import { useStudentContext } from "../hooks/useStudentContext";
+import formatDistanceToNow from 'date-fns/formatDistanceToNow'
+
+
 
 function Dashboard() {
   const { getCourse } = useFiles();
@@ -79,7 +82,7 @@ function Dashboard() {
                     <Badge bg="danger">{studentList.length}</Badge>
                  </Card.Body>
                     <Card.Footer>
-                      <small className="text-muted">updated 3min ago</small>
+                      <small className="text-muted">updated {formatDistanceToNow(new Date(studentList.createdAt), {addSuffix:true})}</small>
                     </Card.Footer>
                   </Card>
                   </div>
