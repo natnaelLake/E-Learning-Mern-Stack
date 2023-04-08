@@ -1,6 +1,9 @@
 import { React, useState } from "react";
 import { Form, Card, Button } from "react-bootstrap";
 import axios from "axios";
+import { useFiles } from "../adminHooks/useFiles";
+
+
 
 function Add() {
   const [validated, setValidated] = useState(false);
@@ -13,7 +16,7 @@ function Add() {
   const [fileArray, setFileArray] = useState([]);
   const [descTitle, setDescTitle] = useState("");
   const [desc, setDesc] = useState("");
-
+  const {addCourse} = useFiles();
   const handleSubmit = async (event) => {
     event.preventDefault();
     const formData = new FormData();
@@ -38,15 +41,7 @@ function Add() {
       event.stopPropagation();
     }
     setValidated(true);
-    const response = await axios.post(
-      "http://localhost:8000/addVideos",
-      formData,
-      {
-        headers: { "Content-Type": "multipart/form-data" },
-      }
-    );
-    // const jsonRes = await response.json()
-    console.log(response);
+    await addCourse(formData)
   };
 
   return (

@@ -1,4 +1,4 @@
-import React from "react";
+import {React,useState} from "react";
 import Sidebar from "./Sidebar";
 import Header from "../Pages/Header";
 import { Card, Button } from "react-bootstrap";
@@ -7,20 +7,25 @@ import imageOne from "../Assets/student.png";
 import { useFiles } from "./adminHooks/useFiles";
 import {useFileContext} from '../hooks/useFileContext'
 import { useEffect } from "react";
-import formatDistanceToNow from "date-fns/formatDistance";
+// import formatDistanceToNow from "date-fns/formatDistance";
 
 
 
 function ManageCourse() {
   const { getCourse } = useFiles();
   const {fileList} = useFileContext()
+  const [imageState,setImageState] = useState('')
   useEffect(()=>{
     const manageCrs = async ()=>{
+  setImageState(stud)
       
       await getCourse();
     }
     manageCrs();
   },[])
+  const {courseTitle} = fileList
+  const stud = '../Assets/student.png'
+  console.log('........ T .... ',courseTitle)
   return (
     <div>
       <div className="d-flex profile">
@@ -74,7 +79,7 @@ function ManageCourse() {
                     <div className="imageCard">
                       <Card.Img
                         variant="top"
-                        src={imageOne}
+                        src={`http://localhost:8000/uploads/${files.coverImage}`}
                         className="rounded-5 mainCard"
                       />
                     </div>
@@ -90,7 +95,7 @@ function ManageCourse() {
                       </Button>
                     </Card.Body>
                     <Card.Footer>
-                      <small className="text-muted">{formatDistanceToNow(new Date(files.createdAt), {addSuffix:true})}</small>
+                      <small className="text-muted">3 min ago</small>
                     </Card.Footer>
                   </Card>
                   </div>

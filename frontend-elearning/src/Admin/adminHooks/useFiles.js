@@ -40,13 +40,20 @@ export const useFiles = () => {
             dispatch({action:'DELETE_COURSE',payload:deletedStudent})
         }
     }
-    // const addCourse = async (studentname,quiz,mid,final,total)=>{
-    //     const courseData = {studentname,quiz,mid,final,total}
-    //     const addedCourse = await axios.post('http://localhost:8000/addVideos',studentData);
-    //     console.log(addedCourse)
-    //     if(addedCourse.ok){
-    //         dispatch({action:'ADD_COURSE',payload:addCourse})
-    //     }
-    // }
-    return {getCourse,updateCourse,deleteCourse};
+    const addCourse = async (formData)=>{
+        console.log('......... formData ......',formData)
+        const response = await axios.post(
+            "http://localhost:8000/addVideos",
+            formData,
+            {
+              headers: { "Content-Type": "multipart/form-data" },
+            }
+          );
+
+          console.log('file responses is  ............ .',response)
+        if(response.status === 200){
+            dispatch({action:'ADD_COURSE',payload:response})
+        }
+    }
+    return {getCourse,updateCourse,deleteCourse,addCourse};
 }

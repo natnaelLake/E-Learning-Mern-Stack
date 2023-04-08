@@ -1,12 +1,13 @@
 require("dotenv").config();
 const express = require("express");
+const mv = require("mv");
 const User = require("../Models/Users");
 const jwt = require("jsonwebtoken");
 const Courses = require("../Models/CourseDB");
 const multer = require("multer");
 const app = express();
 const fileupload = require("express-fileupload");
-const mongoose = require('mongoose')
+const mongoose = require("mongoose");
 app.use(fileupload);
 const path = require("path");
 const storage = multer.diskStorage({
@@ -26,9 +27,9 @@ const handleErrors = (err) => {
     password: "",
     phone: "",
     department: "",
-    quiz:'',
-    mid:'',
-    final:'',
+    quiz: "",
+    mid: "",
+    final: "",
   };
   if (err.message === "Email is not registered") {
     errors.email = "Email is not registered";
@@ -52,7 +53,7 @@ const handleErrors = (err) => {
   // }
   // console.log(err.errors.code)
   // console.log(err.errors.kind)
-console.log(err.errors)
+  console.log(err.errors);
   if (err.message.includes("User validation failed")) {
     Object.values(err.errors).forEach(({ properties }) => {
       errors[properties.path] = properties.message;
@@ -69,28 +70,36 @@ const login_Post = async (req, res) => {
   const { email, password } = req.body;
   try {
     const user = await User.login(email, password);
-    const name = user.studentname
-    console.log('....... user',user)
+    const name = user.studentname;
+    console.log("....... user", user);
     const token = createToken(user._id);
-    res.status(200).json({ email, token, name});
+    res.status(200).json({ email, token, name });
   } catch (err) {
     const errors = handleErrors(err);
     res.status(404).json({ errors });
   }
 };
 const signup_Post = async (req, res) => {
-  const { studentname,email, password, age, phone, department,quiz,mid,final } =
-    req.body;
+  const {
+    studentname,
+    email,
+    password,
+    age,
+    phone,
+    department,
+    quiz,
+    mid,
+    final,
+  } = req.body;
   let quiz1;
   let mid1;
   let final1;
-  quiz === undefined ? quiz1 = 0 : quiz1 = quiz
-  mid === undefined ? mid1 = 0 : mid1 = mid
-  final === undefined ? final1 = 0 : final1 = final
+  quiz === undefined ? (quiz1 = 0) : (quiz1 = quiz);
+  mid === undefined ? (mid1 = 0) : (mid1 = mid);
+  final === undefined ? (final1 = 0) : (final1 = final);
 
-
-    const total = Number(mid1 )+ Number(quiz1) +Number(final1)
-    console.log(req.body,mid,quiz,final)
+  const total = Number(mid1) + Number(quiz1) + Number(final1);
+  console.log(req.body, mid, quiz, final);
   try {
     const user = await User.create({
       studentname,
@@ -99,18 +108,18 @@ const signup_Post = async (req, res) => {
       age,
       phone,
       department,
-      quiz:quiz1,
-      mid:mid1,
-      final:final1,
-      total
+      quiz: quiz1,
+      mid: mid1,
+      final: final1,
+      total,
     });
-    console.log(user)
+    console.log(user);
     const token = createToken(user._id);
-    res.status(200).json({ email, token ,user});
+    res.status(200).json({ email, token, user });
   } catch (err) {
-    console.log(err)
+    console.log(err);
     let errors = handleErrors(err);
-    console.log(errors)
+    console.log(errors);
     res.status(404).json({ errors });
   }
 };
@@ -137,9 +146,18 @@ const handlerFileErrors = (err) => {
   console.log(errors);
   return errors;
 };
-const videos_Post = async (req, res) => {
+const videos_Post = async (req, res, next) => {
   const { courseTitle, moduleTitle, descTitle, desc } = req.body;
+  console.log('. .. . . . . ',req.files)
   const files = req.files;
+
+  // fileData.mv(`${__dirname}/frontend-elearning/src/Assets${fileData.filename}`,err=>{
+  //   if(err){
+  //     console.log(err)
+  //     return res.status(500).send(err)
+  //   }
+  //   res.status(200).json({fileName:fileData.filename,filePath:`/Assets/${fileData.filename}`})
+  // })
   let session = {
     videos: [],
     docs: [],
@@ -166,7 +184,9 @@ const videos_Post = async (req, res) => {
     } else {
       coverImage = images.filename;
     }
-  }
+  }console.log(coverImage)
+  // console.log(`/home/natnael/ProgrammingClass/elearning}`)
+  
   const { videos, docs } = session;
   try {
     const courses = await Courses.create({
@@ -182,8 +202,7 @@ const videos_Post = async (req, res) => {
         desc,
       },
     });
-    console.log(courses);
-    res.status(200).json({ message: "Successfully Added" });
+   
   } catch (err) {
     const errors = handlerFileErrors(err);
     res.status(401).json(errors);
@@ -191,17 +210,15 @@ const videos_Post = async (req, res) => {
 };
 const videos_get = async (req, res) => {
   const result = await Courses.find({}).sort({ createdAt: -1 });
-  const countList = await Courses.find({}).count();
-
   console.log(result);
-  res.status(200).json({fileList:result,countListFile:countList});
+  res.status(200).json({ fileList: result });
 };
 const getStudents = async (req, res) => {
   const getStudents = await User.find({});
   // const countList = await User.find({}).count();
 
   console.log(getStudents);
-  res.status(200).json({students:getStudents});
+  res.status(200).json({ students: getStudents });
 };
 // const getIndStud = async (req, res) => {
 //   const getStudents = await User.find({});
@@ -212,14 +229,14 @@ const getStudents = async (req, res) => {
 // };
 const deleteStudents = async (req, res) => {
   const { id } = req.params;
-  console.log(id)
+  console.log(id);
   if (!mongoose.Types.ObjectId.isValid(id)) {
-    console.log('id error')
+    console.log("id error");
     return res.status(400).json({ error: "there is no such student." });
   }
   const deletedStudents = await User.findByIdAndDelete({ _id: id });
   if (!deletedStudents) {
-    console.log('no stud')
+    console.log("no stud");
     return res.status(404).json({ error: "no such student" });
   }
 
@@ -227,39 +244,40 @@ const deleteStudents = async (req, res) => {
   res.status(200).json(deletedStudents);
 };
 const updateStudents = async (req, res) => {
-  const {id} = req.params;
-  console.log({...req.body},id)
-  const {quiz,mid,final} = req.body
+  const { id } = req.params;
+  console.log({ ...req.body }, id);
+  const { quiz, mid, final } = req.body;
 
- let emptyField = {
-  quiz:'',
-  mid:'',
-  final:''
- }
-  const total = Number(quiz) + Number(mid) + Number(final)
-  req.body.total = total
+  let emptyField = {
+    quiz: "",
+    mid: "",
+    final: "",
+  };
+  const total = Number(quiz) + Number(mid) + Number(final);
+  req.body.total = total;
   if (!mongoose.Types.ObjectId.isValid(id)) {
     return res.status(400).json({ error: "there is no such student." });
   }
-  if(quiz >5){
-    emptyField['quiz'] = 'Maximum quiz limit is 5'
+  if (quiz > 5) {
+    emptyField["quiz"] = "Maximum quiz limit is 5";
   }
-  if(mid >25){
-    emptyField['mid'] = 'Maximum mid limit is 25'
-  }if(final >50){
-    emptyField['final'] = 'Maximum final limit is 50'
+  if (mid > 25) {
+    emptyField["mid"] = "Maximum mid limit is 25";
   }
-  if(quiz>5 || mid>25 || final>50){
-    return res.status(404).json(emptyField)
+  if (final > 50) {
+    emptyField["final"] = "Maximum final limit is 50";
   }
-  console.log('empty field is : ',emptyField)
+  if (quiz > 5 || mid > 25 || final > 50) {
+    return res.status(404).json(emptyField);
+  }
+  console.log("empty field is : ", emptyField);
   const updatedStudents = await User.findByIdAndUpdate(
     { _id: id },
     {
-      ...req.body
+      ...req.body,
     }
   );
-  console.log(updatedStudents)
+  console.log(updatedStudents);
   if (!updatedStudents) {
     return res.status(404).json({ error: "No Such Student" });
   }

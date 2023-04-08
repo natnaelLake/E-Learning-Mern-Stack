@@ -17,8 +17,6 @@ import "./style.css";
 import EditAss from "./AssButton/EditAss";
 import { useAuthContext } from "../hooks/useAuthContext";
 
-
-
 function ManageAssesment() {
   const navigate = useNavigate();
   const {
@@ -37,7 +35,7 @@ function ManageAssesment() {
   const [changecontrol, setChangeControl] = useState(true);
   const [show, setShow] = useState(error);
   const position = "middle-center";
-  const {user} = useAuthContext();
+  const { user } = useAuthContext();
   console.log("....topLis", user);
 
   const handleDelete = async (stud) => {
@@ -127,9 +125,9 @@ function ManageAssesment() {
                   <Toast
                     onClose={() => setShow(false)}
                     show={show}
-                    bg = 'danger'
+                    bg="danger"
                     delay={3000}
-                    className = 'text-white'
+                    className="text-white"
                     autohide
                   >
                     <Toast.Header>
@@ -141,7 +139,7 @@ function ManageAssesment() {
                       <strong className="me-auto">{user.name}</strong>
                       <small>11 mins ago</small>
                     </Toast.Header>
-                    <Toast.Body >{quizError}</Toast.Body>
+                    <Toast.Body>{quizError}</Toast.Body>
                   </Toast>
                 </ToastContainer>
               )}
@@ -150,9 +148,9 @@ function ManageAssesment() {
                   <Toast
                     onClose={() => setShow(false)}
                     show={show}
-                    bg = 'danger'
+                    bg="danger"
                     delay={3000}
-                    className = 'text-white'
+                    className="text-white"
                     autohide
                   >
                     <Toast.Header>
@@ -164,7 +162,7 @@ function ManageAssesment() {
                       <strong className="me-auto">Bootstrap</strong>
                       <small>11 mins ago</small>
                     </Toast.Header>
-                    <Toast.Body className = 'tedt-white'>{midError}</Toast.Body>
+                    <Toast.Body className="tedt-white">{midError}</Toast.Body>
                   </Toast>
                 </ToastContainer>
               )}
@@ -173,9 +171,9 @@ function ManageAssesment() {
                   <Toast
                     onClose={() => setShow(false)}
                     show={show}
-                    bg = 'danger'
+                    bg="danger"
                     delay={3000}
-                    className = 'text-white'
+                    className="text-white"
                     autohide
                   >
                     <Toast.Header>
@@ -186,8 +184,8 @@ function ManageAssesment() {
                       />
                       <strong className="me-auto">Bootstrap</strong>
                       <small>11 mins ago</small>
-                    </Toast.Header >
-                    <Toast.Body className = 'tedt-white' >{finalError}</Toast.Body>
+                    </Toast.Header>
+                    <Toast.Body className="tedt-white">{finalError}</Toast.Body>
                   </Toast>
                 </ToastContainer>
               )}
@@ -251,7 +249,6 @@ function ManageAssesment() {
                                   // const studentUpd = { [name]: value };
                                   handleUpdate(student, student._id);
                                   setShow(error);
-
                                 }}
                                 placeholder="Enter Mid"
                               />
@@ -267,7 +264,6 @@ function ManageAssesment() {
                                   // const studentUpd = { [name]: value };
                                   handleUpdate(student, student._id);
                                   setShow(error);
-
                                 }}
                                 placeholder="Enter Final"
                               />

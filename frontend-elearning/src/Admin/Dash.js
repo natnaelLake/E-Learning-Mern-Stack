@@ -82,7 +82,7 @@ function Dashboard() {
                     <Badge bg="danger">{studentList.length}</Badge>
                  </Card.Body>
                     <Card.Footer>
-                      <small className="text-muted">updated {formatDistanceToNow(new Date(studentList.createdAt), {addSuffix:true})}</small>
+                      <small className="text-muted">updated 3 min ago</small>
                     </Card.Footer>
                   </Card>
                   </div>

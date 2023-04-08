@@ -11,10 +11,6 @@ export const fileReducer = (state,action)=>{
       return {
         fileList: action.payload,
       };
-      case "COUNT_COURSE":
-        return {
-          countListFile: action.payload,
-        };
     case "DELETE_COURSE":
       return {
         fileList: [...state.fileList],
