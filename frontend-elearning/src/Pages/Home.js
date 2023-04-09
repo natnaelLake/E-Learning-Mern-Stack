@@ -1,5 +1,5 @@
 import { React, useState,useEffect } from "react";
-import { Container, Card, Button, Row, Col, Image, Offcanvas, Modal,Pagination } from "react-bootstrap";
+import { Container, Card, Button, Row, Col, Image, Offcanvas, Modal } from "react-bootstrap";
 // import * as Icon from 'react-bootstrap-icons'
 import imageOne from "../Assets/constimage.jpeg";
 import imageTwo from "../Assets/the big mountain.png";
@@ -11,7 +11,8 @@ import "./style.css";
 import * as Icon from "react-bootstrap-icons";
 import useFileContext from "../hooks/useFileContext";
 import CourseCards from "./CourseCards";
-
+import Paging from "./Paging";
+import { useFiles } from "../Admin/adminHooks/useFiles";
 
 
 function Home() {
@@ -19,12 +20,13 @@ function Home() {
   const [courses,setCourses] = useState([]);
   const [currentPage,setCurrentPage] = useState(1)
   const [coursePerPage,setCoursePerPage] = useState(6)
-
+  const {getCourse} = useFiles();
   const handleClose = () => { setShow(false) }
   const handleShow = () => { setShow(true) }
   const { fileList } = useFileContext();
   useEffect(()=>{
-    const manageChange = ()=>{
+    const manageChange = async ()=>{
+        await getCourse()
         setCourses(fileList)
     }
     manageChange();
@@ -34,7 +36,30 @@ function Home() {
   const indexOfFisrtCourse = indexOfLastCourse - coursePerPage;
   let currentCourses 
   {fileList  !== null ? currentCourses = fileList.slice(indexOfFisrtCourse,indexOfLastCourse):currentCourses = null}
-
+  const paginate = pageNumber =>{
+    console.log(pageNumber)
+    setCurrentPage(pageNumber)
+  }
+  const firstPage = pageNumber =>{
+    console.log(pageNumber)
+    setCurrentPage(pageNumber)
+  }
+  const prevPage = pageNumber =>{
+    console.log(pageNumber)
+    setCurrentPage(pageNumber)
+  }
+  const nextPage = pageNumber =>{
+    console.log(pageNumber)
+    setCurrentPage(pageNumber)
+  }
+  const lastPage = pageNumber =>{
+    console.log(pageNumber)
+    setCurrentPage(pageNumber)
+  }
+  let fileLength ;
+  if(fileList !== null){
+    fileLength = fileList.length
+  }else fileLength = 0
   return (
     <div className="">
       <Container>
@@ -88,23 +113,7 @@ function Home() {
         </Row>
         <CourseCards courses= {currentCourses}/>
         <Row >
-          <Pagination className="justify-content-center">
-            <Pagination.First />
-            <Pagination.Prev />
-            <Pagination.Item>{1}</Pagination.Item>
-            <Pagination.Ellipsis />
-
-            <Pagination.Item>{10}</Pagination.Item>
-            <Pagination.Item>{11}</Pagination.Item>
-            <Pagination.Item active>{12}</Pagination.Item>
-            <Pagination.Item>{13}</Pagination.Item>
-            <Pagination.Item disabled>{14}</Pagination.Item>
-
-            <Pagination.Ellipsis />
-            <Pagination.Item>{20}</Pagination.Item>
-            <Pagination.Next />
-            <Pagination.Last />
-          </Pagination>
+          {fileList && <Paging currentPage = {currentPage}coursePerPage = {coursePerPage} totalPage = {fileLength} paginate = {paginate} firstPage = {firstPage} nextPage = {nextPage} prevPage = {prevPage} lastPage = {lastPage}/>}
         </Row>
         <br />
         <br />

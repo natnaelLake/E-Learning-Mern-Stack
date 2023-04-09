@@ -26,6 +26,21 @@ export const useFiles = () => {
             console.log('file list is ',fileList)
         }
     }
+    const getCourseSearch = async (search)=>{
+        const allCourses = await axios.get('http://localhost:8000/search')
+        console.log(allCourses)
+        // console.log(allCourses.data.fileList)
+
+        if(allCourses.status === 200){
+            // setGetData(allStudents)
+            // console.log('json file is ',JSON.stringify(allCourses.data.fileList))
+            localStorage.setItem("allCourse", JSON.stringify(allCourses.data.fileList));
+            // localStorage.setItem("countCourse", JSON.stringify(allCourses.data.countListFile));
+            dispatch({type:'GET_COURSE',payload:allCourses.data})
+            // dispatch({type:'COUNT_COURSE',payload:allCourses.data.countListFile})
+            console.log('file list is ',fileList)
+        }
+    }
     const updateCourse = async ()=>{
         const updatedCourse = await axios.post('http://localhost:8000/fileUpdate/:id')
         console.log(updatedCourse)
@@ -55,5 +70,5 @@ export const useFiles = () => {
             dispatch({action:'ADD_COURSE',payload:response})
         }
     }
-    return {getCourse,updateCourse,deleteCourse,addCourse};
+    return {getCourse,updateCourse,deleteCourse,addCourse,getCourseSearch};
 }

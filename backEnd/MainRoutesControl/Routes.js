@@ -13,12 +13,15 @@ const {
   deleteStudents,
   updateStudents,
   deleteFiles,
+  searchCourse
+
 
 } = require("../RoutesControl/RoutesControl");
 const AuthControl = require('../middleware/AuthControl')
 // const {upload} = 
 router.post('/signup',signup_Post)
 router.post("/login",login_Post);
+router.get('/search',searchCourse)
 // router.use(AuthControl)
 router.post('/addVideos',upload.any(),videos_Post)
 router.get('/getVideos',videos_get)

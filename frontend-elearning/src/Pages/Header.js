@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useState } from 'react'
 import Nav from 'react-bootstrap/Nav';
 import Navbar from 'react-bootstrap/Navbar';
 import {Container,NavDropdown,Form,Button,Image} from 'react-bootstrap'
@@ -6,16 +6,20 @@ import imageOne  from '../Assets/constimage.jpeg'
 import  './style.css'
 import { useLogout } from '../hooks/useLogout';
 import { useAuthContext } from '../hooks/useAuthContext';
-
+import { useFiles } from '../Admin/adminHooks/useFiles';
 
 
 function Header() {
     const {logout} = useLogout()
     const {user} = useAuthContext();
+    const [search,setSearch] = useState('');
+    const {getCourseSearch}  = useFiles();
     const handleLogout = ()=>{
         logout()
     }
-
+const handleSearch = async (searchName)=>{
+    await getCourseSearch(searchName)
+}
   return (
     <div>
         <Navbar collapseOnSelect fixed='top' expand = 'lg' bg= 'success' className='main-nav' variant = 'dark'>
@@ -58,8 +62,10 @@ function Header() {
                             placeholder = 'Search'
                             className = 'me-2'
                             aria-label = 'Search'
+                            onChange = {e=>setSearch(e.target.value)}
+                            
                             />
-                        <Button variant = 'outline-dark' className='text-light'>Search</Button>
+                        <Button variant = 'outline-dark' onClick = {()=> {handleSearch(search)}} className='text-light'>Search</Button>
                     </Form>
                 </Nav>
                 </Navbar.Collapse>

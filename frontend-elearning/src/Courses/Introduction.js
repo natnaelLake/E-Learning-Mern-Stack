@@ -1,10 +1,12 @@
 import React from 'react'
 import Header from '../Pages/Header'
 import SidebarEl from '../SidebarEl'
-
+import { useLocation } from 'react-router-dom'
 
 
 function Introduction() {
+  const location = useLocation();
+  const intro = location.state.intro
   return (
     <div>
         <div>
@@ -32,47 +34,8 @@ function Introduction() {
           >
             <div className='container '>
               <p className='text-center'>
-              Lorem ipsum dolor sit amet consectetur, adipisicing elit. Aperiam, 
-              ducimus! Aspernatur fugit architecto fugiat labore corporis reprehenderit aliquid 
-              veniam dolores, delectus eum praesentium? Quia vero quo, saepe animi voluptatibus ab.
-
-              Lorem ipsum dolor sit amet consectetur, adipisicing elit. Aperiam, 
-              ducimus! Aspernatur fugit architecto fugiat labore corporis reprehenderit aliquid 
-              veniam dolores, delectus eum praesentium? Quia vero quo, saepe animi voluptatibus ab.
+                {intro}
               </p>
-
-              <p>
-              Lorem ipsum dolor sit amet consectetur, adipisicing elit. Aperiam, 
-              ducimus! Aspernatur fugit architecto fugiat labore corporis reprehenderit aliquid 
-              veniam dolores, delectus eum praesentium? Quia vero quo, saepe animi voluptatibus ab.
-
-              Lorem ipsum dolor sit amet consectetur, adipisicing elit. Aperiam, 
-              ducimus! Aspernatur fugit architecto fugiat labore corporis reprehenderit aliquid 
-              veniam dolores, delectus eum praesentium? Quia vero quo, saepe animi voluptatibus ab.
-              </p>
-
-              <p>
-              Lorem ipsum dolor sit amet consectetur, adipisicing elit. Aperiam, 
-              ducimus! Aspernatur fugit architecto fugiat labore corporis reprehenderit aliquid 
-              veniam dolores, delectus eum praesentium? Quia vero quo, saepe animi voluptatibus ab.
-
-              Lorem ipsum dolor sit amet consectetur, adipisicing elit. Aperiam, 
-              ducimus! Aspernatur fugit architecto fugiat labore corporis reprehenderit aliquid 
-              veniam dolores, delectus eum praesentium? Quia vero quo, saepe animi voluptatibus ab.
-              </p>
-
-              <p>
-              Lorem ipsum dolor sit amet consectetur, adipisicing elit. Aperiam, 
-              ducimus! Aspernatur fugit architecto fugiat labore corporis reprehenderit aliquid 
-              veniam dolores, delectus eum praesentium? Quia vero quo, saepe animi voluptatibus ab.
-
-              Lorem ipsum dolor sit amet consectetur, adipisicing elit. Aperiam, 
-              ducimus! Aspernatur fugit architecto fugiat labore corporis reprehenderit aliquid 
-              veniam dolores, delectus eum praesentium? Quia vero quo, saepe animi voluptatibus ab.
-              </p>
-
-
-              
             </div>
           </div>
         </div>

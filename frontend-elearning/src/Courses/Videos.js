@@ -5,10 +5,12 @@ import video_Two from "../Assets/video.mp4";
 import imageOne from "../Assets/student.png";
 import "../../node_modules/video-react/dist/video-react.css";
 import { Player } from 'video-react';
-
+import { useLocation } from "react-router-dom";
 
 
 function Videos() {
+  const location = useLocation();
+  const videoFiles = location.state.video
   return (
     <div>
       <div>
@@ -38,7 +40,8 @@ function Videos() {
                 <Player
       playsInline
       poster={imageOne}
-      src="https://media.w3.org/2010/05/sintel/trailer_hd.mp4"
+      autoPlay = {true}
+      src={`http://localhost:8000/uploads/${videoFiles}`}
     />
                 </div>
                 <br />

@@ -148,7 +148,6 @@ const handlerFileErrors = (err) => {
 };
 const videos_Post = async (req, res, next) => {
   const { courseTitle, moduleTitle, descTitle, desc } = req.body;
-  console.log('. .. . . . . ',req.files)
   const files = req.files;
 
   // fileData.mv(`${__dirname}/frontend-elearning/src/Assets${fileData.filename}`,err=>{
@@ -208,16 +207,18 @@ const videos_Post = async (req, res, next) => {
     res.status(401).json(errors);
   }
 };
+const searchCourse = async (req,res)=>{
+  const {search} = req.body
+  const result = await Courses.find({courseTitle:search});
+  res.status(200).json({result});
+}
 const videos_get = async (req, res) => {
   const result = await Courses.find({}).sort({ createdAt: -1 });
-  console.log(result);
   res.status(200).json({ fileList: result });
 };
 const getStudents = async (req, res) => {
   const getStudents = await User.find({});
   // const countList = await User.find({}).count();
-
-  console.log(getStudents);
   res.status(200).json({ students: getStudents });
 };
 // const getIndStud = async (req, res) => {
@@ -321,5 +322,6 @@ module.exports = {
   deleteStudents,
   updateStudents,
   deleteFiles,
+  searchCourse,
   upload,
 };
