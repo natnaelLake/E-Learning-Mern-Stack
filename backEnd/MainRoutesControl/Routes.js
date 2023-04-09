@@ -15,9 +15,9 @@ const {
   deleteFiles,
   searchCourse
 
-
 } = require("../RoutesControl/RoutesControl");
 const AuthControl = require('../middleware/AuthControl')
+const adminCheck = require('../middleware/adminCheck')
 // const {upload} = 
 router.post('/signup',signup_Post)
 router.post("/login",login_Post);

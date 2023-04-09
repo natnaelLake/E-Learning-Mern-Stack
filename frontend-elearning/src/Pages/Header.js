@@ -36,10 +36,11 @@ const handleSearch = async (searchName)=>{
                 <Navbar.Collapse id= 'responsive-Navbar-nav'>
                 <Nav className = 'm-auto'>
                     {user && (<Nav.Link href = '/' className = 'my-Navbars text-light'>Home</Nav.Link>)}
-                    {user && (<Nav.Link href = '/courses'className = 'my-Navbars text-light'>Courses</Nav.Link>)}
+                    {user && (<Nav.Link href = '/mainCourse' className = 'my-Navbars text-light'>Courses</Nav.Link>)}
                    {user && ( <NavDropdown title = 'All Courses 'variant = 'light' id = 'collasible-nav-dropdown' className = 'my-Navbars'>
+                   {user && user.user.role ==='admin' ? <Nav.Link href= '/dashboard' className = 'my-Navbars text-light'>DashBoard</Nav.Link>:null}
                         <NavDropdown.Item href= '/login' className = 'my-drops text-dark'>Login</NavDropdown.Item>
-                        <NavDropdown.Item href= '/courses' className = 'my-drops text-dark'>Courses</NavDropdown.Item>
+                        <NavDropdown.Item href= '/mainCourse' className = 'my-drops text-dark'>Courses</NavDropdown.Item>
                         <NavDropdown.Item href= '/'className = 'my-drops text-dark'>Home</NavDropdown.Item>
                         <NavDropdown.Item href= '/login' className = 'my-drops text-dark'>Login</NavDropdown.Item>
                     </NavDropdown>)}

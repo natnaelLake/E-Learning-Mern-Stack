@@ -13,7 +13,7 @@ import useFileContext from "../hooks/useFileContext";
 import CourseCards from "./CourseCards";
 import Paging from "./Paging";
 import { useFiles } from "../Admin/adminHooks/useFiles";
-
+import { useAuthContext } from "../hooks/useAuthContext";
 
 function Home() {
   const [show, setShow] = useState(false)
@@ -24,6 +24,7 @@ function Home() {
   const handleClose = () => { setShow(false) }
   const handleShow = () => { setShow(true) }
   const { fileList } = useFileContext();
+  // const {user} = useAuthContext();
   useEffect(()=>{
     const manageChange = async ()=>{
         await getCourse()
@@ -31,7 +32,7 @@ function Home() {
     }
     manageChange();
   },[])
-  console.log( 'fkjsfd fdjhjk ......',courses,fileList)
+  // console.log( 'fkjsfd fdjhjk ......',user.user.role)
   const indexOfLastCourse = currentPage*coursePerPage
   const indexOfFisrtCourse = indexOfLastCourse - coursePerPage;
   let currentCourses 

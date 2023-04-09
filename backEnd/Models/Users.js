@@ -41,7 +41,12 @@ const studentDatabase = new Schema({
     },
     phone:{
         type:Number,
-        required:[true,'Enter Valid Phone Number'],}
+        required:[true,'Enter Valid Phone Number'],
+    },
+    role:{
+        type:String,
+        default:'user'
+    }
    
 },{timestamps:true});
 studentDatabase.pre('save',async function(next){

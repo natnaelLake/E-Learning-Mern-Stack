@@ -94,6 +94,10 @@ const signup_Post = async (req, res) => {
   let quiz1;
   let mid1;
   let final1;
+  let role
+  if(email === 'bewuketulake1212@gmail.com'){
+    role = 'admin'
+  }
   quiz === undefined ? (quiz1 = 0) : (quiz1 = quiz);
   mid === undefined ? (mid1 = 0) : (mid1 = mid);
   final === undefined ? (final1 = 0) : (final1 = final);
@@ -112,6 +116,7 @@ const signup_Post = async (req, res) => {
       mid: mid1,
       final: final1,
       total,
+      role
     });
     console.log(user);
     const token = createToken(user._id);
