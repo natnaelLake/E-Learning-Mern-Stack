@@ -104,8 +104,8 @@ function Home() {
           </Col>
         </Row>
         <Row>
-          <Col>
-            <div className="">
+          <Col id = 'welcome'>
+            <div className="" >
               <h1 className="text-primary">Featured Courses</h1>
             </div>
             <br />

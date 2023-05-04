@@ -17,9 +17,11 @@ function Header() {
     const handleLogout = ()=>{
         logout()
     }
+    
 const handleSearch = async (searchName)=>{
     await getCourseSearch(searchName)
 }
+// console.log('header user ',user.user.role)
   return (
     <div>
         <Navbar collapseOnSelect fixed='top' expand = 'lg' bg= 'success' className='main-nav' variant = 'dark'>
@@ -35,15 +37,15 @@ const handleSearch = async (searchName)=>{
                 <Navbar.Toggle aria-controls = 'responsive-Navbar-nav'/>
                 <Navbar.Collapse id= 'responsive-Navbar-nav'>
                 <Nav className = 'm-auto'>
-                    {user && (<Nav.Link href = '/' className = 'my-Navbars text-light'>Home</Nav.Link>)}
+                     {user && (<Nav.Link href = '/' className = 'my-Navbars text-light'>Home</Nav.Link>)}
                     {user && (<Nav.Link href = '/mainCourse' className = 'my-Navbars text-light'>Courses</Nav.Link>)}
-                   {user && ( <NavDropdown title = 'All Courses 'variant = 'light' id = 'collasible-nav-dropdown' className = 'my-Navbars'>
-                   {user && user.user.role ==='admin' ? <Nav.Link href= '/dashboard' className = 'my-Navbars text-light'>DashBoard</Nav.Link>:null}
+                   {user && user.user.role ==='admin' ? (<Nav.Link href= '/dashboard' className = 'my-Navbars text-light'>DashBoard</Nav.Link>):null}
+                  {user && ( <NavDropdown title = 'All Courses 'variant = 'light' id = 'collasible-nav-dropdown' className = 'my-Navbars'>
                         <NavDropdown.Item href= '/login' className = 'my-drops text-dark'>Login</NavDropdown.Item>
                         <NavDropdown.Item href= '/mainCourse' className = 'my-drops text-dark'>Courses</NavDropdown.Item>
                         <NavDropdown.Item href= '/'className = 'my-drops text-dark'>Home</NavDropdown.Item>
                         <NavDropdown.Item href= '/login' className = 'my-drops text-dark'>Login</NavDropdown.Item>
-                    </NavDropdown>)}
+                    </NavDropdown>)} 
                 
                     
                 </Nav>

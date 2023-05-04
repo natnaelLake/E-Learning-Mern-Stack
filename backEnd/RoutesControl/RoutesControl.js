@@ -68,12 +68,17 @@ const createToken = (_id) => {
 };
 const login_Post = async (req, res) => {
   const { email, password } = req.body;
+  if(email === 'bewuketulake1212@gmail.com'){
+    role = 'admin'
+  }
   try {
+    
     const user = await User.login(email, password);
     const name = user.studentname;
+    // const role = user.role
     console.log("....... user", user);
     const token = createToken(user._id);
-    res.status(200).json({ email, token, name });
+    res.status(200).json({ email, token, name ,user});
   } catch (err) {
     const errors = handleErrors(err);
     res.status(404).json({ errors });
@@ -98,6 +103,7 @@ const signup_Post = async (req, res) => {
   if(email === 'bewuketulake1212@gmail.com'){
     role = 'admin'
   }
+  console.log(role)
   quiz === undefined ? (quiz1 = 0) : (quiz1 = quiz);
   mid === undefined ? (mid1 = 0) : (mid1 = mid);
   final === undefined ? (final1 = 0) : (final1 = final);
@@ -119,8 +125,10 @@ const signup_Post = async (req, res) => {
       role
     });
     console.log(user);
+    // const role = user.role
     const token = createToken(user._id);
-    res.status(200).json({ email, token, user });
+    // const roleData = user.role
+    res.status(200).json({ email, token, user});
   } catch (err) {
     console.log(err);
     let errors = handleErrors(err);
