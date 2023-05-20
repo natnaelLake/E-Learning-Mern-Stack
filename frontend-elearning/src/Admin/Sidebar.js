@@ -27,16 +27,16 @@ function Sidebar() {
         </CDBSidebarHeader>
         <CDBSidebarContent className="sidebar-content">
           <CDBSidebarMenu>
-            <NavLink exact to="/dashboard" activeClassName="activeClicked">
+            <NavLink  to="/dashboard" activeclassname="activeClicked">
               <CDBSidebarMenuItem icon="columns">Dashboard</CDBSidebarMenuItem>
             </NavLink>
-            <NavLink exact to="/assessment" activeClassName="activeClicked">
+            <NavLink to="/assessment" activeclassname="activeClicked">
               <CDBSidebarMenuItem icon="columns">Manage Assessment</CDBSidebarMenuItem>
             </NavLink>
-            <NavLink exact to="/mntcourse" activeClassName="activeClicked">
+            <NavLink  to="/mntcourse" activeclassname="activeClicked">
               <CDBSidebarMenuItem icon="columns">Manage Courses</CDBSidebarMenuItem>
             </NavLink>
-            <NavLink exact to="/exams" activeClassName="activeClicked">
+            <NavLink  to="/exams" activeclassname="activeClicked">
               <CDBSidebarMenuItem icon="columns">Manage Exams</CDBSidebarMenuItem>
             </NavLink>
           </CDBSidebarMenu>

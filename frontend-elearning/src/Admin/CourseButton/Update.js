@@ -1,16 +1,31 @@
 import { React, useState } from "react";
 import { Form, Card, Button } from "react-bootstrap";
+import {useFileContext} from '../../hooks/useFileContext';
+import { useFiles } from "../adminHooks/useFiles";
+
+
 
 function Update() {
   const [validated, setValidated] = useState(false);
-  const handleSubmit = (event) => {
+  const [courseTitle,setCourseTitle] = useState()
+  const [moduleTitle,setModuleTitle] = useState()
+  const [desc,setDesc] = useState()
+  const [descTitle,setDescTitle] = useState()
+
+
+
+
+  const {updateCourse} = useFiles()
+  const handleSubmit = async (event) => {
     const form = event.currentTarget;
     if (form.checkValidity() === false) {
       event.preventDefault();
       event.stopPropagation();
     }
-
     setValidated(true);
+    event.preventDefault();
+    await updateCourse(courseTitle,moduleTitle,desc,descTitle)
+
   };
   return (
     <div className="d-flex align-items-cUpdate justify-content-cUpdate firstDiv">
@@ -28,6 +43,8 @@ function Update() {
                   type="text"
                   id="course"
                   placeholder="Course Name"
+                  value = {courseTitle}
+                  onChanage = {(e)=>{setCourseTitle(e.target.value)}}
                   controlId="validationCustom03"
                 />
                 <label htmlFor="student">Update Course Title</label>
@@ -40,6 +57,8 @@ function Update() {
                   type="text"
                   id="session"
                   placeholder="Session Name"
+                  value = {moduleTitle}
+                  onChanage = {(e)=>{setModuleTitle(e.target.value)}}
                   controlId="validationCustom03"
                 />
                 <label htmlFor="student">Update Session Title</label>
@@ -56,13 +75,13 @@ function Update() {
                 disabled
               />
               <br />
-              <Button
+              {/* <Button
                 variant="danger"
                 href="/vidEdit"
                 className="text-uppercase "
               >
                 Update Videos
-              </Button>
+              </Button> */}
             </Form.Group>
 
             <br />
@@ -76,9 +95,9 @@ function Update() {
                 disabled
               />
               <br />
-              <Button variant="danger" href = '/docEdit' className="text-uppercase ">
+              {/* <Button variant="danger" href = '/docEdit' className="text-uppercase ">
                 Update Documents
-              </Button>
+              </Button> */}
             </Form.Group>
 
             <br />
@@ -89,15 +108,37 @@ function Update() {
                   rows={4}
                   id="session"
                   placeholder="Session Name"
+                  value = {descTitle}
+                  onChanage = {(e)=>{setDescTitle(e.target.value)}}
                   controlId="validationCustom03"
-                  disabled
+                  // disabled
                 />
                 <label htmlFor="student">Update Introduction</label>
               </Form.Floating>
               <br />
-              <Button variant="primary" href ='/introEdit' className="text-uppercase ">
+              {/* <Button variant="primary" href ='/introEdit' className="text-uppercase ">
                 Update Introduction
-              </Button>
+              </Button> */}
+            </Form.Group>
+            <br />
+            <Form.Group>
+              <Form.Floating>
+                <Form.Control
+                  as="textarea"
+                  rows={4}
+                  id="session"
+                  placeholder="Session Name"
+                  value = {desc}
+                  onChanage = {(e)=>{setDesc(e.target.value)}}
+                  controlId="validationCustom03"
+                  // disabled
+                />
+                <label htmlFor="student">Update Introduction</label>
+              </Form.Floating>
+              <br />
+              {/* <Button variant="primary" href ='/introEdit' className="text-uppercase ">
+                Update Introduction
+              </Button> */}
             </Form.Group>
 
             <br />

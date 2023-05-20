@@ -39,7 +39,7 @@ function EditCourse() {
               >
                 <div style={{ margin: "0 auto", maxWidth: "1320px" }}>
                     <Tabs defaultActiveKey='Add' className = 'm-5' fill>
-                        <Tab eventKey = 'Add'  title = 'Add'><Add /></Tab>
+                        <Tab eventKey='Add' title = 'Add '><Add /></Tab>
                         <Tab eventKey='Update' title = 'Update '><Update /></Tab>
                         <Tab eventKey='Delete' title ='Delete'><Delete /></Tab>
                     </Tabs>

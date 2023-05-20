@@ -36,3 +36,13 @@ body{
     margin-right: auto;
     padding-left: auto;
   }
+  .pagination{
+    list-style-type:none;
+    display:flex;
+    justify-content:center;
+    align-items: center;
+    margin-bottom: 5rem;
+    font-size: 3.2rem;
+    gap: 5px;
+
+  }

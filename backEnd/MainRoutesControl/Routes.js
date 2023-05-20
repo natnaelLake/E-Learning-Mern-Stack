@@ -1,3 +1,5 @@
+
+// import { upload } from "../RoutesControl/RoutesControl";
 const express = require("express");
 const router = express.Router();
 const {
@@ -5,15 +7,27 @@ const {
   signup_Post,
   videos_Post,
   videos_get,
-  files_Post,
-  files_get,
+  upload,
+  fileUpdate,
+  getStudents,
+  deleteStudents,
+  updateStudents,
+  deleteFiles,
+  searchCourse
+
 } = require("../RoutesControl/RoutesControl");
-
-router.post("/login",login_Post);
+const AuthControl = require('../middleware/AuthControl')
+const adminCheck = require('../middleware/adminCheck')
+// const {upload} = 
 router.post('/signup',signup_Post)
-router.post('/addVideos',videos_Post)
+router.post("/login",login_Post);
+router.get('/search',searchCourse)
+// router.use(AuthControl)
+router.post('/addVideos',upload.any(),videos_Post)
 router.get('/getVideos',videos_get)
-router.post('/addFiles',files_Post)
-router.get('/getFiles',files_get)
-
+router.get('/getStudents',getStudents)
+router.delete('/deleteFiles/:id',deleteFiles)
+router.delete('/deleteStudents/:id',deleteStudents)
+router.patch('/updateStudents/:id',updateStudents)
+router.patch('/fileUpdate:id',fileUpdate)
 module.exports = router

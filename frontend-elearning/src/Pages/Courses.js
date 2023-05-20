@@ -1,6 +1,6 @@
 import React from "react";
 import * as Icon from "react-bootstrap-icons";
-
+import { useLocation } from "react-router-dom";
 import { NavLink } from "react-router-dom";
 import imageOne from "../Assets/constimage.jpeg";
 import imageTwo from "../Assets/student.png";
@@ -17,10 +17,17 @@ import './courses.css'
 
 function Courses() {
   // const style = {padding}
+  // console.log('course file ',location.state.course)
+
+  const location = useLocation()
+  const file = location.state.course || ''
+  localStorage.setItem('sidebarEl',JSON.stringify(file))
+
+  console.log(' file in side course page',file)
   return (
     <div className="d-flex profile">
       <div>
-        <SidebarEl />
+        {file !=='' ? <SidebarEl file = {file}/> : null} 
       </div>
       <div
         style={{
