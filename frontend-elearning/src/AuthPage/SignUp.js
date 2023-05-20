@@ -66,7 +66,7 @@ function SignUp() {
 
 
   return (
-    <div className="d-flex align-items-center justify-content-center firstDiv">
+    <div className="d-flex align-items-center justify-content-center firstDiv" style={{paddingTop:'90px'}}>
       <Card
         bg="dark"
         className="text-center  border-0 shadow-5 rounded-5 mx-auto pt-5 mb-5"
