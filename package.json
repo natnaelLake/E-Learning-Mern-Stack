@@ -2,5 +2,19 @@
   "dependencies": {
     "bootstrap": "^5.2.3",
     "react-bootstrap": "^1.6.6"
-  }
+  },
+  "name": "e-learning-mern-stack",
+  "version": "1.0.0",
+  "main": "index.js",
+  "devDependencies": {},
+  "scripts": {
+    "install-server": "cd backEnd && npm install",
+    "start-server": "cd backEnd && node ./bin/www",
+    "install-client": "cd frontend-elearning && npm install",
+    "build-client": "cd frontend-elearning && npm run build",
+    "start-client": "cd frontend-elearning && npm run start"
+  },
+  "author": "",
+  "license": "ISC",
+  "description": ""
 }
