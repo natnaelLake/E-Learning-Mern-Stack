@@ -20,6 +20,7 @@ function CourseCards({ courses }) {
   const handleLearn = async (stud) => {
    stud && await navigate("/courses", { state: { course: stud } });
   };
+ 
   return (
     <div>
       {courses && (
@@ -38,7 +39,6 @@ function CourseCards({ courses }) {
                   <Card.Title>{files.courseTitle}</Card.Title>
                   <Card.Text>{files.desc}</Card.Text>
                   <Button
-                    href="/courses"
                     variant="outline-success"
                     className=""
                     onClick={() => {

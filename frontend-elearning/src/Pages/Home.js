@@ -14,6 +14,7 @@ import CourseCards from "./CourseCards";
 import Paging from "./Paging";
 import { useFiles } from "../Admin/adminHooks/useFiles";
 import { useAuthContext } from "../hooks/useAuthContext";
+import { useNavigate } from "react-router-dom";
 
 function Home() {
   const [show, setShow] = useState(false)
@@ -25,6 +26,7 @@ function Home() {
   const handleShow = () => { setShow(true) }
   const { fileList } = useFileContext();
   // const {user} = useAuthContext();
+  const navigate = useNavigate()
   useEffect(()=>{
     const manageChange = async ()=>{
         await getCourse()
@@ -41,6 +43,9 @@ function Home() {
     console.log(pageNumber)
     setCurrentPage(pageNumber)
   }
+  const handleStartLearning = ()=>[
+    navigate('/courses')
+  ]
   const firstPage = pageNumber =>{
     console.log(pageNumber)
     setCurrentPage(pageNumber)
@@ -82,7 +87,7 @@ function Home() {
             </p>
             <Button
               variant="primary"
-              href='/courses'
+              onClick={handleStartLearning}
               style={{ width: "200px", height: "50px" }}
             >
               Start Learning &nbsp;&nbsp;&nbsp; <Icon.ArrowRight size={30} />
