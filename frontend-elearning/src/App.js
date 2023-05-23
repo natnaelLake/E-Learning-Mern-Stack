@@ -30,8 +30,8 @@ function App() {
   
   return (
     <div className="App">
-      <Header />
       <BrowserRouter>
+      <Header />
         <Routers />
       </BrowserRouter>
     </div>

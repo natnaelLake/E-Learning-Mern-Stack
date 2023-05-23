@@ -32,6 +32,7 @@ import ProtectedRoutes from "./ProtectedRoutes";
 import AddCourse from "./Admin/CourseButton/AddCourse";
 import AddStudent from "./Admin/AssButton/AddStudent";
 import MainCourse from "./Pages/MainCourse";
+import Header from "./Pages/Header";
 
 function RoutesPage() {
   const { user } = useAuthContext();
@@ -70,6 +71,7 @@ function RoutesPage() {
           <Route path="/mainCourse" element={user !== null ? <MainCourse />:  <Login />} />
         {/* </Route> */}
         <Route path="/" element={<Home />} />
+        <Route path="/header" element={<Header />} />
       </Routes>
     </div>
   );
