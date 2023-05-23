@@ -79,9 +79,10 @@ function ManageCourse() {
                     <div className="imageCard">
                       <Card.Img
                         variant="top"
-                        src={`https://e-learning-web-app-back-end.onrender.com/uploads/${files.coverImage}`}
+                        src={`https://e-learning-web-app-back-end.onrender.com//${files.coverImage}`}
                         className="rounded-5 mainCard"
                       />
+                      {console.log('image cover',files.coverImage)}
                     </div>
                     <Card.Body>
                       <Card.Title>{files.courseTitle}</Card.Title>

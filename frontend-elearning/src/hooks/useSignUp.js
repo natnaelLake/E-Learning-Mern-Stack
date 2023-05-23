@@ -23,6 +23,7 @@ export const useSignUp = () => {
             headers:{'Content-Type':'application/json'}
           })
           let jsonRes = await response.json();
+          console.log('in singup',jsonRes)
           if(response.ok){
               console.log(jsonRes)
               setNameError('')

@@ -4,23 +4,16 @@ import * as Icon from "react-bootstrap-icons";
 import { Link } from "react-router-dom";
 import "./style.css";
 import { useState } from "react";
-
+import { useSignUp } from "../hooks/useSignUp";
 function SignUp() {
   const [validated, setValidated] = useState(false);
-  const [firstname,setFirstname] = useState('')
-  const [lastname,setLastname] = useState('')
   const [email,setEmail] = useState('')
+  const [studentname,setStudentName] = useState('')
   const [password,setPassword] = useState('')
   const [age,setAge] = useState('')
   const [department,setDepartment] = useState('')
   const [phone,setPhone] = useState('')
-  const [phoneError,setPhoneError] = useState('')
-  const [fnameError,setFnameError]  = useState('')
-  const [lnameError,setLnameError]  = useState('')
-  const [emailError,setEmailError]  = useState('')
-  const [passError,setPassError]  = useState('')
-  const [depError,setDepError]  = useState('')
-
+  const {nameError,passError,emailError,phoneError,depError,signUp}  = useSignUp()
 
 
   const handleSubmit = async (event) => {
@@ -33,33 +26,7 @@ function SignUp() {
     setValidated(true);
     event.preventDefault();
     setValidated(true);
-    let data = {firstname, lastname, email, password, age, phone, department} 
-    const response = await fetch('https://e-learning-web-app-back-end.onrender.com/signup',{
-      method:'POST',
-      body:JSON.stringify(data),
-      headers:{'Content-Type':'application/json'}
-    })
-    // console.log(response)
-    let jsonRes = await response.json();
-    if(response.ok){
-        console.log(jsonRes)
-        setLnameError('')
-        setFnameError('')
-        setEmailError('')
-        setPassError('')
-        setPhoneError('')
-        setDepError('')
-    }else{
-      console.log(jsonRes)
-      setFnameError(jsonRes.firstname)
-      setLnameError(jsonRes.lastname)
-      setEmailError(jsonRes.email)
-      setPassError(jsonRes.password)
-      setPhoneError(jsonRes.phone)
-      setDepError(jsonRes.department)
-    }
-    
-
+   await signUp(email,password,studentname,age,department,phone)
   };
   const style = { color: "white", width: "200px", height: "50px" };
   const style1 = { width: "200px", height: "50px" };
@@ -83,34 +50,16 @@ function SignUp() {
               <Form.Floating>
                 <Form.Control
                   type="text"
-                  id="firtName"
+                  id="studentname"
                   placeholder="User Name"
-                  value={firstname}
-                  onChange = {e=>{setFirstname(e.target.value)}}
+                  value={studentname}
+                  onChange = {e=>{setStudentName(e.target.value)}}
                   required
                   controlid="validationCustom03"
                 />
-                <label htmlFor="firtName">First Name</label>
+                <label htmlFor="firtName">Full Name</label>
                 <Form.Control.Feedback type="invalid">
-                  {fnameError}
-                </Form.Control.Feedback>
-              </Form.Floating>
-            </Form.Group>
-            <br />
-            <Form.Group>
-              <Form.Floating>
-                <Form.Control
-                  type="text"
-                  id="lastName"
-                  placeholder="Last Name"
-                  value={lastname}
-                  onChange = {e=>{setLastname(e.target.value)}}
-                  required
-                  controlid="validationCustom03"
-                />
-                <label htmlFor="lastName">Last Name</label>
-                <Form.Control.Feedback type="invalid">
-                  {lnameError}
+                  {nameError}
                 </Form.Control.Feedback>
               </Form.Floating>
             </Form.Group>

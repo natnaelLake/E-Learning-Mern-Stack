@@ -40,7 +40,7 @@ const studentDatabase = new Schema({
         type:Number,
     },
     phone:{
-        type:Number,
+        type:String,
         required:[true,'Enter Valid Phone Number'],
     },
     role:{
