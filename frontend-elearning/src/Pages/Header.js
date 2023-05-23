@@ -7,6 +7,7 @@ import  './style.css'
 import { useLogout } from '../hooks/useLogout';
 import { useAuthContext } from '../hooks/useAuthContext';
 import { useFiles } from '../Admin/adminHooks/useFiles';
+import { useNavigate } from 'react-router-dom';
 
 
 function Header() {
@@ -14,10 +15,13 @@ function Header() {
     const {user} = useAuthContext();
     const [search,setSearch] = useState('');
     const {getCourseSearch}  = useFiles();
+    const navigate = useNavigate();
     const handleLogout = ()=>{
         logout()
     }
-    
+    const handleLogin = ()=>{
+        navigate('/login')
+    }
 const handleSearch = async (searchName)=>{
     await getCourseSearch(searchName)
 }
@@ -57,7 +61,7 @@ const handleSearch = async (searchName)=>{
                     </div>
                 </Nav>
                 <Nav className = 'ml-auto'>
-                {!user && (<Button href = '/login' variant = 'outline-primary' className='text-light me-4'>login</Button>)}
+                {!user && (<Button onClick={handleLogin} variant = 'outline-primary' className='text-light me-4'>login</Button>)}
                     
                     <Form className = 'd-flex'>
                         <Form.Control 

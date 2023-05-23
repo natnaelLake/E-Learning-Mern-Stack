@@ -40,7 +40,6 @@ function RoutesPage() {
       <Routes>
         <Route path="/login" element={!user ? <Login /> : <Navigate to = '/'/>} />
         <Route path="/signup" element={!user ? <SignUp /> : <Navigate to ='/'/>} />
-        {/* <Route element={<ProtectedRoutes />}> */}
           <Route
             path="/courses"
             element={user ? < Courses />: <Login />}
