@@ -19,6 +19,9 @@ function Header() {
     const handleLogout = ()=>{
         logout()
     }
+    const handleLogo = ()=>[
+        navigate('/')
+    ]
     const handleLogin = ()=>{
         navigate('/login')
     }
@@ -29,7 +32,7 @@ const handleSearch = async (searchName)=>{
   return (
     <div>
         <Navbar collapseOnSelect fixed='top' expand = 'lg' bg= 'success' className='main-nav' variant = 'dark'>
-                <Navbar.Brand href = '/' className = 'me-auto'> 
+                <Navbar.Brand onClick={handleLogo} className = 'me-auto'> 
                 <Image 
                             src = {imageOne}
                             width='40'
