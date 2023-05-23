@@ -24,7 +24,7 @@ export const useStudents = () => {
       setUserAuthError("You must be logged in first.");
       return;
     }
-    const allStudents = await axios.get("http://localhost:8000/getStudents");
+    const allStudents = await axios.get("https://e-learning-web-app-back-end.onrender.com/getStudents");
     // console.log(allStudents)
     if (allStudents.status === 200) {
       // setGetData(allStudents)
@@ -41,7 +41,7 @@ export const useStudents = () => {
   const updateStudent = async (student, studId) => {
     try {
       const updatedStudent = await axios.patch(
-        "http://localhost:8000/updateStudents/" + studId,
+        "https://e-learning-web-app-back-end.onrender.com/updateStudents/" + studId,
         student
       );
       // console.log(updatedStudent)
@@ -62,7 +62,7 @@ export const useStudents = () => {
 
   const deleteStudent = async (id) => {
     const deletedStudent = await axios.delete(
-      "http://localhost:8000/deleteStudents/" + id
+      "https://e-learning-web-app-back-end.onrender.com/deleteStudents/" + id
     );
     // console.log('deletedStud is :',id)
     if (deletedStudent.status === 200) {
@@ -92,7 +92,7 @@ export const useStudents = () => {
       final,
     };
     // console.log('before add :',studentData)
-    const addedStudent = await fetch("http://localhost:8000/signup", {
+    const addedStudent = await fetch("https://e-learning-web-app-back-end.onrender.com/signup", {
       method: "POST",
       body: JSON.stringify({
         studentname,

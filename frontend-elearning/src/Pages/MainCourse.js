@@ -65,7 +65,7 @@ function MainCourse() {
                 <div className="imageCard">
                   <Card.Img
                     variant="top"
-                    src={`http://localhost:8000/uploads/${files.coverImage}`}
+                    src={`https://e-learning-web-app-back-end.onrender.com/uploads/${files.coverImage}`}
                     className="rounded-5 mainCard"
                   />
                 </div>

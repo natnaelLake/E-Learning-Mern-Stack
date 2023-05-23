@@ -34,7 +34,7 @@ function SignUp() {
     event.preventDefault();
     setValidated(true);
     let data = {firstname, lastname, email, password, age, phone, department} 
-    const response = await fetch('http://localhost:8000/signup',{
+    const response = await fetch('https://e-learning-web-app-back-end.onrender.com/signup',{
       method:'POST',
       body:JSON.stringify(data),
       headers:{'Content-Type':'application/json'}

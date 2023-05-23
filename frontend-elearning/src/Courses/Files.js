@@ -52,7 +52,7 @@ function Files() {
               >
                 <div className="align-items-center container">
                  <h1>Click the button to View a file</h1>
-                 <Button><Link to={`http://localhost:8000/uploads/${docFile}`} target="_blank" download style={{color:'white',textDecoration:'none'}}>View File</Link></Button>
+                 <Button><Link to={`https://e-learning-web-app-back-end.onrender.com/uploads/${docFile}`} target="_blank" download style={{color:'white',textDecoration:'none'}}>View File</Link></Button>
                 </div>
               </div>
             </div>

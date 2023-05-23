@@ -12,7 +12,7 @@ export const useFiles = () => {
     const {dispatch,fileList} = useFileContext();
     // console.log(studentList)
     const getCourse = async ()=>{
-        const allCourses = await axios.get('http://localhost:8000/getVideos')
+        const allCourses = await axios.get('https://e-learning-web-app-back-end.onrender.com/getVideos')
         console.log(allCourses)
         // console.log(allCourses.data.fileList)
 
@@ -27,7 +27,7 @@ export const useFiles = () => {
         }
     }
     const getCourseSearch = async (search)=>{
-        const allCourses = await axios.get('http://localhost:8000/search')
+        const allCourses = await axios.get('https://e-learning-web-app-back-end.onrender.com/search')
         console.log(allCourses)
         // console.log(allCourses.data.fileList)
 
@@ -42,14 +42,14 @@ export const useFiles = () => {
         }
     }
     const updateCourse = async ()=>{
-        const updatedCourse = await axios.post('http://localhost:8000/fileUpdate/:id')
+        const updatedCourse = await axios.post('https://e-learning-web-app-back-end.onrender.com/fileUpdate/:id')
         console.log(updatedCourse)
         if(updatedCourse.ok){
             dispatch({action:'UPDATE_COURSE',payload:updatedCourse})
         }
     }
     const deleteCourse = async ()=>{
-        const deletedStudent =  await axios.delete('http://localhost:8000/deleteFiles/:id')
+        const deletedStudent =  await axios.delete('https://e-learning-web-app-back-end.onrender.com/deleteFiles/:id')
         console.log(deletedStudent)
         if(deletedStudent.ok){
             dispatch({action:'DELETE_COURSE',payload:deletedStudent})
@@ -58,7 +58,7 @@ export const useFiles = () => {
     const addCourse = async (formData)=>{
         console.log('......... formData ......',formData)
         const response = await axios.post(
-            "http://localhost:8000/addVideos",
+            "https://e-learning-web-app-back-end.onrender.com/addVideos",
             formData,
             {
               headers: { "Content-Type": "multipart/form-data" },

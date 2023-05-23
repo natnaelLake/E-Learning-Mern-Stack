@@ -10,7 +10,7 @@ export const useSignUp = () => {
     const [phoneError,setPhoneError] = useState('');
     const {dispatch}  = useAuthContext()
     const signUp = async (email,password,studentname,age,department,phone) =>{
-        const response = await fetch('http://localhost:8000/signup',{
+        const response = await fetch('https://e-learning-web-app-back-end.onrender.com/signup',{
             method:'POST',
             body:JSON.stringify({
                 studentname,

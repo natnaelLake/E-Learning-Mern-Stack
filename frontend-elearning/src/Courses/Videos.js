@@ -41,7 +41,7 @@ function Videos() {
       playsInline
       poster={imageOne}
       autoPlay = {true}
-      src={`http://localhost:8000/uploads/${videoFiles}`}
+      src={`https://e-learning-web-app-back-end.onrender.com/uploads/${videoFiles}`}
     />
                 </div>
                 <br />
