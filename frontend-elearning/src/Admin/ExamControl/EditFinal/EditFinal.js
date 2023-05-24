@@ -7,10 +7,15 @@ import Sidebar from '../../Sidebar'
 import AddFinal from './AddFinal'
 import DeleteFinal from './DeleteFinal'
 import UpdateFinal from './UpdateFinal'
+import { useNavigate } from 'react-router-dom'
 
 
 
 function EditFinal() {
+  const navigate = useNavigate()
+  const handleExams = ()=>{
+    navigate('/exams')
+  }
   return (
     <div className="d-flex profile">
     <div>
@@ -26,7 +31,7 @@ function EditFinal() {
       }}
     >
         <Header className="p-5"></Header>
-      <Button className ='align-items-left ml-5' href = '/exams'style = {{float:'left',width:'7rem',marginLeft:'5px'}}> <Icon.ArrowLeftCircle /> Back</Button>
+      <Button className ='align-items-left ml-5' onClick = {handleExams}style = {{float:'left',width:'7rem',marginLeft:'5px'}}> <Icon.ArrowLeftCircle /> Back</Button>
         <div style={{ height: "100%" }}>
           <div
             style={{

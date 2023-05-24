@@ -1,17 +1,16 @@
-import {React,useState} from "react";
+import { React } from "react";
+import { Link, useLocation } from "react-router-dom";
 import Header from "../Pages/Header";
 import SidebarEl from "../SidebarEl";
-import { useLocation,Link } from "react-router-dom";
 // import { Logger } from "logging-library";
 // import FileViewer from "react-file-viewer";
 // import { CustomErrorComponent } from "custom-error";
-import {Button} from 'react-bootstrap'
-
+import { Button } from "react-bootstrap";
 
 function Files() {
   const location = useLocation();
   const docFile = location.state.file;
-  
+
   // const onButtonClick = () => {
   //   fetch(`http://localhost:8000/uploads/${docFile}`).then((response) => {
   //     response.blob().then((blob) => {
@@ -51,8 +50,17 @@ function Files() {
                 }}
               >
                 <div className="align-items-center container">
-                 <h1>Click the button to View a file</h1>
-                 <Button><Link to={`https://e-learning-web-app-back-end.onrender.com/uploads/${docFile}`} target="_blank" download style={{color:'white',textDecoration:'none'}}>View File</Link></Button>
+                  <h1>Click the button to View a file</h1>
+                  <Button>
+                    <Link
+                      to={`https://e-learning-web-app-back-end.onrender.com/uploads/${docFile}`}
+                      target="_blank"
+                      download
+                      style={{ color: "white", textDecoration: "none" }}
+                    >
+                      View File
+                    </Link>
+                  </Button>
                 </div>
               </div>
             </div>

@@ -1,9 +1,13 @@
-import React from 'react'
+import React from "react";
 import { Button, Table } from "react-bootstrap";
 import * as Icon from "react-bootstrap-icons";
-
+import { useNavigate } from "react-router-dom";
 
 function Final() {
+  const navigate = useNavigate();
+  const handleFinal = () => {
+    navigate("/editFinal");
+  };
   return (
     <div>
       <div style={{ height: "100%" }}>
@@ -28,7 +32,7 @@ function Final() {
                   <td>2012</td>
                   <td>1</td>
                   <td>
-                    <Button bg="danger" href="/editFinal">
+                    <Button bg="danger" onClick={handleFinal}>
                       <Icon.Pen /> Edit
                     </Button>
                   </td>
@@ -37,7 +41,7 @@ function Final() {
                   <td>2013</td>
                   <td>2</td>
                   <td>
-                    <Button bg="danger" href="/editFinal">
+                    <Button bg="danger" onClick={handleFinal}>
                       <Icon.Pen /> Edit
                     </Button>
                   </td>
@@ -46,7 +50,7 @@ function Final() {
                   <td>2014</td>
                   <td>1</td>
                   <td>
-                    <Button bg="danger" href="/editFinal">
+                    <Button bg="danger" onClick={handleFinal}>
                       <Icon.Pen /> Edit
                     </Button>
                   </td>
@@ -55,7 +59,7 @@ function Final() {
                   <td>2015</td>
                   <td>2</td>
                   <td>
-                    <Button href="/editFinal" bg="danger">
+                    <Button onClick={handleFinal} bg="danger">
                       <Icon.Pen /> Edit
                     </Button>
                   </td>
@@ -66,7 +70,7 @@ function Final() {
         </div>
       </div>
     </div>
-  )
+  );
 }
 
-export default Final
+export default Final;

@@ -1,17 +1,14 @@
 import React from "react";
-import * as Icon from "react-bootstrap-icons";
 import { useLocation } from "react-router-dom";
-import { NavLink } from "react-router-dom";
 import imageOne from "../Assets/constimage.jpeg";
 import imageTwo from "../Assets/student.png";
 
-import { CDBTable, CDBTableHeader, CDBTableBody } from "cdbreact";
 // import { Profile } from "../pages/Profile";
 import { CDBBtn, CDBIframe, CDBView } from "cdbreact";
 import SidebarEl from "../SidebarEl";
-import Header from './Header'
-import './style.css'
-import './courses.css'
+import Header from './Header';
+import './courses.css';
+import './style.css';
 
 
 

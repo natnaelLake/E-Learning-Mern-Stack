@@ -1,25 +1,34 @@
 import { React, useState } from "react";
-import { Form, Card,Button } from "react-bootstrap";
+import { Button, Card, Form } from "react-bootstrap";
 import { useNavigate } from "react-router-dom";
 import { useStudents } from "../adminHooks/useStudents";
 
-
- function Add() {
+function Add() {
   const [validated, setValidated] = useState(false);
-  const [studentname,setStudentname]  = useState('');
-  const [email,setEmail]  = useState('');
-  const [password,setPassword] = useState('')
-  const [phone,setPhone] = useState('')
-  const [age,setAge] = useState('')
-  const [department,setDepartment] = useState('')
-  const [quiz,setQuiz] = useState(0)
-  const [mid,setMid] = useState(0)
-  const [final,setFinal] = useState(0)
+  const [studentname, setStudentname] = useState("");
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+  const [phone, setPhone] = useState("");
+  const [age, setAge] = useState("");
+  const [department, setDepartment] = useState("");
+  const [quiz, setQuiz] = useState(0);
+  const [mid, setMid] = useState(0);
+  const [final, setFinal] = useState(0);
   const navigate = useNavigate();
   // const [total,setTotal] = useState(null)
-  const {addStudents,nameError,emailError,passwordError,phoneError,quizError,deptError,midError,finalError} = useStudents();
+  const {
+    addStudents,
+    nameError,
+    emailError,
+    passwordError,
+    phoneError,
+    quizError,
+    deptError,
+    midError,
+    finalError,
+  } = useStudents();
 
-  console.log(nameError)
+  console.log(nameError);
 
   const handleSubmit = async (event) => {
     const form = event.currentTarget;
@@ -29,16 +38,44 @@ import { useStudents } from "../adminHooks/useStudents";
     }
     setValidated(true);
     event.preventDefault();
-    if(!(nameError === '' && emailError=== '' && passwordError === ''&& phoneError === ''&& quizError === ''&& deptError === '' && midError === '' && finalError === '')){
+    if (
+      !(
+        nameError === "" &&
+        emailError === "" &&
+        passwordError === "" &&
+        phoneError === "" &&
+        quizError === "" &&
+        deptError === "" &&
+        midError === "" &&
+        finalError === ""
+      )
+    ) {
       event.preventDefault();
       event.stopPropagation();
     }
-    if(nameError === '' && emailError=== '' && passwordError === ''&& phoneError === ''&& quizError === ''&& deptError === '' && midError === '' && finalError === ''){
-      navigate(-1)
+    if (
+      nameError === "" &&
+      emailError === "" &&
+      passwordError === "" &&
+      phoneError === "" &&
+      quizError === "" &&
+      deptError === "" &&
+      midError === "" &&
+      finalError === ""
+    ) {
+      navigate(-1);
     }
-    await addStudents(studentname,email,password,age,department,phone,quiz,mid,final)
-
-    
+    await addStudents(
+      studentname,
+      email,
+      password,
+      age,
+      department,
+      phone,
+      quiz,
+      mid,
+      final
+    );
   };
   return (
     <div className="d-flex align-items-center justify-content-center firstDiv">
@@ -56,8 +93,10 @@ import { useStudents } from "../adminHooks/useStudents";
                   type="text"
                   id="student"
                   placeholder="Student Name"
-                  value = {studentname}
-                  onChange={(e)=>{setStudentname(e.target.value)}}
+                  value={studentname}
+                  onChange={(e) => {
+                    setStudentname(e.target.value);
+                  }}
                   required
                   controlid="validationCustom03"
                 />
@@ -74,13 +113,15 @@ import { useStudents } from "../adminHooks/useStudents";
                   type="email"
                   id="student"
                   placeholder="Enter Email"
-                  value = {email}
-                  onChange={(e)=>{setEmail(e.target.value)}}
+                  value={email}
+                  onChange={(e) => {
+                    setEmail(e.target.value);
+                  }}
                   required
                   controlid="validationCustom03"
                 />
                 <label htmlFor="student">Email</label>
-                <p className="text-danger">{emailError  && emailError}</p>
+                <p className="text-danger">{emailError && emailError}</p>
                 {/* <Form.Control.Feedback type="invalid">
                   {emailError}
                 </Form.Control.Feedback> */}
@@ -93,8 +134,10 @@ import { useStudents } from "../adminHooks/useStudents";
                   type="password"
                   id="student"
                   placeholder="Enter Password"
-                  value = {password}
-                  onChange={(e)=>{setPassword(e.target.value)}}
+                  value={password}
+                  onChange={(e) => {
+                    setPassword(e.target.value);
+                  }}
                   required
                   controlid="validationCustom03"
                 />
@@ -112,8 +155,10 @@ import { useStudents } from "../adminHooks/useStudents";
                   type="text"
                   id="student"
                   placeholder="Enter Department"
-                  value = {department}
-                  onChange={(e)=>{setDepartment(e.target.value)}}
+                  value={department}
+                  onChange={(e) => {
+                    setDepartment(e.target.value);
+                  }}
                   required
                   controlid="validationCustom03"
                 />
@@ -133,13 +178,14 @@ import { useStudents } from "../adminHooks/useStudents";
                   placeholder="Phone Number"
                   pattern="[0-9]{10}"
                   value={phone}
-                  onChange = {e=>{setPhone(e.target.value)}}
+                  onChange={(e) => {
+                    setPhone(e.target.value);
+                  }}
                   controlid="validationCuston03"
                 />
                 <label htmlFor="phone">Enter Phone Number</label>
                 <Form.Control.Feedback type="invalid" className="text-danger">
                   {phoneError}
-                  
                 </Form.Control.Feedback>
               </Form.Floating>{" "}
             </Form.Group>
@@ -150,8 +196,10 @@ import { useStudents } from "../adminHooks/useStudents";
                   type="number"
                   id="student"
                   placeholder="Student Name"
-                  value = {age}
-                  onChange={(e)=>{setAge(e.target.value)}}
+                  value={age}
+                  onChange={(e) => {
+                    setAge(e.target.value);
+                  }}
                   // required
                   controlid="validationCustom03"
                 />
@@ -169,12 +217,14 @@ import { useStudents } from "../adminHooks/useStudents";
                   type="number"
                   id="quiz"
                   placeholder="Enter Quiz Result"
-                  value = {quiz}
-                  onChange={(e)=>{setQuiz(e.target.value)}}
+                  value={quiz}
+                  onChange={(e) => {
+                    setQuiz(e.target.value);
+                  }}
                   controlid="validationCustom03"
                 />
                 <label htmlFor="quiz">Enter Quiz Result</label>
-                <p className="text-danger">{quizError  && quizError}</p>
+                <p className="text-danger">{quizError && quizError}</p>
                 {/* <Form.Control.Feedback type="invalid" className="text-danger">
                   {quizError}
                 </Form.Control.Feedback> */}
@@ -188,8 +238,10 @@ import { useStudents } from "../adminHooks/useStudents";
                   type="number"
                   id="mid"
                   placeholder="Enter Mid Result"
-                  value = {mid}
-                  onChange={(e)=>{setMid(e.target.value)}}
+                  value={mid}
+                  onChange={(e) => {
+                    setMid(e.target.value);
+                  }}
                   controlid="validationCustom03"
                 />
                 <label htmlFor="mid">Enter Mid Result</label>
@@ -207,23 +259,21 @@ import { useStudents } from "../adminHooks/useStudents";
                   type="number"
                   id="final"
                   placeholder="Enter Final Result"
-                  value = {final}
-                  onChange={(e)=>{setFinal(e.target.value)}}
+                  value={final}
+                  onChange={(e) => {
+                    setFinal(e.target.value);
+                  }}
                   controlid="validationCustom03"
                 />
                 <label htmlFor="final">Enter Final Result</label>
-                <p className="text-danger">{finalError  && finalError}</p>
+                <p className="text-danger">{finalError && finalError}</p>
                 {/* <Form.Control.Feedback type="invalid" className="text-danger">
                   {finalError}
                 </Form.Control.Feedback> */}
               </Form.Floating>{" "}
-            </Form.Group>            
+            </Form.Group>
             <br />
-            <Button
-              variant="danger"
-              type="submit"
-              className="text-uppercase "
-            >
+            <Button variant="danger" type="submit" className="text-uppercase ">
               Add
             </Button>
           </Form>

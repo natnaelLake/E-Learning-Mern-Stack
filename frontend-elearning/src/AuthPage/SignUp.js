@@ -1,20 +1,19 @@
-import { React } from "react";
-import { Form, Card, Button } from "react-bootstrap";
+import { React, useState } from "react";
+import { Button, Card, Form } from "react-bootstrap";
 import * as Icon from "react-bootstrap-icons";
 import { Link } from "react-router-dom";
-import "./style.css";
-import { useState } from "react";
 import { useSignUp } from "../hooks/useSignUp";
+import "./style.css";
 function SignUp() {
   const [validated, setValidated] = useState(false);
-  const [email,setEmail] = useState('')
-  const [studentname,setStudentName] = useState('')
-  const [password,setPassword] = useState('')
-  const [age,setAge] = useState('')
-  const [department,setDepartment] = useState('')
-  const [phone,setPhone] = useState('')
-  const {nameError,passError,emailError,phoneError,depError,signUp}  = useSignUp()
-
+  const [email, setEmail] = useState("");
+  const [studentname, setStudentName] = useState("");
+  const [password, setPassword] = useState("");
+  const [age, setAge] = useState("");
+  const [department, setDepartment] = useState("");
+  const [phone, setPhone] = useState("");
+  const { nameError, passError, emailError, phoneError, depError, signUp } =
+    useSignUp();
 
   const handleSubmit = async (event) => {
     const form = event.currentTarget;
@@ -26,14 +25,16 @@ function SignUp() {
     setValidated(true);
     event.preventDefault();
     setValidated(true);
-   await signUp(email,password,studentname,age,department,phone)
+    await signUp(email, password, studentname, age, department, phone);
   };
   const style = { color: "white", width: "200px", height: "50px" };
   const style1 = { width: "200px", height: "50px" };
 
-
   return (
-    <div className="d-flex align-items-center justify-content-center firstDiv" style={{paddingTop:'90px'}}>
+    <div
+      className="d-flex align-items-center justify-content-center firstDiv"
+      style={{ paddingTop: "90px" }}
+    >
       <Card
         bg="dark"
         className="text-center  border-0 shadow-5 rounded-5 mx-auto pt-5 mb-5"
@@ -46,14 +47,16 @@ function SignUp() {
         {/* <hr /> */}
         <Card.Body>
           <Form noValidate validated={validated} onSubmit={handleSubmit}>
-          <Form.Group>
+            <Form.Group>
               <Form.Floating>
                 <Form.Control
                   type="text"
                   id="studentname"
                   placeholder="User Name"
                   value={studentname}
-                  onChange = {e=>{setStudentName(e.target.value)}}
+                  onChange={(e) => {
+                    setStudentName(e.target.value);
+                  }}
                   required
                   controlid="validationCustom03"
                 />
@@ -71,12 +74,16 @@ function SignUp() {
                   id="email"
                   placeholder="User Name"
                   value={email}
-                  onChange = {e=>{setEmail(e.target.value)}}
+                  onChange={(e) => {
+                    setEmail(e.target.value);
+                  }}
                   required
                   controlid="validationCustom03"
                 />
                 <label htmlFor="email">Enter Email</label>
-                <p className="text-danger">{emailError  == 'Email is in use' && emailError}</p>
+                <p className="text-danger">
+                  {emailError == "Email is in use" && emailError}
+                </p>
                 <Form.Control.Feedback type="invalid">
                   {emailError}
                 </Form.Control.Feedback>
@@ -90,14 +97,18 @@ function SignUp() {
                   id="email"
                   placeholder="Password"
                   value={password}
-                  onChange = {e=>{setPassword(e.target.value)}}
+                  onChange={(e) => {
+                    setPassword(e.target.value);
+                  }}
                   controlid="validationCustom03"
                   required
                 />
                 <label htmlFor="email">Password</label>
-                <p className="text-danger">{passError == 'Minimum Length is 8 Characters' && passError}</p>
+                <p className="text-danger">
+                  {passError == "Minimum Length is 8 Characters" && passError}
+                </p>
                 <Form.Control.Feedback type="invalid" className="text-danger">
-                 {passError}
+                  {passError}
                 </Form.Control.Feedback>
               </Form.Floating>{" "}
             </Form.Group>
@@ -109,13 +120,16 @@ function SignUp() {
                   id="age"
                   placeholder="Age"
                   value={age}
-                  onChange = {e=>{setAge(e.target.value)}}
+                  onChange={(e) => {
+                    setAge(e.target.value);
+                  }}
                   controlid="validationCustom03"
                 />
                 <label htmlFor="age">Age</label>
-                <Form.Control.Feedback type="invalid" className="text-danger">
-                  
-                </Form.Control.Feedback>
+                <Form.Control.Feedback
+                  type="invalid"
+                  className="text-danger"
+                ></Form.Control.Feedback>
               </Form.Floating>{" "}
             </Form.Group>
             <br />
@@ -126,8 +140,10 @@ function SignUp() {
                   type="text"
                   id="department"
                   placeholder="Text"
-                  value = {department}
-                  onChange = {e=>{setDepartment(e.target.value)}}
+                  value={department}
+                  onChange={(e) => {
+                    setDepartment(e.target.value);
+                  }}
                   controlid="validationCustom03"
                 />
                 <label htmlFor="department">Department</label>
@@ -146,7 +162,9 @@ function SignUp() {
                   placeholder="Phone Number"
                   pattern="[0-9]{10}"
                   value={phone}
-                  onChange = {e=>{setPhone(e.target.value)}}
+                  onChange={(e) => {
+                    setPhone(e.target.value);
+                  }}
                   controlid="validationCuston03"
                 />
                 <label htmlFor="phone">Phone Number</label>

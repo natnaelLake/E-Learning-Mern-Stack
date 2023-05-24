@@ -1,71 +1,82 @@
-import { React, useState,useEffect } from "react";
-import { Container, Card, Button, Row, Col, Image, Offcanvas, Modal } from "react-bootstrap";
+import { React, useEffect, useState } from "react";
+import {
+  Button,
+  Card,
+  Col,
+  Container,
+  Image,
+  Modal,
+  Row,
+} from "react-bootstrap";
 // import * as Icon from 'react-bootstrap-icons'
-import imageOne from "../Assets/constimage.jpeg";
-import imageTwo from "../Assets/the big mountain.png";
-import imageThree from "../Assets/students.png";
+import { CDBBtn } from "cdbreact";
 import imageFour from "../Assets/student.png";
-import { CDBBtn } from 'cdbreact'
+import imageTwo from "../Assets/the big mountain.png";
 
-import "./style.css";
 import * as Icon from "react-bootstrap-icons";
+import { useNavigate } from "react-router-dom";
+import { useFiles } from "../Admin/adminHooks/useFiles";
 import useFileContext from "../hooks/useFileContext";
 import CourseCards from "./CourseCards";
 import Paging from "./Paging";
-import { useFiles } from "../Admin/adminHooks/useFiles";
-import { useAuthContext } from "../hooks/useAuthContext";
-import { useNavigate } from "react-router-dom";
+import "./style.css";
 
 function Home() {
-  const [show, setShow] = useState(false)
-  const [courses,setCourses] = useState([]);
-  const [currentPage,setCurrentPage] = useState(1)
-  const [coursePerPage,setCoursePerPage] = useState(6)
-  const {getCourse} = useFiles();
-  const handleClose = () => { setShow(false) }
-  const handleShow = () => { setShow(true) }
+  const [show, setShow] = useState(false);
+  const [courses, setCourses] = useState([]);
+  const [currentPage, setCurrentPage] = useState(1);
+  const [coursePerPage, setCoursePerPage] = useState(6);
+  const { getCourse } = useFiles();
+  const handleClose = () => {
+    setShow(false);
+  };
+  const handleShow = () => {
+    setShow(true);
+  };
   const { fileList } = useFileContext();
   // const {user} = useAuthContext();
-  const navigate = useNavigate()
-  useEffect(()=>{
-    const manageChange = async ()=>{
-        await getCourse()
-        setCourses(fileList)
-    }
+  const navigate = useNavigate();
+  useEffect(() => {
+    const manageChange = async () => {
+      await getCourse();
+      setCourses(fileList);
+    };
     manageChange();
-  },[])
+  }, []);
   // console.log( 'fkjsfd fdjhjk ......',user.user.role)
-  const indexOfLastCourse = currentPage*coursePerPage
+  const indexOfLastCourse = currentPage * coursePerPage;
   const indexOfFisrtCourse = indexOfLastCourse - coursePerPage;
-  let currentCourses 
-  {fileList  !== null ? currentCourses = fileList.slice(indexOfFisrtCourse,indexOfLastCourse):currentCourses = null}
-  const paginate = pageNumber =>{
-    console.log(pageNumber)
-    setCurrentPage(pageNumber)
+  let currentCourses;
+  {
+    fileList !== null
+      ? (currentCourses = fileList.slice(indexOfFisrtCourse, indexOfLastCourse))
+      : (currentCourses = null);
   }
-  const handleStartLearning = ()=>[
-    navigate('/courses')
-  ]
-  const firstPage = pageNumber =>{
-    console.log(pageNumber)
-    setCurrentPage(pageNumber)
-  }
-  const prevPage = pageNumber =>{
-    console.log(pageNumber)
-    setCurrentPage(pageNumber)
-  }
-  const nextPage = pageNumber =>{
-    console.log(pageNumber)
-    setCurrentPage(pageNumber)
-  }
-  const lastPage = pageNumber =>{
-    console.log(pageNumber)
-    setCurrentPage(pageNumber)
-  }
-  let fileLength ;
-  if(fileList !== null){
-    fileLength = fileList.length
-  }else fileLength = 0
+  const paginate = (pageNumber) => {
+    console.log(pageNumber);
+    setCurrentPage(pageNumber);
+  };
+  const handleStartLearning = () => [navigate("/courses")];
+  const firstPage = (pageNumber) => {
+    console.log(pageNumber);
+    setCurrentPage(pageNumber);
+  };
+  const prevPage = (pageNumber) => {
+    console.log(pageNumber);
+    setCurrentPage(pageNumber);
+  };
+  const nextPage = (pageNumber) => {
+    console.log(pageNumber);
+    setCurrentPage(pageNumber);
+  };
+  const lastPage = (pageNumber) => {
+    console.log(pageNumber);
+    setCurrentPage(pageNumber);
+  };
+  let fileLength;
+  if (fileList !== null) {
+    fileLength = fileList.length;
+  } else fileLength = 0;
   return (
     <div className="">
       <Container>
@@ -95,7 +106,7 @@ function Home() {
             &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
             <Button
               variant="outline-danger"
-              href='#welcome'
+              href="#welcome"
               style={{ width: "200px", height: "50px" }}
             >
               More Information <Icon.ArrowDown size={30} />
@@ -109,17 +120,28 @@ function Home() {
           </Col>
         </Row>
         <Row>
-          <Col id = 'welcome'>
-            <div className="" >
+          <Col id="welcome">
+            <div className="">
               <h1 className="text-primary">Featured Courses</h1>
             </div>
             <br />
             <hr />
           </Col>
         </Row>
-        <CourseCards courses= {currentCourses}/>
-        <Row >
-          {fileList && <Paging currentPage = {currentPage}coursePerPage = {coursePerPage} totalPage = {fileLength} paginate = {paginate} firstPage = {firstPage} nextPage = {nextPage} prevPage = {prevPage} lastPage = {lastPage}/>}
+        <CourseCards courses={currentCourses} />
+        <Row>
+          {fileList && (
+            <Paging
+              currentPage={currentPage}
+              coursePerPage={coursePerPage}
+              totalPage={fileLength}
+              paginate={paginate}
+              firstPage={firstPage}
+              nextPage={nextPage}
+              prevPage={prevPage}
+              lastPage={lastPage}
+            />
+          )}
         </Row>
         <br />
         <br />
@@ -136,24 +158,37 @@ function Home() {
               <h1 className="text-primary">Course Lectures</h1>
             </div>
             <br />
-
           </Col>
         </Row>
         <Row>
           <Col>
-            <Card className="shadow-none border-0 mb-4" style={{ width: '15rem' }} onClick={handleShow}>
-              <Image src={imageTwo} roundedCircle width='100' height='100' className="border shadow align-items-center mx-auto" />
-              <Card.Body className=''>
+            <Card
+              className="shadow-none border-0 mb-4"
+              style={{ width: "15rem" }}
+              onClick={handleShow}
+            >
+              <Image
+                src={imageTwo}
+                roundedCircle
+                width="100"
+                height="100"
+                className="border shadow align-items-center mx-auto"
+              />
+              <Card.Body className="">
                 <Card.Title>Ethiopia</Card.Title>
                 <Card.Text>This is the software engineer</Card.Text>
               </Card.Body>
             </Card>
-            <Modal show={show} onHide={handleClose} backdrop='true' scroll='true' position='top-right' side >
-              <Modal.Header closeButton>
-
-              </Modal.Header>
-              <Modal.Title className='text-align: center'>
-
+            <Modal
+              show={show}
+              onHide={handleClose}
+              backdrop="true"
+              scroll="true"
+              position="top-right"
+              side
+            >
+              <Modal.Header closeButton></Modal.Header>
+              <Modal.Title className="text-align: center">
                 <img
                   alt="cardImg"
                   className="mx-auto border rounded-circle bg-dark"
@@ -162,10 +197,9 @@ function Home() {
                 />
               </Modal.Title>
               <br />
-              <Modal.Body className='text-align:center'>
+              <Modal.Body className="text-align:center">
                 <div>
                   <div className="border-0">
-
                     <div className="p-3 d-flex flex-column align-items-center mb-4 text-center">
                       <h4 style={{ fontWeight: "600" }}>Bewuketu Lake</h4>
                       <p>Software Developer</p>
@@ -184,24 +218,40 @@ function Home() {
                 </div>
               </Modal.Body>
               <Modal.Footer>
-                <Button variant='danger' onClick={handleClose} >Close</Button>
+                <Button variant="danger" onClick={handleClose}>
+                  Close
+                </Button>
               </Modal.Footer>
             </Modal>
           </Col>
           <Col>
-            <Card className="shadow-none border-0 mb-4" style={{ width: '15rem' }} onClick={handleShow}>
-              <Image src={imageTwo} roundedCircle width='100' height='100' className="border shadow align-items-center mx-auto" />
-              <Card.Body className=''>
+            <Card
+              className="shadow-none border-0 mb-4"
+              style={{ width: "15rem" }}
+              onClick={handleShow}
+            >
+              <Image
+                src={imageTwo}
+                roundedCircle
+                width="100"
+                height="100"
+                className="border shadow align-items-center mx-auto"
+              />
+              <Card.Body className="">
                 <Card.Title>Ethiopia</Card.Title>
                 <Card.Text>This is the software engineer</Card.Text>
               </Card.Body>
             </Card>
-            <Modal show={show} onHide={handleClose} backdrop='true' scroll='true' position='top-right' side >
-              <Modal.Header closeButton>
-
-              </Modal.Header>
-              <Modal.Title className='text-align: center'>
-
+            <Modal
+              show={show}
+              onHide={handleClose}
+              backdrop="true"
+              scroll="true"
+              position="top-right"
+              side
+            >
+              <Modal.Header closeButton></Modal.Header>
+              <Modal.Title className="text-align: center">
                 <img
                   alt="cardImg"
                   className="mx-auto border rounded-circle bg-dark"
@@ -210,10 +260,9 @@ function Home() {
                 />
               </Modal.Title>
               <br />
-              <Modal.Body className='text-align:center'>
+              <Modal.Body className="text-align:center">
                 <div>
                   <div className="border-0">
-
                     <div className="p-3 d-flex flex-column align-items-center mb-4 text-center">
                       <h4 style={{ fontWeight: "600" }}>Bewuketu Lake</h4>
                       <p>Software Developer</p>
@@ -232,24 +281,40 @@ function Home() {
                 </div>
               </Modal.Body>
               <Modal.Footer>
-                <Button variant='danger' onClick={handleClose} >Close</Button>
+                <Button variant="danger" onClick={handleClose}>
+                  Close
+                </Button>
               </Modal.Footer>
             </Modal>
           </Col>
           <Col>
-            <Card className="shadow-none border-0 mb-4" style={{ width: '15rem' }} onClick={handleShow}>
-              <Image src={imageTwo} roundedCircle width='100' height='100' className="border shadow align-items-center mx-auto" />
-              <Card.Body className=''>
+            <Card
+              className="shadow-none border-0 mb-4"
+              style={{ width: "15rem" }}
+              onClick={handleShow}
+            >
+              <Image
+                src={imageTwo}
+                roundedCircle
+                width="100"
+                height="100"
+                className="border shadow align-items-center mx-auto"
+              />
+              <Card.Body className="">
                 <Card.Title>Ethiopia</Card.Title>
                 <Card.Text>This is the software engineer</Card.Text>
               </Card.Body>
             </Card>
-            <Modal show={show} onHide={handleClose} backdrop='true' scroll='true' position='top-right' side >
-              <Modal.Header closeButton>
-
-              </Modal.Header>
-              <Modal.Title className='text-align: center'>
-
+            <Modal
+              show={show}
+              onHide={handleClose}
+              backdrop="true"
+              scroll="true"
+              position="top-right"
+              side
+            >
+              <Modal.Header closeButton></Modal.Header>
+              <Modal.Title className="text-align: center">
                 <img
                   alt="cardImg"
                   className="mx-auto border rounded-circle bg-dark"
@@ -258,10 +323,9 @@ function Home() {
                 />
               </Modal.Title>
               <br />
-              <Modal.Body className='text-align:center'>
+              <Modal.Body className="text-align:center">
                 <div>
                   <div className="border-0">
-
                     <div className="p-3 d-flex flex-column align-items-center mb-4 text-center">
                       <h4 style={{ fontWeight: "600" }}>Bewuketu Lake</h4>
                       <p>Software Developer</p>
@@ -280,24 +344,40 @@ function Home() {
                 </div>
               </Modal.Body>
               <Modal.Footer>
-                <Button variant='danger' onClick={handleClose} >Close</Button>
+                <Button variant="danger" onClick={handleClose}>
+                  Close
+                </Button>
               </Modal.Footer>
             </Modal>
           </Col>
           <Col>
-            <Card className="shadow-none border-0 mb-4" style={{ width: '15rem' }} onClick={handleShow}>
-              <Image src={imageTwo} roundedCircle width='100' height='100' className="border shadow align-items-center mx-auto" />
-              <Card.Body className=''>
+            <Card
+              className="shadow-none border-0 mb-4"
+              style={{ width: "15rem" }}
+              onClick={handleShow}
+            >
+              <Image
+                src={imageTwo}
+                roundedCircle
+                width="100"
+                height="100"
+                className="border shadow align-items-center mx-auto"
+              />
+              <Card.Body className="">
                 <Card.Title>Ethiopia</Card.Title>
                 <Card.Text>This is the software engineer</Card.Text>
               </Card.Body>
             </Card>
-            <Modal show={show} onHide={handleClose} backdrop='true' scroll='true' position='top-right' side >
-              <Modal.Header closeButton>
-
-              </Modal.Header>
-              <Modal.Title className='text-align: center'>
-
+            <Modal
+              show={show}
+              onHide={handleClose}
+              backdrop="true"
+              scroll="true"
+              position="top-right"
+              side
+            >
+              <Modal.Header closeButton></Modal.Header>
+              <Modal.Title className="text-align: center">
                 <img
                   alt="cardImg"
                   className="mx-auto border rounded-circle bg-dark"
@@ -306,10 +386,9 @@ function Home() {
                 />
               </Modal.Title>
               <br />
-              <Modal.Body className='text-align:center'>
+              <Modal.Body className="text-align:center">
                 <div>
                   <div className="border-0">
-
                     <div className="p-3 d-flex flex-column align-items-center mb-4 text-center">
                       <h4 style={{ fontWeight: "600" }}>Bewuketu Lake</h4>
                       <p>Software Developer</p>
@@ -328,7 +407,9 @@ function Home() {
                 </div>
               </Modal.Body>
               <Modal.Footer>
-                <Button variant='danger' onClick={handleClose} >Close</Button>
+                <Button variant="danger" onClick={handleClose}>
+                  Close
+                </Button>
               </Modal.Footer>
             </Modal>
           </Col>

@@ -1,9 +1,6 @@
 import { React, useState } from "react";
-import { Form, Card, Button } from "react-bootstrap";
-import axios from "axios";
+import { Button, Card, Form } from "react-bootstrap";
 import { useFiles } from "../adminHooks/useFiles";
-
-
 
 function Add() {
   const [validated, setValidated] = useState(false);
@@ -16,7 +13,7 @@ function Add() {
   const [fileArray, setFileArray] = useState([]);
   const [descTitle, setDescTitle] = useState("");
   const [desc, setDesc] = useState("");
-  const {addCourse} = useFiles();
+  const { addCourse } = useFiles();
   const handleSubmit = async (event) => {
     event.preventDefault();
     const formData = new FormData();
@@ -41,7 +38,7 @@ function Add() {
       event.stopPropagation();
     }
     setValidated(true);
-    await addCourse(formData)
+    await addCourse(formData);
   };
 
   return (
@@ -79,7 +76,7 @@ function Add() {
                 type="file"
                 id="quiz"
                 placeholder="Enter Quiz Result"
-                accept = 'image/*'
+                accept="image/*"
                 onChange={(e) => setCoverImage(e.target.files[0])}
                 controlid="validationCustom03"
               />
@@ -110,7 +107,7 @@ function Add() {
                 type="file"
                 id="quiz"
                 placeholder="Enter Quiz Result"
-                accept = 'video/*'
+                accept="video/*"
                 controlid="validationCustom03"
                 onChange={(e) => {
                   setVideoArray(e.target.files);
@@ -125,7 +122,7 @@ function Add() {
                 type="file"
                 id="quiz"
                 placeholder="Enter Quiz Result"
-                accept = '.pdf, .txt ,.doc ,.docx'
+                accept=".pdf, .txt ,.doc ,.docx"
                 onChange={(e) => {
                   setFileArray(e.target.files);
                 }}

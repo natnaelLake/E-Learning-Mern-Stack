@@ -1,21 +1,15 @@
 import { React, useState } from "react";
-import { Form, Card, Button } from "react-bootstrap";
-import {useFileContext} from '../../hooks/useFileContext';
+import { Button, Card, Form } from "react-bootstrap";
 import { useFiles } from "../adminHooks/useFiles";
-
-
 
 function Update() {
   const [validated, setValidated] = useState(false);
-  const [courseTitle,setCourseTitle] = useState()
-  const [moduleTitle,setModuleTitle] = useState()
-  const [desc,setDesc] = useState()
-  const [descTitle,setDescTitle] = useState()
+  const [courseTitle, setCourseTitle] = useState();
+  const [moduleTitle, setModuleTitle] = useState();
+  const [desc, setDesc] = useState();
+  const [descTitle, setDescTitle] = useState();
 
-
-
-
-  const {updateCourse} = useFiles()
+  const { updateCourse } = useFiles();
   const handleSubmit = async (event) => {
     const form = event.currentTarget;
     if (form.checkValidity() === false) {
@@ -24,8 +18,7 @@ function Update() {
     }
     setValidated(true);
     event.preventDefault();
-    await updateCourse(courseTitle,moduleTitle,desc,descTitle)
-
+    await updateCourse(courseTitle, moduleTitle, desc, descTitle);
   };
   return (
     <div className="d-flex align-items-cUpdate justify-content-cUpdate firstDiv">
@@ -43,8 +36,10 @@ function Update() {
                   type="text"
                   id="course"
                   placeholder="Course Name"
-                  value = {courseTitle}
-                  onChanage = {(e)=>{setCourseTitle(e.target.value)}}
+                  value={courseTitle}
+                  onChanage={(e) => {
+                    setCourseTitle(e.target.value);
+                  }}
                   controlId="validationCustom03"
                 />
                 <label htmlFor="student">Update Course Title</label>
@@ -57,8 +52,10 @@ function Update() {
                   type="text"
                   id="session"
                   placeholder="Session Name"
-                  value = {moduleTitle}
-                  onChanage = {(e)=>{setModuleTitle(e.target.value)}}
+                  value={moduleTitle}
+                  onChanage={(e) => {
+                    setModuleTitle(e.target.value);
+                  }}
                   controlId="validationCustom03"
                 />
                 <label htmlFor="student">Update Session Title</label>
@@ -108,8 +105,10 @@ function Update() {
                   rows={4}
                   id="session"
                   placeholder="Session Name"
-                  value = {descTitle}
-                  onChanage = {(e)=>{setDescTitle(e.target.value)}}
+                  value={descTitle}
+                  onChanage={(e) => {
+                    setDescTitle(e.target.value);
+                  }}
                   controlId="validationCustom03"
                   // disabled
                 />
@@ -128,8 +127,10 @@ function Update() {
                   rows={4}
                   id="session"
                   placeholder="Session Name"
-                  value = {desc}
-                  onChanage = {(e)=>{setDesc(e.target.value)}}
+                  value={desc}
+                  onChanage={(e) => {
+                    setDesc(e.target.value);
+                  }}
                   controlId="validationCustom03"
                   // disabled
                 />

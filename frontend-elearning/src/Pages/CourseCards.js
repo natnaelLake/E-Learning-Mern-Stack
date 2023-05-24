@@ -1,19 +1,12 @@
+import formatDateDistance from "date-fns/formatDistanceToNow";
 import React from "react";
 import {
-  Container,
-  Card,
   Button,
-  Row,
-  Col,
-  Image,
-  Offcanvas,
-  Modal,
-  Pagination,
+  Card
 } from "react-bootstrap";
-import "./style.css";
 import * as Icon from "react-bootstrap-icons";
-import formatDateDistance from "date-fns/formatDistanceToNow";
 import { useNavigate } from "react-router-dom";
+import "./style.css";
 
 function CourseCards({ courses }) {
   const navigate = useNavigate();

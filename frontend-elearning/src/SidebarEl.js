@@ -1,46 +1,34 @@
-import { React, useEffect, useState } from "react";
-import imageOne from "./Assets/student.png";
-import { useFiles } from "./Admin/adminHooks/useFiles";
-import useFileContext from "./hooks/useFileContext";
 import {
   CDBSidebar,
   CDBSidebarContent,
   CDBSidebarHeader,
   CDBSidebarMenu,
-  CDBSidebarMenuItem,
-  CDBSidebarFooter,
-  CDBStepper,
-  CDBStep,
-  CDBInput,
-  CDBBtn,
-  CDBContainer,
-  CDBIcon,
 } from "cdbreact";
+import { React, useEffect, useState } from "react";
+import useFileContext from "./hooks/useFileContext";
 
-import uuid from 'react-uuid'
-import { Sidebar, Menu, MenuItem, SubMenu } from "react-pro-sidebar";
-import * as Icon from "react-bootstrap-icons";
-import { NavLink, Link ,useNavigate} from "react-router-dom";
+import { Menu, MenuItem, SubMenu } from "react-pro-sidebar";
+import { useNavigate } from "react-router-dom";
+import uuid from "react-uuid";
 
-const SidebarEl = ({file}) => {
-  const [fileData,setFileData] = useState(JSON.parse(localStorage.getItem('sidebarEl')));
+const SidebarEl = ({ file }) => {
+  const [fileData, setFileData] = useState(
+    JSON.parse(localStorage.getItem("sidebarEl"))
+  );
   const { fileList } = useFileContext();
   const navigate = useNavigate();
-  const handleFile = async (vid)=>{
-    navigate('/videos',{state:{video:vid}})
-  }
-  const handleDoc = async (vid)=>{
-    navigate('/files',{state:{file:vid}})
-  }
-  const handleIntro = async (vid)=>{
-    navigate('/intro',{state:{intro:vid}})
-  }
-  const sideFile = 
-  
-  useEffect(()=>{
-  },[])
-  console.log('....... fileData in side',fileData)
-  console.log('....... file in side',file)
+  const handleFile = async (vid) => {
+    navigate("/videos", { state: { video: vid } });
+  };
+  const handleDoc = async (vid) => {
+    navigate("/files", { state: { file: vid } });
+  };
+  const handleIntro = async (vid) => {
+    navigate("/intro", { state: { intro: vid } });
+  };
+  const sideFile = useEffect(() => {}, []);
+  console.log("....... fileData in side", fileData);
+  console.log("....... file in side", file);
 
   return (
     <div
@@ -54,10 +42,7 @@ const SidebarEl = ({file}) => {
       <CDBSidebar textColor="#333" backgroundColor="#f0f0f0">
         <div>
           <CDBSidebarHeader prefix={<i className="fa fa-bars" />}>
-            <div
-            // className="container"
-            // style={{ display: "flex", alignItems: "left" }}
-            >
+            <div>
               <h6>{fileData.courseTitle}</h6>
             </div>
           </CDBSidebarHeader>
@@ -68,38 +53,41 @@ const SidebarEl = ({file}) => {
                   label={`${fileData.session.moduleTitle}`}
                   prefix={<i className="fa fa-address-book" />}
                 >
-                  {fileList &&
+                  {fileList && (
                     <div>
-                        {fileData.session.videos.map((file) => (
-                      <div>
-                        <MenuItem
-                          // component={<Link  />}
-                          prefix={<i className="fa fa-file " />}
-                          key = {uuid()}
-                          onClick={ ()=>{handleFile(file)}}
-                        >
-                          {file}
-                        </MenuItem>
-                      </div>
-                    ))}
-                    {fileData.session.docs.map((file) => (
-                      <div>
-                        <MenuItem
-                          // component={<Link to="/intro" />}
-                          prefix={<i className="fa fa-code " />}
-                          key = {uuid()}
-                          onClick={ ()=>{handleDoc(file)}}
-                        >
-                          {file}
-                        </MenuItem>
-                      </div>
-                    ))}
+                      {fileData.session.videos.map((file) => (
+                        <div>
+                          <MenuItem
+                            prefix={<i className="fa fa-file " />}
+                            key={uuid()}
+                            onClick={() => {
+                              handleFile(file);
+                            }}
+                          >
+                            {file}
+                          </MenuItem>
+                        </div>
+                      ))}
+                      {fileData.session.docs.map((file) => (
+                        <div>
+                          <MenuItem
+                            prefix={<i className="fa fa-code " />}
+                            key={uuid()}
+                            onClick={() => {
+                              handleDoc(file);
+                            }}
+                          >
+                            {file}
+                          </MenuItem>
+                        </div>
+                      ))}
                     </div>
-                    }
+                  )}
                   <MenuItem
-                    // component={<Link to="/intro" />}
                     prefix={<i className="fa fa-file " />}
-                    onClick={()=>{handleIntro(fileData.description.desc)}}
+                    onClick={() => {
+                      handleIntro(fileData.description.desc);
+                    }}
                   >
                     {fileData.description.descTitle}
                   </MenuItem>

@@ -1,15 +1,16 @@
 import React from "react";
-import Sidebar from "../Sidebar";
+import { Button, Tab, Tabs } from "react-bootstrap";
+import * as Icon from "react-bootstrap-icons";
+import { useNavigate } from "react-router-dom";
 import Header from "../../Pages/Header";
+import Sidebar from "../Sidebar";
 import Add from "./Add";
-import Update from "./Update";
-import Delete from "./Delete";
-import {Tabs,Tab,Button} from 'react-bootstrap'
-import * as Icon from 'react-bootstrap-icons'
-
-
 
 function AddStudent() {
+  const navigate = useNavigate();
+  const handleAddStudent = () => {
+    navigate("/mntcourse");
+  };
   return (
     <div>
       <div>
@@ -28,8 +29,14 @@ function AddStudent() {
           >
             <Header className="p-5"></Header>
             <div>
-        <Button className ='align-items-left ml-5' href = '/mntcourse'style = {{float:'left',width:'7rem',marginLeft:'5px'}}> <Icon.ArrowLeftCircle /> Back</Button>
-
+              <Button
+                className="align-items-left ml-5"
+                onClick={handleAddStudent}
+                style={{ float: "left", width: "7rem", marginLeft: "5px" }}
+              >
+                {" "}
+                <Icon.ArrowLeftCircle /> Back
+              </Button>
             </div>
             <div style={{ height: "100%" }}>
               <div
@@ -40,9 +47,11 @@ function AddStudent() {
                 }}
               >
                 <div style={{ margin: "0 auto", maxWidth: "1320px" }}>
-                    <Tabs defaultActiveKey='Add' className = 'm-5' fill>
-                        <Tab eventKey='Add' title = 'Add '><Add /></Tab>
-                    </Tabs>
+                  <Tabs defaultActiveKey="Add" className="m-5" fill>
+                    <Tab eventKey="Add" title="Add ">
+                      <Add />
+                    </Tab>
+                  </Tabs>
                 </div>
               </div>
             </div>

@@ -1,4 +1,3 @@
-import React from "react";
 import {
   CDBSidebar,
   CDBSidebarContent,
@@ -7,13 +6,14 @@ import {
   CDBSidebarMenu,
   CDBSidebarMenuItem,
 } from "cdbreact";
+import React from "react";
 
 import { NavLink } from "react-router-dom";
 
 function Sidebar() {
   return (
     <div
-      style={{ display: 'flex', height: '100vh', overflow: 'scroll initial' }}
+      style={{ display: "flex", height: "100vh", overflow: "scroll initial" }}
     >
       <CDBSidebar textColor="#fff" backgroundColor="#333">
         <CDBSidebarHeader prefix={<i className="fa fa-bars fa-large"></i>}>
@@ -27,25 +27,31 @@ function Sidebar() {
         </CDBSidebarHeader>
         <CDBSidebarContent className="sidebar-content">
           <CDBSidebarMenu>
-            <NavLink  to="/dashboard" activeclassname="activeClicked">
+            <NavLink to="/dashboard" activeclassname="activeClicked">
               <CDBSidebarMenuItem icon="columns">Dashboard</CDBSidebarMenuItem>
             </NavLink>
             <NavLink to="/assessment" activeclassname="activeClicked">
-              <CDBSidebarMenuItem icon="columns">Manage Assessment</CDBSidebarMenuItem>
+              <CDBSidebarMenuItem icon="columns">
+                Manage Assessment
+              </CDBSidebarMenuItem>
             </NavLink>
-            <NavLink  to="/mntcourse" activeclassname="activeClicked">
-              <CDBSidebarMenuItem icon="columns">Manage Courses</CDBSidebarMenuItem>
+            <NavLink to="/mntcourse" activeclassname="activeClicked">
+              <CDBSidebarMenuItem icon="columns">
+                Manage Courses
+              </CDBSidebarMenuItem>
             </NavLink>
-            <NavLink  to="/exams" activeclassname="activeClicked">
-              <CDBSidebarMenuItem icon="columns">Manage Exams</CDBSidebarMenuItem>
+            <NavLink to="/exams" activeclassname="activeClicked">
+              <CDBSidebarMenuItem icon="columns">
+                Manage Exams
+              </CDBSidebarMenuItem>
             </NavLink>
           </CDBSidebarMenu>
         </CDBSidebarContent>
-        <CDBSidebarFooter style={{ textAlign: 'center' }}>
+        <CDBSidebarFooter style={{ textAlign: "center" }}>
           <div
             className="sidebar-btn-wrapper"
             style={{
-              padding: '20px 5px',
+              padding: "20px 5px",
             }}
           >
             Natnael Lake

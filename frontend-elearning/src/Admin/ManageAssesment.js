@@ -1,21 +1,16 @@
 import React, { useState } from "react";
-import Sidebar from "./Sidebar";
-import Header from "../Pages/Header";
 import { useNavigate } from "react-router-dom";
+import Header from "../Pages/Header";
+import Sidebar from "./Sidebar";
 
-import "react-toastify/dist/ReactToastify.css";
-import { Table, Button, Toast, ToastContainer } from "react-bootstrap";
+import { useEffect } from "react";
+import { Button, Table, Toast, ToastContainer } from "react-bootstrap";
 import * as Icon from "react-bootstrap-icons";
+import "react-toastify/dist/ReactToastify.css";
+import { useAuthContext } from "../hooks/useAuthContext";
 import { useStudentContext } from "../hooks/useStudentContext";
 import { useStudents } from "./adminHooks/useStudents";
-import { useEffect } from "react";
-import { Tabs, Tab } from "react-bootstrap";
-import Add from "./AssButton/Add";
-import Update from "./AssButton/Update";
-import Delete from "./AssButton/Delete";
 import "./style.css";
-import EditAss from "./AssButton/EditAss";
-import { useAuthContext } from "../hooks/useAuthContext";
 
 function ManageAssesment() {
   const navigate = useNavigate();
@@ -29,9 +24,9 @@ function ManageAssesment() {
     error,
   } = useStudents();
   const { studentList, dispatch } = useStudentContext();
-  const locData = JSON.parse(localStorage.getItem("allStudent"));
+  // const locData = JSON.parse(localStorage.getItem("allStudent"));
   const [studentData, setStudentData] = useState(studentList);
-  const [blurcontrol, setControl] = useState(true);
+  // const [blurcontrol, setControl] = useState(true);
   const [changecontrol, setChangeControl] = useState(true);
   const [show, setShow] = useState(error);
   const position = "middle-center";
@@ -41,6 +36,9 @@ function ManageAssesment() {
   const handleDelete = async (stud) => {
     navigate("/edit", { state: { student: stud } });
   };
+  const handleAss = ()=>{
+    navigate('/')
+  }
   console.log("..... quiz erro :", quizError, show);
   const handleUpdate = async (student, idnum) => {
     // console.log(id)
@@ -93,7 +91,6 @@ function ManageAssesment() {
         <div>
           <Button
             className="align-items-left ml-5"
-            href="/"
             style={{ float: "left", width: "7rem", marginLeft: "5px" }}
           >
             {" "}

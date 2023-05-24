@@ -1,12 +1,10 @@
 import React from "react";
-import { Tabs, Tab ,Button} from "react-bootstrap";
+import { Button, Tab, Tabs } from "react-bootstrap";
 import * as Icon from "react-bootstrap-icons";
-import UpdateDocInd from "./UpdateDocInd";
-import DeleteDoc from "./DeleteDoc";
 import Header from "../../../Pages/Header";
 import Sidebar from "../../Sidebar";
-
-
+import DeleteDoc from "./DeleteDoc";
+import UpdateDocInd from "./UpdateDocInd";
 
 function DocMainEdit() {
   return (
@@ -41,9 +39,13 @@ function DocMainEdit() {
               overflowY: "scroll",
             }}
           >
-            <Tabs defaultActiveKey='Update' className = 'mb-3' fill>
-                <Tab eventKey='Update' title = 'Update'><UpdateDocInd/></Tab>
-                <Tab eventKey='Delete' title = 'Delete'><DeleteDoc/></Tab>
+            <Tabs defaultActiveKey="Update" className="mb-3" fill>
+              <Tab eventKey="Update" title="Update">
+                <UpdateDocInd />
+              </Tab>
+              <Tab eventKey="Delete" title="Delete">
+                <DeleteDoc />
+              </Tab>
             </Tabs>
           </div>
         </div>

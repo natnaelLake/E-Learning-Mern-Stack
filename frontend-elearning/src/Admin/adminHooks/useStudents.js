@@ -1,6 +1,6 @@
-import { useStudentContext } from "../../hooks/useStudentContext";
 import axios from "axios";
 import { useState } from "react";
+import { useStudentContext } from "../../hooks/useStudentContext";
 // import EditAss from '../AssButton/EditAss'
 import { useAuthContext } from "../../hooks/useAuthContext";
 
@@ -24,7 +24,9 @@ export const useStudents = () => {
       setUserAuthError("You must be logged in first.");
       return;
     }
-    const allStudents = await axios.get("https://e-learning-web-app-back-end.onrender.com/getStudents");
+    const allStudents = await axios.get(
+      "https://e-learning-web-app-back-end.onrender.com/getStudents"
+    );
     // console.log(allStudents)
     if (allStudents.status === 200) {
       // setGetData(allStudents)
@@ -41,7 +43,8 @@ export const useStudents = () => {
   const updateStudent = async (student, studId) => {
     try {
       const updatedStudent = await axios.patch(
-        "https://e-learning-web-app-back-end.onrender.com/updateStudents/" + studId,
+        "https://e-learning-web-app-back-end.onrender.com/updateStudents/" +
+          studId,
         student
       );
       // console.log(updatedStudent)
@@ -92,21 +95,24 @@ export const useStudents = () => {
       final,
     };
     // console.log('before add :',studentData)
-    const addedStudent = await fetch("https://e-learning-web-app-back-end.onrender.com/signup", {
-      method: "POST",
-      body: JSON.stringify({
-        studentname,
-        email,
-        password,
-        age,
-        department,
-        phone,
-        quiz,
-        mid,
-        final,
-      }),
-      headers: { "Content-Type": "application/json" },
-    });
+    const addedStudent = await fetch(
+      "https://e-learning-web-app-back-end.onrender.com/signup",
+      {
+        method: "POST",
+        body: JSON.stringify({
+          studentname,
+          email,
+          password,
+          age,
+          department,
+          phone,
+          quiz,
+          mid,
+          final,
+        }),
+        headers: { "Content-Type": "application/json" },
+      }
+    );
     let jsonRes = await addedStudent.json();
     console.log(addedStudent);
     if (addedStudent.ok) {

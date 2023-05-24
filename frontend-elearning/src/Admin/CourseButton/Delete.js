@@ -1,20 +1,18 @@
-import {React,useState} from 'react'
-import {Form,Card,Button,Modal} from 'react-bootstrap'
-import { useStudents } from '../adminHooks/useStudents'
-
-
+import { React, useState } from "react";
+import { Button, Card, Form, Modal } from "react-bootstrap";
+import { useStudents } from "../adminHooks/useStudents";
 
 function Delete() {
-  const [show ,setShow] = useState(false)
-  const {deleteStudent} = useStudents();
-  const handleModal = ()=>{
-      setShow(true)
-  }
-  const handleClose = ()=> setShow(false)
-  const handleSubmit = async (e)=>{
+  const [show, setShow] = useState(false);
+  const { deleteStudent } = useStudents();
+  const handleModal = () => {
+    setShow(true);
+  };
+  const handleClose = () => setShow(false);
+  const handleSubmit = async (e) => {
     e.preventDefault();
     await deleteStudent();
-  }
+  };
 
   return (
     <div className="d-flex align-items-cUpdate justify-content-cUpdate firstDiv">
@@ -25,7 +23,7 @@ function Delete() {
       >
         {/* <hr /> */}
         <Card.Body>
-          <Form  onSubmit={handleSubmit}>
+          <Form onSubmit={handleSubmit}>
             <Form.Group>
               <Form.Floating>
                 <Form.Control
@@ -40,30 +38,31 @@ function Delete() {
               </Form.Floating>
             </Form.Group>
             <br />
-            
           </Form>
           <Button
-              variant="danger"
-              type="submit"
-              className="text-uppercase "
-              onClick = {handleModal}
-            >
-              Delete
-            </Button>
-          <Modal show = {show} onHide = {handleClose}>
+            variant="danger"
+            type="submit"
+            className="text-uppercase "
+            onClick={handleModal}
+          >
+            Delete
+          </Button>
+          <Modal show={show} onHide={handleClose}>
             <Modal.Header closeButton></Modal.Header>
-            <Modal.Body>
-                Do you want to delete this Course?
-            </Modal.Body>
+            <Modal.Body>Do you want to delete this Course?</Modal.Body>
             <Modal.Footer>
-                <Button variant = 'danger' onClick={handleSubmit}>Yes</Button>
-                <Button variant = 'primary' onClick={handleClose }>No</Button>
+              <Button variant="danger" onClick={handleSubmit}>
+                Yes
+              </Button>
+              <Button variant="primary" onClick={handleClose}>
+                No
+              </Button>
             </Modal.Footer>
           </Modal>
         </Card.Body>
       </Card>
     </div>
-  )
+  );
 }
 
-export default Delete
+export default Delete;

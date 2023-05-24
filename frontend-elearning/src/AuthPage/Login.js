@@ -1,20 +1,18 @@
-import {useState} from "react";
-import { Form, Card, Button } from "react-bootstrap";
+import { useState } from "react";
+import { Button, Card, Form } from "react-bootstrap";
 import * as Icon from "react-bootstrap-icons";
 import { Link } from "react-router-dom";
-import "./style.css";
-import { useLogin } from "../hooks/useLogin";
 import { useAuthContext } from "../hooks/useAuthContext";
-
+import { useLogin } from "../hooks/useLogin";
+import "./style.css";
 
 function Login() {
   const [validated, setValidated] = useState(false);
-  const [email,setEmail] = useState('');
-  const [password,setPassword] = useState('');
-  const {login,emailError,passError} = useLogin()
-  const {user} = useAuthContext();
-  const [authError,setAuthError] = useState();
-
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+  const { login, emailError, passError } = useLogin();
+  const { user } = useAuthContext();
+  const [authError, setAuthError] = useState();
 
   const handleSubmit = async (event) => {
     // if(user){
@@ -35,8 +33,7 @@ function Login() {
     event.preventDefault();
     setValidated(true);
 
-      await login(email,password)
-
+    await login(email, password);
   };
   const style = { color: "white", width: "200px", height: "50px" };
   const style1 = { width: "200px", height: "50px" };
@@ -63,14 +60,18 @@ function Login() {
                   id="email"
                   placeholder="User Name"
                   value={email}
-                  onChange = {(e)=>{setEmail(e.target.value)}}
+                  onChange={(e) => {
+                    setEmail(e.target.value);
+                  }}
                   required
                   controlid="validationCustom03"
                 />
                 <label htmlFor="email">User Name</label>
-                <p className="text-danger">{emailError != 'Enter Valid Email' && emailError}</p>
+                <p className="text-danger">
+                  {emailError != "Enter Valid Email" && emailError}
+                </p>
                 <Form.Control.Feedback type="invalid">
-                 {emailError}
+                  {emailError}
                 </Form.Control.Feedback>
               </Form.Floating>
             </Form.Group>
@@ -84,10 +85,14 @@ function Login() {
                   placeholder="Password"
                   value={password}
                   controlid="validationCustom03"
-                  onChange = {(e)=>{setPassword(e.target.value)}}
+                  onChange={(e) => {
+                    setPassword(e.target.value);
+                  }}
                 />
                 <label htmlFor="email">Password</label>
-                <p className="text-danger">{passError != 'Enter Password' && passError}</p>
+                <p className="text-danger">
+                  {passError != "Enter Password" && passError}
+                </p>
                 <Form.Control.Feedback type="invalid" className="text-danger">
                   {passError}
                 </Form.Control.Feedback>

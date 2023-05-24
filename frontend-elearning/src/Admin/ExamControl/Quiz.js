@@ -1,8 +1,13 @@
 import React from "react";
 import { Button, Table } from "react-bootstrap";
 import * as Icon from "react-bootstrap-icons";
+import { useNavigate } from "react-router-dom";
 
 function Quiz() {
+  const navigate = useNavigate();
+  const handleQuiz = () => {
+    navigate("/editQuiz");
+  };
   return (
     <div>
       <div style={{ height: "100%" }}>
@@ -27,7 +32,7 @@ function Quiz() {
                   <td>2012</td>
                   <td>1</td>
                   <td>
-                    <Button bg="danger" href="/editQuiz">
+                    <Button bg="danger" onClick={handleQuiz}>
                       <Icon.Pen /> Edit
                     </Button>
                   </td>
@@ -36,7 +41,7 @@ function Quiz() {
                   <td>2013</td>
                   <td>2</td>
                   <td>
-                    <Button bg="danger" href="/editQuiz">
+                    <Button bg="danger" onClick={handleQuiz}>
                       <Icon.Pen /> Edit
                     </Button>
                   </td>
@@ -45,7 +50,7 @@ function Quiz() {
                   <td>2014</td>
                   <td>1</td>
                   <td>
-                    <Button bg="danger" href="/editQuiz">
+                    <Button bg="danger" onClick={handleQuiz}>
                       <Icon.Pen /> Edit
                     </Button>
                   </td>
@@ -54,7 +59,7 @@ function Quiz() {
                   <td>2015</td>
                   <td>2</td>
                   <td>
-                    <Button href="/editQuiz" bg="danger">
+                    <Button onClick={handleQuiz} bg="danger">
                       <Icon.Pen /> Edit
                     </Button>
                   </td>

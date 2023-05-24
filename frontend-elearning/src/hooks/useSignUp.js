@@ -1,4 +1,4 @@
-import {useState} from 'react'
+import { useState } from 'react';
 // import { AuthContext } from '../Context/AuthContext';
 import { useAuthContext } from './useAuthContext';
 

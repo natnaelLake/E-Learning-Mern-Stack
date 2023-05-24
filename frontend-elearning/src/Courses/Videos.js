@@ -4,13 +4,12 @@ import Header from "../Pages/Header";
 import video_Two from "../Assets/video.mp4";
 import imageOne from "../Assets/student.png";
 import "../../node_modules/video-react/dist/video-react.css";
-import { Player } from 'video-react';
+import { Player } from "video-react";
 import { useLocation } from "react-router-dom";
-
 
 function Videos() {
   const location = useLocation();
-  const videoFiles = location.state.video
+  const videoFiles = location.state.video;
   return (
     <div>
       <div>
@@ -37,12 +36,12 @@ function Videos() {
                 }}
               >
                 <div className="player-wrapper">
-                <Player
-      playsInline
-      poster={imageOne}
-      autoPlay = {true}
-      src={`https://e-learning-web-app-back-end.onrender.com/uploads/${videoFiles}`}
-    />
+                  <Player
+                    playsInline
+                    poster={imageOne}
+                    autoPlay={true}
+                    src={`https://e-learning-web-app-back-end.onrender.com/uploads/${videoFiles}`}
+                  />
                 </div>
                 <br />
                 <br />

@@ -1,10 +1,16 @@
 import React from 'react'
-import Sidebar from '../Sidebar'
-import Header from '../../Pages/Header'
+import { Button } from 'react-bootstrap'
 import * as Icon from 'react-bootstrap-icons'
-import {Button} from 'react-bootstrap'
+import { useNavigate } from 'react-router-dom'
+import Header from '../../Pages/Header'
+import Sidebar from '../Sidebar'
 
 function UpdateIntro() {
+  const navigate = useNavigate()
+  const handleEditCourse = ()=>{
+    navigate('/editCourse')
+  }
+
   return (
     <div className="d-flex profile">
           <div>
@@ -20,7 +26,7 @@ function UpdateIntro() {
             }}
           >
             <Header className="p-5"></Header>
-        <Button className ='align-items-left ml-5' href = '/editCourse'style = {{float:'left',width:'7rem',marginLeft:'5px'}}> <Icon.ArrowLeftCircle /> Back</Button>
+        <Button className ='align-items-left ml-5' onClick = {handleEditCourse}style = {{float:'left',width:'7rem',marginLeft:'5px'}}> <Icon.ArrowLeftCircle /> Back</Button>
             <div style={{ height: "100%" }}>
               <div
                 style={{

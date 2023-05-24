@@ -1,32 +1,34 @@
-import React from "react";
-import Sidebar from "./Sidebar";
-import Header from "../Pages/Header";
-import { Card, Button,Badge } from "react-bootstrap";
+import React, { useEffect } from "react";
+import { Badge, Button, Card } from "react-bootstrap";
 import * as Icon from "react-bootstrap-icons";
-import imageOne from "../Assets/student.png";
-import { useFiles } from "./adminHooks/useFiles";
-import {useFileContext} from '../hooks/useFileContext'
-import { useEffect } from "react";
-import { useStudents } from "./adminHooks/useStudents";
+import { useNavigate } from "react-router-dom";
+import Header from "../Pages/Header";
+import { useFileContext } from "../hooks/useFileContext";
 import { useStudentContext } from "../hooks/useStudentContext";
-import formatDistanceToNow from 'date-fns/formatDistanceToNow'
-
-
+import Sidebar from "./Sidebar";
+import { useFiles } from "./adminHooks/useFiles";
+import { useStudents } from "./adminHooks/useStudents";
 
 function Dashboard() {
   const { getCourse } = useFiles();
+  const navigate = useNavigate();
   const { getStudents } = useStudents();
-  const {fileList} = useFileContext();
-  const {studentList} = useStudentContext()
+  const { fileList } = useFileContext();
+  const { studentList } = useStudentContext();
+  const handleDash = () => {
+    navigate("/");
+  };
+  const handleAddCourse = () => {
+    navigate("/addCourse");
+  };
 
-
-  useEffect(()=>{
-    const manageDash = async ()=>{
+  useEffect(() => {
+    const manageDash = async () => {
       await getCourse();
-      await getStudents()
-    }
+      await getStudents();
+    };
     manageDash();
-  },[])
+  }, []);
   return (
     <div>
       <div className="d-flex profile">
@@ -46,7 +48,7 @@ function Dashboard() {
           <div>
             <Button
               className="align-items-left ml-5"
-              href="/"
+              onClick={handleDash}
               style={{ float: "left", width: "7rem", marginLeft: "5px" }}
             >
               {" "}
@@ -54,7 +56,7 @@ function Dashboard() {
             </Button>
             <Button
               className="align-items-left ml-5"
-              href="/addCourse"
+              onClick={handleAddCourse}
               style={{ float: "left", width: "10rem", marginLeft: "5px" }}
               variant="success"
             >
@@ -72,36 +74,40 @@ function Dashboard() {
               }}
             >
               <div style={{ margin: "0 auto", maxWidth: "1320px" }}>
-                {
-                  studentList && <div class="row row-cols-1 row-cols-md-3 g-4">
-                 { 
-                  <div class="col">
-                     <Card style={{ height: "9rem" }}>
-                   <Card.Body>
-                    <Card.Title>Enrolled Students</Card.Title>
-                    <Badge bg="danger">{studentList.length}</Badge>
-                 </Card.Body>
-                    <Card.Footer>
-                      <small className="text-muted">updated 3 min ago</small>
-                    </Card.Footer>
-                  </Card>
-                  </div>
-                    }
+                {studentList && (
+                  <div class="row row-cols-1 row-cols-md-3 g-4">
                     {
-                  fileList &&  <div class="col">
-                     <Card style={{ height: "9rem" }}>
-                   <Card.Body>
-                    <Card.Title>Enrolled Courses</Card.Title>
-                    <Badge bg="danger">{fileList.length}</Badge>
-                 </Card.Body>
-                    <Card.Footer>
-                      <small className="text-muted">updated 3min ago</small>
-                    </Card.Footer>
-                  </Card>
-                  </div>
+                      <div class="col">
+                        <Card style={{ height: "9rem" }}>
+                          <Card.Body>
+                            <Card.Title>Enrolled Students</Card.Title>
+                            <Badge bg="danger">{studentList.length}</Badge>
+                          </Card.Body>
+                          <Card.Footer>
+                            <small className="text-muted">
+                              updated 3 min ago
+                            </small>
+                          </Card.Footer>
+                        </Card>
+                      </div>
                     }
-                </div>
-                }              
+                    {fileList && (
+                      <div class="col">
+                        <Card style={{ height: "9rem" }}>
+                          <Card.Body>
+                            <Card.Title>Enrolled Courses</Card.Title>
+                            <Badge bg="danger">{fileList.length}</Badge>
+                          </Card.Body>
+                          <Card.Footer>
+                            <small className="text-muted">
+                              updated 3min ago
+                            </small>
+                          </Card.Footer>
+                        </Card>
+                      </div>
+                    )}
+                  </div>
+                )}
                 <br />
                 <br />
                 <footer className="d-flex mx-auto py-4">
